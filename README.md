@@ -14,4 +14,6 @@ Visit the website: [Company-wise LeetCode](https://company-wise-leetcode-farneet
 For collaboration inquiries, contact via [LinkedIn](https://www.linkedin.com/in/farneet-singh-6b155b208/).
 
 ## License
-Licensed under the MIT License. [View License](https://opensource.org/licenses/MIT).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Licensed under the MIT License.
