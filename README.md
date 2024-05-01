@@ -8,7 +8,7 @@ This repository hosts the code for the Company-wise LeetCode Website, a tool off
 - Access company-specific questions.
 
 ## Access
-Visit the website: [Company-wise LeetCode](https://company-wise-leetcode-farneet.vercel.app/)
+Visit the website: [Company-wise LeetCode](https://company-wise-leetcode-farneet.netlify.app/)
 
 ## Collaboration
 For collaboration inquiries, contact via [LinkedIn](https://www.linkedin.com/in/farneet-singh-6b155b208/).
