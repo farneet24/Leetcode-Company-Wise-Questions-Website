@@ -1,0 +1,117 @@
+body {
+  background-image: url("https://wallpaperaccess.com/full/82357.jpg");
+  background-size: cover; /* Scale the background image to cover the element */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-attachment: fixed; /* Optional: makes the background fixed during scrolling */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Removes default margin provided by browsers */
+  padding: 0; /* Removes default padding */
+}
+
+/* Thin Scrollbar for Company Dropdown */
+.company-dropdown {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.company-dropdown::-webkit-scrollbar {
+  width: 4px; /* Set the width of the scrollbar */
+}
+
+.company-dropdown::-webkit-scrollbar-track {
+  background-color: transparent; /* Set the background color of the scrollbar track */
+}
+
+.company-dropdown::-webkit-scrollbar-thumb {
+  background-color: #6b7280; /* Set the color of the scrollbar thumb */
+  border-radius: 2px; /* Add rounded corners to the scrollbar thumb */
+}
+
+.difficulty-easy {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  border-radius: 15px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #fff;
+  background-color: #27ae60; /* Soft green for easy */
+}
+
+.difficulty-medium {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  border-radius: 15px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f39c12; /* Amber for medium */
+}
+
+.difficulty-hard {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  border-radius: 15px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #fff;
+  background-color: #c0392b; /* Soft red for hard */
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* For WebKit browsers (e.g. Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #333; /* Color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded ends */
+}
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0px;
+  font-size: 0.95em;
+  font-family: sans-serif;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(8, 7, 7, 0.15);
+}
+
+.styled-table tr {
+  background-color: #009879;
+  color: black;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+
+.styled-table tr:nth-of-type(odd) {
+  background-color: #FFF6F6;
+}
+.styled-table tr:nth-of-type(even) {
+  background-color: #f6f5f2;
+}
+
+.styled-table tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}

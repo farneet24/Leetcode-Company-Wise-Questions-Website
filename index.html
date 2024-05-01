@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeetCode Questions by Company</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-...the_CDN_link..."
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-4xl font-bold text-center mb-8 my-4">
+        Company-wise Leetcode Problems
+      </h1>
+
+      <!-- Dropdowns -->
+      <div
+        class="flex flex-wrap items-center justify-center mb-8 space-x-4 py-5"
+      >
+        <div class="relative">
+          <select
+            id="company-select"
+            class="select-dropdown appearance-none bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:bg-gray-700 pr-8 company-dropdown"
+          >
+            <option value="">Select a Company</option>
+          </select>
+          <i
+            data-feather="chevron-down"
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          ></i>
+        </div>
+        <div class="relative">
+          <select
+            id="duration-select"
+            class="select-dropdown appearance-none bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:bg-gray-700 pr-8"
+          >
+            <option value="">Select Duration</option>
+          </select>
+          <i
+            data-feather="chevron-down"
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          ></i>
+        </div>
+        <div class="relative">
+          <select
+            id="sort-select"
+            class="select-dropdown appearance-none bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:bg-gray-700 pr-8"
+          >
+            <option value="">Sort By</option>
+            <option value="difficulty-asc">Difficulty Ascending</option>
+            <option value="difficulty-desc">Difficulty Descending</option>
+            <option value="frequency-asc">Frequency Ascending</option>
+            <option value="frequency-desc">Frequency Descending</option>
+          </select>
+          <i
+            data-feather="chevron-down"
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          ></i>
+        </div>
+        <div class="relative">
+          <select
+            id="difficulty-filter"
+            class="select-dropdown appearance-none bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:bg-gray-700 pr-8"
+          >
+            <option value="">Filter by Difficulty</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <i
+            data-feather="chevron-down"
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          ></i>
+        </div>
+        <button
+          id="clear-button"
+          class="px-4 py-2 rounded-lg bg-red-700 hover:bg-red-600 text-white focus:outline-none focus:bg-red-800 flex items-center space-x-2"
+        >
+          <i data-feather="x-circle"></i>
+          <span>Clear</span>
+        </button>
+      </div>
+
+      <!-- Company Logo and Current Selection -->
+      <div class="flex items-center justify-center mb-8 space-x-4">
+        <img
+          id="company-logo"
+          class="company-image h-16 w-16 rounded-full"
+          src=""
+          alt="Company Logo"
+          style="display: none"
+        />
+        <span id="current-selection" class="text-lg font-semibold"></span>
+      </div>
+
+      <!-- Table Container -->
+      <div
+        id="table-container"
+        class="styled-table table-container overflow-x-auto"
+      >
+        <!-- Table will be dynamically generated here -->
+      </div>
+    </div>
+
+    <div>
+        <footer class="text-center py-4 text-white-400">
+            <p>
+            Built <i class="fas fa-tools text-white-500"></i> by
+            <a
+                href="https://github.com/farneet24"
+                target="_blank"
+                class="text-blue-500"
+                >Farneet Singh</a
+            >   
+            </p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>

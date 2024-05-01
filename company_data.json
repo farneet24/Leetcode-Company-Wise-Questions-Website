@@ -1,0 +1,939 @@
+{
+    "accolite": [
+        "alltime"
+    ],
+    "adobe": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "aetion": [
+        "2year",
+        "alltime"
+    ],
+    "affinity": [
+        "alltime"
+    ],
+    "affirm": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "airbnb": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "airtel": [
+        "alltime"
+    ],
+    "akamai": [
+        "alltime"
+    ],
+    "akuna-capital": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "akuna": [
+        "alltime"
+    ],
+    "alation": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "alibaba": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "amazon": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "american-express": [
+        "alltime"
+    ],
+    "appdynamics": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "apple": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "arista-networks": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "arista": [
+        "alltime"
+    ],
+    "asana": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "atlassian": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "audible": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "baidu": [
+        "2year",
+        "alltime"
+    ],
+    "barclays": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "blackrock": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "blizzard": [
+        "2year",
+        "alltime"
+    ],
+    "bloomberg": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "bloomreach": [
+        "alltime"
+    ],
+    "bookingcom": [
+        "2year",
+        "alltime"
+    ],
+    "booking": [
+        "alltime"
+    ],
+    "box": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "bytedancetoutiao": [
+        "alltime"
+    ],
+    "bytedance": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "c3-iot": [
+        "alltime"
+    ],
+    "c3ai": [
+        "alltime"
+    ],
+    "capital-one": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "cisco": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "citadel": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "citrix": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "cloudera": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "clutter": [
+        "alltime"
+    ],
+    "codenation": [
+        "alltime"
+    ],
+    "cohesity": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "coupang": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "coursera": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "cruise-automation": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "databricks": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "dataminr": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "de-shaw": [
+        "alltime"
+    ],
+    "deliveryhero": [
+        "alltime"
+    ],
+    "dell": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "deutsche-bank": [
+        "2year",
+        "alltime"
+    ],
+    "didi": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "docusign": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "doordash": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "drawbridge": [
+        "2year",
+        "alltime"
+    ],
+    "dropbox": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "druva": [
+        "alltime"
+    ],
+    "ebay": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "electronic-arts": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "emc": [
+        "2year",
+        "alltime"
+    ],
+    "epic-systems": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "evernote": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "expedia": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "f5-networks": [
+        "alltime"
+    ],
+    "facebook": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "factset": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "fallible": [
+        "alltime"
+    ],
+    "fidessa": [
+        "alltime"
+    ],
+    "flexport": [
+        "alltime"
+    ],
+    "flipkart": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "forusall": [
+        "2year",
+        "alltime"
+    ],
+    "garena": [
+        "2year",
+        "alltime"
+    ],
+    "ge-digital": [
+        "2year",
+        "alltime"
+    ],
+    "gilt-groupe": [
+        "alltime"
+    ],
+    "godaddy": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "goldman-sachs": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "google": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "grab": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "groupon": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "gsn-games": [
+        "alltime"
+    ],
+    "hbo": [
+        "2year",
+        "alltime"
+    ],
+    "helix": [
+        "alltime"
+    ],
+    "honey": [
+        "alltime"
+    ],
+    "hotstar": [
+        "alltime"
+    ],
+    "houzz": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "hrt": [
+        "alltime"
+    ],
+    "huawei": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "hulu": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "ibm": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "iit-bombay": [
+        "alltime"
+    ],
+    "indeed": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "infosys": [
+        "alltime"
+    ],
+    "inmobi": [
+        "alltime"
+    ],
+    "intel": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "intuit": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "ixl": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "jane-street": [
+        "alltime"
+    ],
+    "jingchi": [
+        "alltime"
+    ],
+    "jp-morgan-chase": [
+        "alltime"
+    ],
+    "jpmorgan": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "jump-trading": [
+        "2year",
+        "alltime"
+    ],
+    "kakao": [
+        "alltime"
+    ],
+    "karat": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "leap-motion": [
+        "alltime"
+    ],
+    "limebike": [
+        "alltime"
+    ],
+    "linkedin": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "liveramp": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "lyft": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "machine-zone": [
+        "alltime"
+    ],
+    "machinezone": [
+        "alltime"
+    ],
+    "maq-software": [
+        "alltime"
+    ],
+    "mathworks": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "mckinsey": [
+        "alltime"
+    ],
+    "medianet": [
+        "alltime"
+    ],
+    "meituan": [
+        "2year",
+        "alltime"
+    ],
+    "microsoft": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "microstrategy": [
+        "alltime"
+    ],
+    "morgan-stanley": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "national-instruments": [
+        "alltime"
+    ],
+    "netease": [
+        "2year",
+        "alltime"
+    ],
+    "netflix": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "netsuite": [
+        "alltime"
+    ],
+    "nutanix": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "nvidia": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "opendoor": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "oracle": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "palantir-technologies": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "palantir": [
+        "alltime"
+    ],
+    "paypal": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "paytm": [
+        "alltime"
+    ],
+    "phonepe": [
+        "alltime"
+    ],
+    "pinterest": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "pocket-gems": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "point72": [
+        "alltime"
+    ],
+    "ponyai": [
+        "2year",
+        "alltime"
+    ],
+    "poshmark": [
+        "alltime"
+    ],
+    "postmates": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "poynt": [
+        "alltime"
+    ],
+    "pramp": [
+        "alltime"
+    ],
+    "pure-storage": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "qualcomm": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "qualtrics": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "quantcast": [
+        "2year",
+        "alltime"
+    ],
+    "quip": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "quora": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "rackspace": [
+        "alltime"
+    ],
+    "radius": [
+        "2year",
+        "alltime"
+    ],
+    "reddit": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "redfin": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "riot-games": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "robinhood": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "roblox": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "rubrik": [
+        "2year",
+        "alltime"
+    ],
+    "salesforce": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "samsung": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "sapient": [
+        "alltime"
+    ],
+    "sap": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "servicenow": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "snapchat": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "snapdeal": [
+        "alltime"
+    ],
+    "splunk": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "spotify": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "square": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "sumologic": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "symantec": [
+        "2year",
+        "alltime"
+    ],
+    "tableau": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "tandemg": [
+        "alltime"
+    ],
+    "tencent": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "tesla": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "thumbtack": [
+        "alltime"
+    ],
+    "traveloka": [
+        "alltime"
+    ],
+    "tripadvisor": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "triplebyte": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "turvo": [
+        "alltime"
+    ],
+    "twilio": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "twitch": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "twitter": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "two-sigma": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "uber": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "uipath": [
+        "alltime"
+    ],
+    "united-health-group": [
+        "alltime"
+    ],
+    "valve": [
+        "2year",
+        "alltime"
+    ],
+    "virtu": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "visa": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "vmware": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "walmart": [
+        "alltime"
+    ],
+    "wayfair": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "wish": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "works-applications": [
+        "2year",
+        "alltime"
+    ],
+    "yahoo": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "yandex": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "yatra": [
+        "alltime"
+    ],
+    "yelp": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "zalando": [
+        "alltime"
+    ],
+    "zappos": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "zenefits": [
+        "alltime"
+    ],
+    "zillow": [
+        "1year",
+        "2year",
+        "6months",
+        "alltime"
+    ],
+    "zoho": [
+        "1year",
+        "2year",
+        "alltime"
+    ],
+    "zscaler": [
+        "alltime"
+    ],
+    "zulily": [
+        "1year",
+        "2year",
+        "alltime"
+    ]
+}
