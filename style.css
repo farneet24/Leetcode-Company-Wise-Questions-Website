@@ -38,7 +38,13 @@ body {
   text-transform: capitalize;
   font-weight: bold;
   color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: #27ae60; /* Soft green for easy */
+}
+
+.difficulty-easy:hover {
+  transform: translateY(-2px);  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
 }
 
 .difficulty-medium {
@@ -51,7 +57,14 @@ body {
   font-weight: bold;
   color: #fff;
   background-color: #f39c12; /* Amber for medium */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.difficulty-medium:hover {
+  transform: translateY(-2px);  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+}
+
 
 .difficulty-hard {
   display: inline-block;
@@ -63,6 +76,12 @@ body {
   font-weight: bold;
   color: #fff;
   background-color: #c0392b; /* Soft red for hard */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.difficulty-hard:hover {
+  transform: translateY(-2px);  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
 }
 
 html,
@@ -114,4 +133,41 @@ body {
 
 .styled-table tr:last-of-type {
   border-bottom: 2px solid #009879;
+}
+
+
+.frequency-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.high-frequency {
+  color: white;
+  background-color: #FF204E; 
+}
+
+.medium-frequency {
+  color: white;
+
+  background-color: #FF9300;  
+}
+
+.low-frequency {
+  color: white;
+
+  background-color: #1FAB89;  
+}
+
+.frequency-tag:hover {
+  transform: translateY(-2px);  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+}
+
+img {
+  vertical-align: middle;  
+  height: 24px;
+  margin-right: 10px;
 }
