@@ -93,6 +93,8 @@ function displayTable(csvData, sort, difficulty) {
   console.log("Rows", rows);
   // Extract the header row
   const header = rows.shift();
+  rows.unshift(header + " ,Attempted");
+
   console.log("Header", header);
   // Sort rows if sort option is provided
   if (sort) {
@@ -105,7 +107,6 @@ function displayTable(csvData, sort, difficulty) {
   }
 
   // Reinsert the header at the beginning of the rows array
-  rows.unshift(header);
 
   // Create a new table element
   const table = document.createElement("table");
@@ -114,38 +115,58 @@ function displayTable(csvData, sort, difficulty) {
   // Iterate over each row to create table rows
   rows.forEach((row, index) => {
     const tr = document.createElement("tr");
+    const cells = row.split(",");
+    if (index > 0) cells.push(""); // Ensuring an empty cell for 'Attempted' is added to each data row
 
-    // Split each row into cells and process each cell
-    row.split(",").forEach((cell, cellIndex) => {
+    cells.forEach((cell, cellIndex) => {
       const cellElement = document.createElement(index === 0 ? "th" : "td");
       cellElement.classList.add("border", "px-4", "py-2", "text-center"); // Apply Tailwind CSS classes
 
       if (index === 0) {
-        // This condition is true for header cells
-        cellElement.style.backgroundColor = "#009879"; // Set header background color to green
-        cellElement.style.color = "white"; // Set header background color to green
+        cellElement.style.backgroundColor = "#009879"; // Header cells background color
+        cellElement.style.color = "white";
       }
-      // Special handling for link cells
-      if (index > 0 && cellIndex === 5) {
+
+      if (index === 0 && cellIndex === cells.length - 1) {
+        // Set text for 'Attempted' header
+        cellElement.textContent = "Attempted";
+      } else if (index > 0 && cellIndex === cells.length - 1) {
+        
+        // Append checkbox for each data row in the 'Attempted' column
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("form-checkbox", "h-5", "w-5", "text-blue-600"); // Tailwind classes for checkboxes
+        checkbox.id = `attempt-${cells[0]}`; // Assuming the first column is 'ID'
+        checkbox.checked = JSON.parse(
+          localStorage.getItem(checkbox.id) || "false"
+        );
+        checkbox.addEventListener("change", function () {
+          localStorage.setItem(this.id, this.checked);
+        });
+        const label = document.createElement("label");
+        label.classList.add("inline-flex", "justify-center", "items-center"); // Centering checkbox within its cell
+        label.appendChild(checkbox);
+        cellElement.appendChild(label);
+
+
+      } else if (index > 0 && cellIndex === 5) {
+        // Handling link cells
         cellElement.style.display = "flex";
         cellElement.style.flexDirection = "row-reverse";
         cellElement.style.justifyContent = "space-around";
         const link = document.createElement("a");
         link.href = cell;
         link.target = "_blank";
-        // LeetCode Icon
         const leetCodeIcon = new Image();
         leetCodeIcon.src = "leetcode.svg";
         leetCodeIcon.alt = "LeetCode";
         leetCodeIcon.style.alignItems = "center";
         leetCodeIcon.style.height = "30px";
         leetCodeIcon.style.width = "30px";
-
         link.appendChild(leetCodeIcon);
         cellElement.appendChild(link);
-      }
-      // Special formatting for the Difficulty column
-      else if (cellIndex === 3) {
+      } else if (cellIndex === 3) {
+        // Special formatting for the Difficulty column
         const difficultyTag = document.createElement("span");
         difficultyTag.classList.add("difficulty-tag");
         if (cell === "Easy") {
@@ -157,11 +178,11 @@ function displayTable(csvData, sort, difficulty) {
         }
         difficultyTag.textContent = cell;
         cellElement.appendChild(difficultyTag);
-      }
-      // Formatting for frequency cells, assuming these are percentage values
-      else if (index > 0 && cellIndex === 4) {
+      } else if (index > 0 && cellIndex === 4) {
+        // Formatting for frequency cells
         cellElement.textContent = `${parseFloat(cell).toFixed(2)}%`;
       } else {
+        // Normal cell handling
         cellElement.textContent = cell;
       }
 
