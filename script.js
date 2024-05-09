@@ -402,7 +402,31 @@ function displaySearchResults(data, title, link) {
   titleElement.textContent = title;
   titleElement.style.fontSize = "30px";
   titleElement.style.marginRight = "10px";
-  titleLinkContainer.appendChild(titleElement);
+
+  // Create checkbox beside the title
+  const titleCheckbox = document.createElement("input");
+  titleCheckbox.type = "checkbox";
+  titleCheckbox.id = "title-checkbox"; // Specific ID for the checkbox
+  titleCheckbox.classList.add(
+    "form-checkbox",
+    "h-5",
+    "w-5",
+    "text-blue-600",
+    "mr-2"
+  ); // Tailwind CSS for style
+
+  // Optional: Retrieve the state from localStorage if needed, using some ID from elsewhere like 'id-search'
+  const checkboxId = document.getElementById("id-search").value; // Ensure this element exists and has a value
+  titleCheckbox.checked = JSON.parse(
+    localStorage.getItem(`attempt-${checkboxId}`) || "false"
+  );
+
+  // Event listener to update local storage or handle changes
+  titleCheckbox.addEventListener("change", function () {
+    localStorage.setItem(`attempt-${checkboxId}`, this.checked);
+  });
+
+  // Append the checkbox to the container
 
   const linkElement = document.createElement("a");
   linkElement.setAttribute("href", link);
@@ -425,8 +449,10 @@ function displaySearchResults(data, title, link) {
   leetCodeIcon.style.boxSizing = "border-box"; // Includes padding in the width and height measurements
 
   linkElement.insertBefore(leetCodeIcon, linkElement.firstChild);
-  titleLinkContainer.appendChild(linkElement);
 
+  titleLinkContainer.appendChild(titleCheckbox);
+  titleLinkContainer.appendChild(titleElement);
+  titleLinkContainer.appendChild(linkElement);
   tableContainer.appendChild(titleLinkContainer);
 
   if (Object.keys(data).length === 0) {
@@ -450,13 +476,13 @@ function displaySearchResults(data, title, link) {
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
     const companyNameHeader = document.createElement("th");
-    companyNameHeader.style.backgroundColor = '#556FB5'
-    companyNameHeader.style.color = 'white'
+    companyNameHeader.style.backgroundColor = "#556FB5";
+    companyNameHeader.style.color = "white";
     companyNameHeader.textContent = "Company";
     const frequencyHeader = document.createElement("th");
     frequencyHeader.textContent = "Frequency";
-    frequencyHeader.style.backgroundColor = '#556FB5'
-    frequencyHeader.style.color = 'white'
+    frequencyHeader.style.backgroundColor = "#556FB5";
+    frequencyHeader.style.color = "white";
     headerRow.appendChild(companyNameHeader);
     headerRow.appendChild(frequencyHeader);
     thead.appendChild(headerRow);
@@ -483,7 +509,7 @@ function displaySearchResults(data, title, link) {
       const frequencyCell = document.createElement("td");
       Object.entries(durations).forEach(([duration, frequency]) => {
         const tag = document.createElement("span");
-        tag.textContent = `${Math.ceil(frequency*100)}% (${duration})`;
+        tag.textContent = `${Math.ceil(frequency * 100)}% (${duration})`;
         tag.classList.add("frequency-tag");
         tag.style.marginRight = "10px";
         if (parseFloat(frequency) >= 0.7) {
