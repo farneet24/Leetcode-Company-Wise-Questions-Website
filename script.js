@@ -1,15 +1,15 @@
+const companySelect = document.getElementById("company-select");
+const durationSelect = document.getElementById("duration-select");
+const sortSelect = document.getElementById("sort-select");
+const difficultyFilter = document.getElementById("difficulty-filter");
+const currentSelection = document.getElementById("current-selection");
+
 document.addEventListener("DOMContentLoaded", function () {
   fetch("company_data.json")
     .then((response) => response.json())
     .then((data) => initializeDropdowns(data))
     .catch((error) => console.error("Error loading company data:", error));
 });
-
-const companySelect = document.getElementById("company-select");
-const durationSelect = document.getElementById("duration-select");
-const sortSelect = document.getElementById("sort-select");
-const difficultyFilter = document.getElementById("difficulty-filter");
-const currentSelection = document.getElementById("current-selection");
 
 function initializeDropdowns(companyData) {
   Object.keys(companyData).forEach((company) => {
@@ -62,11 +62,6 @@ function initializeDropdowns(companyData) {
   difficultyFilter.addEventListener("change", updateDisplay);
 }
 
-function clearTable() {
-  const tableContainer = document.getElementById("table-container");
-  tableContainer.innerHTML = "";
-}
-
 function updateCompanyLogo(companyName) {
   const logoImg = document.getElementById("company-logo");
   logoImg.src = `https://logo.clearbit.com/${companyName}.com`;
@@ -85,7 +80,18 @@ function loadCompanyQuestions(company, duration, sort, difficulty) {
 
 function displayTable(csvData, sort, difficulty) {
   // Get the container for the table
+
   const tableContainer = document.getElementById("table-container");
+
+  if (tableContainer.innerHTML == "") {
+    if (window.problemsSolvedPerDayChart) {
+      window.problemsSolvedPerDayChart.destroy();
+    }
+    if (window.problemsSolvedByHourChart) {
+      window.problemsSolvedByHourChart.destroy();
+    }
+  }
+
   tableContainer.innerHTML = ""; // Clear previous content
 
   // Split CSV data into rows and filter out any empty rows
@@ -93,7 +99,7 @@ function displayTable(csvData, sort, difficulty) {
   console.log("Rows", rows);
   // Extract the header row
   const header = rows.shift();
-  rows.unshift(header + " ,Attempted");
+  rows.unshift(header + ",Attempted,Date Solved");
 
   console.log("Header", header);
   // Sort rows if sort option is provided
@@ -116,7 +122,11 @@ function displayTable(csvData, sort, difficulty) {
   rows.forEach((row, index) => {
     const tr = document.createElement("tr");
     const cells = row.split(",");
-    if (index > 0) cells.push(""); // Ensuring an empty cell for 'Attempted' is added to each data row
+
+    if (index > 0) {
+      cells.push(""); // For 'Attempted' checkbox
+      cells.push(""); // For 'Date Solved' input
+    }
 
     cells.forEach((cell, cellIndex) => {
       const cellElement = document.createElement(index === 0 ? "th" : "td");
@@ -127,28 +137,55 @@ function displayTable(csvData, sort, difficulty) {
         cellElement.style.color = "white";
       }
 
-      if (index === 0 && cellIndex === cells.length - 1) {
+      if (index === 0 && cellIndex === cells.length - 2) {
         // Set text for 'Attempted' header
         cellElement.textContent = "Attempted";
-      } else if (index > 0 && cellIndex === cells.length - 1) {
-        
-        // Append checkbox for each data row in the 'Attempted' column
+      } else if (index === 0 && cellIndex === cells.length - 1) {
+        // Set text for 'Attempted' header
+        cellElement.textContent = "Date Solved";
+      } else if (index > 0 && cellIndex === cells.length - 2) {
+        // Checkbox for 'Attempted'
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.classList.add("form-checkbox", "h-5", "w-5", "text-blue-600"); // Tailwind classes for checkboxes
-        checkbox.id = `attempt-${cells[0]}`; // Assuming the first column is 'ID'
+        checkbox.classList.add("form-checkbox", "h-5", "w-5", "text-blue-600");
+        checkbox.id = `attempt-${cells[0]}`;
         checkbox.checked = JSON.parse(
           localStorage.getItem(checkbox.id) || "false"
         );
+
         checkbox.addEventListener("change", function () {
+          const dateInput = document.getElementById(`date-${cells[0]}`);
+          if (this.checked) {
+            const currentDate = formatDate(new Date());
+            dateInput.value = currentDate;
+            localStorage.setItem(`date-${cells[0]}`, currentDate);
+          } else {
+            dateInput.value = "";
+            localStorage.removeItem(`date-${cells[0]}`);
+          }
           localStorage.setItem(this.id, this.checked);
         });
+
         const label = document.createElement("label");
-        label.classList.add("inline-flex", "justify-center", "items-center"); // Centering checkbox within its cell
+        label.classList.add("inline-flex", "justify-center", "items-center");
         label.appendChild(checkbox);
         cellElement.appendChild(label);
+      } else if (index > 0 && cellIndex === cells.length - 1) {
+        // Input for 'Date Solved'
+        const dateInput = document.createElement("input");
+        dateInput.type = "text";
+        dateInput.id = `date-${cells[0]}`;
+        dateInput.classList.add("form-input", "text-center");
+        dateInput.value = localStorage.getItem(`date-${cells[0]}`) || "";
+        dateInput.disabled = !JSON.parse(
+          localStorage.getItem(`attempt-${cells[0]}`) || "false"
+        );
 
+        dateInput.addEventListener("change", function () {
+          localStorage.setItem(this.id, this.value);
+        });
 
+        cellElement.appendChild(dateInput);
       } else if (index > 0 && cellIndex === 5) {
         // Handling link cells
         cellElement.style.display = "flex";
@@ -169,6 +206,7 @@ function displayTable(csvData, sort, difficulty) {
         // Special formatting for the Difficulty column
         const difficultyTag = document.createElement("span");
         difficultyTag.classList.add("difficulty-tag");
+
         if (cell === "Easy") {
           difficultyTag.classList.add("difficulty-easy");
         } else if (cell === "Medium") {
@@ -221,6 +259,31 @@ function displayTable(csvData, sort, difficulty) {
   // Insert the row count above the table
   tableContainer.insertBefore(rowCountDisplay, tableContainer.firstChild);
   tableContainer.appendChild(table);
+}
+
+function formatDate(date) {
+  const nth = (d) => {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  let day = date.getDate();
+  let month = date.toLocaleString("default", { month: "long" });
+  let year = date.getFullYear();
+  let hour = date.getHours() % 12 || 12; // Convert to 12 hour format
+  let minute = date.getMinutes().toString().padStart(2, "0");
+  let ampm = date.getHours() >= 12 ? "PM" : "AM";
+
+  return `${day}${nth(day)} ${month} ${year}, ${hour}:${minute} ${ampm}`;
 }
 
 function sortRows(rows, sort, header) {
@@ -291,39 +354,23 @@ function formatDuration(duration) {
     .replace("alltime", "All Time");
 }
 
-document.getElementById("clear-button").addEventListener("click", () => {
-  // Clear the table
-  document.getElementById("table-container").innerHTML = "";
-  // Clear the current selection
-  document.getElementById("current-selection").innerText = "";
-  // Hide the company logo
-  document.getElementById("company-logo").style.display = "none";
-  document.getElementById("id-search").value = "";
-  
-  companySelect.selectedIndex = 0;
-  durationSelect.selectedIndex = 0;
-  sortSelect.selectedIndex = 0;
-  difficultyFilter.selectedIndex = 0;
-});
-
 document.getElementById("search-button").addEventListener("click", () => {
   const id = document.getElementById("id-search").value.trim();
   if (id) {
-      searchByID(id);
+    searchByID(id);
   }
 });
 
 // Event listener to handle "Enter" key in the input field
 document.getElementById("id-search").addEventListener("keypress", (event) => {
   if (event.key === "Enter") {
-      event.preventDefault();  // Prevent the default action to avoid submitting the form
-      const id = document.getElementById("id-search").value.trim();
-      if (id) {
-          searchByID(id);
-      }
+    event.preventDefault(); // Prevent the default action to avoid submitting the form
+    const id = document.getElementById("id-search").value.trim();
+    if (id) {
+      searchByID(id);
+    }
   }
 });
-
 
 function searchByID(id) {
   fetch("company_data.json")
@@ -415,15 +462,23 @@ function displaySearchResults(data, title, link) {
     "mr-2"
   ); // Tailwind CSS for style
 
-  // Optional: Retrieve the state from localStorage if needed, using some ID from elsewhere like 'id-search'
   const checkboxId = document.getElementById("id-search").value; // Ensure this element exists and has a value
-  titleCheckbox.checked = JSON.parse(
-    localStorage.getItem(`attempt-${checkboxId}`) || "false"
-  );
+
+  function getLocalStorageItem(key, checkboxId, defaultValue = "false") {
+    return JSON.parse(
+      localStorage.getItem(`${key}-${checkboxId}`) || defaultValue
+    );
+  }
+
+  titleCheckbox.checked =
+    getLocalStorageItem("attempt", checkboxId) ||
+    getLocalStorageItem("date", checkboxId);
 
   // Event listener to update local storage or handle changes
   titleCheckbox.addEventListener("change", function () {
     localStorage.setItem(`attempt-${checkboxId}`, this.checked);
+    const currentDate = formatDate(new Date());
+    localStorage.setItem(`date-${checkboxId}`, currentDate);
   });
 
   // Append the checkbox to the container
@@ -529,3 +584,446 @@ function displaySearchResults(data, title, link) {
     tableContainer.appendChild(table);
   }
 }
+
+function clearUIElements() {
+  // Clear the table
+  document.getElementById("table-container").innerHTML = "";
+  document.getElementById("current-selection").innerText = "";
+  document.getElementById("company-logo").style.display = "none";
+  document.getElementById("id-search").value = "";
+  document.getElementById("options").style.display = "none"; // Show the dropdown
+
+  document.getElementById('newEntryForm').classList.add('hidden');
+  document.getElementById('summaryTable').classList.add('hidden');
+  document.getElementById('uniqueId').value = '';
+  document.getElementById('problemName').value = '';
+  document.getElementById('link').value = '';
+  document.getElementById('difficulty').value = '';
+  document.getElementById('companies').value = '';
+
+  if (window.problemsSolvedPerDayChart) {
+    window.problemsSolvedPerDayChart.destroy();
+  }
+  if (window.problemsSolvedByHourChart) {
+    window.problemsSolvedByHourChart.destroy();
+  }
+
+  document.getElementById("company-select").selectedIndex = 0;
+  document.getElementById("duration-select").selectedIndex = 0;
+  document.getElementById("sort-select").selectedIndex = 0;
+  document.getElementById("difficulty-filter").selectedIndex = 0;
+}
+
+// Add the event listener to the clear button
+document
+  .getElementById("clear-button")
+  .addEventListener("click", clearUIElements);
+
+function clearTable() {
+  const tableContainer = document.getElementById("table-container");
+  tableContainer.innerHTML = "";
+}
+
+document.getElementById("analysisBtn").addEventListener("click", function () {
+  document.getElementById("options").style.display = "block";
+  updateCharts();
+});
+
+document.getElementById("timeFrame").addEventListener("change", function () {
+  updateCharts();
+});
+
+function updateCharts() {
+  const problemsSolvedPerDayCtx = document
+    .getElementById("problemsSolvedPerDay")
+    .getContext("2d");
+  const problemsSolvedByHourCtx = document
+    .getElementById("problemsSolvedByHour")
+    .getContext("2d");
+  const selectedTimeFrame = document.getElementById("timeFrame").value;
+
+  if (window.problemsSolvedPerDayChart) {
+    window.problemsSolvedPerDayChart.destroy();
+  }
+  if (window.problemsSolvedByHourChart) {
+    window.problemsSolvedByHourChart.destroy();
+  }
+
+  const solvedData = {};
+  const timeData = Array(24).fill(0);
+  const now = new Date();
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith("date-")) {
+      const value = localStorage.getItem(key);
+      if (value) {
+        const date = parseDate(value);
+        const dayKey = `${date.getFullYear()}-${
+          date.getMonth() + 1
+        }-${date.getDate()}`;
+        const monthKey = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        const hour = date.getHours();
+
+        if (selectedTimeFrame === "month-wise") {
+          solvedData[monthKey] = (solvedData[monthKey] || 0) + 1;
+        } else {
+          if (
+            (selectedTimeFrame === "week" && isLast7Days(date, now)) ||
+            (selectedTimeFrame === "month" && isLastMonth(date, now))
+          ) {
+            solvedData[dayKey] = (solvedData[dayKey] || 0) + 1;
+          }
+        }
+
+        timeData[hour]++;
+      }
+    }
+  }
+
+  // Handle missing data for month-wise and time frames
+  let labels, data;
+  if (selectedTimeFrame === "month-wise") {
+    const year = new Date().getFullYear();
+    labels = Array.from({ length: 12 }, (_, i) => new Date(year, i, 1));
+    data = labels.map((date) => ({
+      x: date,
+      y: solvedData[`${date.getFullYear()}-${date.getMonth() + 1}`] || 0,
+    }));
+  } else {
+    const startDate =
+      selectedTimeFrame === "week"
+        ? new Date(now.setDate(now.getDate() - 7))
+        : new Date(now.setMonth(now.getMonth() - 1));
+    const endDate = new Date();
+    labels = [];
+    for (
+      let dt = new Date(startDate);
+      dt <= endDate;
+      dt.setDate(dt.getDate() + 1)
+    ) {
+      labels.push(new Date(dt));
+    }
+    data = labels.map((date) => ({
+      x: date,
+      y:
+        solvedData[
+          `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+        ] || 0,
+    }));
+  }
+
+  window.problemsSolvedPerDayChart = new Chart(problemsSolvedPerDayCtx, {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: "Problems Solved",
+          data: data,
+          fill: true,
+          borderColor: "rgb(75, 192, 192)",
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          type: "time",
+          time: {
+            unit: selectedTimeFrame === "month-wise" ? "month" : "day",
+            tooltipFormat: "do MMM yyyy",
+            displayFormats: {
+              day: "do MMM yyyy",
+              month: "MMM yyyy",
+            },
+          },
+          ticks: {
+            color: "rgb(255, 253, 208)", // Cream color for X-axis ticks
+          },
+          title: {
+            display: true,
+            text: "Date",
+            color: "rgb(255, 253, 208)",
+            font: {
+              size: 16, // Increased font size for Y-axis title
+            },
+            padding: {
+              top: 20, // Increase padding top for X-axis title
+            },
+          },
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Number of Problems Solved",
+            color: "rgb(255, 253, 208)",
+            font: {
+              size: 16, // Font size for Y-axis title
+            },
+            padding: {
+              bottom: 20, // Increase padding bottom for Y-axis title
+            },
+          },
+          ticks: {
+            color: "rgb(255, 253, 208)", // Cream color for Y-axis ticks
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          position: 'top',  // Positions the legend at the top
+          align: 'end',     // Aligns the legend to the right
+          labels: {
+            color: "rgb(255, 253, 208)", // Cream color for legend labels
+          },
+        },
+      },
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+    },
+  });
+
+  window.problemsSolvedByHourChart = new Chart(problemsSolvedByHourCtx, {
+    type: "bar",
+    data: {
+      labels: Array.from(
+        { length: 24 },
+        (_, i) => `${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`
+      ),
+      datasets: [
+        {
+          label: "Problems Solved",
+          data: timeData,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Hour of the Day",
+            color: "rgb(255, 253, 208)",
+            font: {
+              size: 16, // Increased font size for Y-axis title
+            },
+            padding: {
+              top: 20, // Increase padding top for X-axis title
+            },
+          },
+          ticks: {
+            color: "rgb(255, 253, 208)", // Cream color for Y-axis ticks
+          },
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Number of Problems Solved",
+            color: "rgb(255, 253, 208)",
+            font: {
+              size: 16, // Font size for Y-axis title
+            },
+            padding: {
+              bottom: 20, // Increase padding bottom for Y-axis title
+            },
+          },
+          ticks: {
+            color: "rgb(255, 253, 208)", // Cream color for Y-axis ticks
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          position: 'top',  // Positions the legend at the top
+          align: 'end',     // Aligns the legend to the right
+          labels: {
+            color: "rgb(255, 253, 208)", // Cream color for legend labels
+          },
+        },
+      },
+    },
+  });
+}
+
+function isToday(date) {
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+}
+
+function isLast7Days(date, now) {
+  const oneWeekAgo = new Date(now);
+  oneWeekAgo.setDate(now.getDate() - 7);
+  return date >= oneWeekAgo && date <= now;
+}
+
+function isLastMonth(date, now) {
+  const oneMonthAgo = new Date(now);
+  oneMonthAgo.setMonth(now.getMonth() - 1);
+  return date >= oneMonthAgo && date <= now;
+}
+
+// Updated to format date strings for ChartJS
+function parseDate(input) {
+  const parts = input.match(
+    /(\d+)(st|nd|rd|th)? (\w+) (\d+), (\d+):(\d+) (AM|PM)/
+  );
+  if (!parts) return new Date(input); // Fallback to default parser if regex fails
+
+  const num = parseInt(parts[1], 10);
+  const month = parts[3];
+  const year = parseInt(parts[4], 10);
+  let hour = parseInt(parts[5], 10);
+  const minute = parseInt(parts[6], 10);
+  const ampm = parts[7];
+
+  if (ampm === "PM" && hour < 12) hour += 12;
+  if (ampm === "AM" && hour === 12) hour = 0;
+
+  return new Date(`${month} ${num}, ${year} ${hour}:${minute}:00`);
+}
+
+function getOrdinalSuffix(day) {
+  if (day > 3 && day < 21) return "th";
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+
+
+
+document.getElementById('dropdownButton').addEventListener('click', function() {
+  document.getElementById('dropdownMenu').classList.toggle('hidden');
+});
+
+function toggleNewEntryForm() {
+  document.getElementById('newEntryForm').classList.toggle('hidden');
+}
+
+function storeData() {
+  const uniqueId = document.getElementById('uniqueId').value;
+  const problemName = document.getElementById('problemName').value;
+  const link = document.getElementById('link').value;
+  const difficulty = document.getElementById('difficulty').value;
+  const companies = document.getElementById('companies').value;
+  const currentDate = formatDate(new Date());
+
+  // Check if the ID is numeric and not already used
+  if (!uniqueId || isNaN(uniqueId)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please enter a numeric Unique ID.'
+    });
+    return;
+  }
+
+  // Check if the Unique ID already exists in localStorage
+  if (localStorage.getItem(`attempt-${uniqueId}`)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Duplicate Entry',
+      text: 'This Unique ID already exists. Please use a different ID.'
+    });
+    return;
+  }
+
+  if (!problemName || !link || !companies || difficulty === "") {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'All fields must be filled out.'
+    });
+    return;
+  }
+
+  localStorage.setItem(`attempt-${uniqueId}`, true);
+  localStorage.setItem(`date-${uniqueId}`, currentDate);
+  localStorage.setItem(`name-${uniqueId}`, problemName);
+  localStorage.setItem(`link-${uniqueId}`, link);
+  localStorage.setItem(`difficulty-${uniqueId}`, difficulty);
+  localStorage.setItem(`companies-${uniqueId}`, companies);
+
+  // Clear input fields
+  document.getElementById('uniqueId').value = '';
+  document.getElementById('problemName').value = '';
+  document.getElementById('link').value = '';
+  document.getElementById('difficulty').value = '';
+  document.getElementById('companies').value = '';
+
+  // Show success modal with SweetAlert2
+  Swal.fire({
+    title: 'Success!',
+    text: 'Question submitted successfully!',
+    icon: 'success',
+    confirmButtonText: 'Cool'
+  });
+}
+
+
+function showSummary() {
+  const table = document.getElementById('summaryTable');
+  table.classList.remove('hidden');
+  table.classList.add('styled-table');
+  const tbody = table.querySelector('tbody');
+
+  // Clear previous rows
+  while (tbody.rows.length > 0) {
+    tbody.deleteRow(0);
+  }
+
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('attempt-')) {
+      const id = key.split('-')[1];
+      const name = localStorage.getItem(`name-${id}`);
+      if (name) {  // Only add rows where 'name' exists
+        const row = tbody.insertRow(-1);
+        const cells = [
+          row.insertCell(0), row.insertCell(1), row.insertCell(2),
+          row.insertCell(3), row.insertCell(4), row.insertCell(5)
+        ];
+        cells.forEach(cell => cell.className = "border px-5 py-2 text-center");
+
+        cells[0].textContent = id;
+        cells[1].textContent = name;
+
+        const link = document.createElement('a');
+        link.href = localStorage.getItem(`link-${id}`);
+        link.target = "_blank";
+        const leetCodeIcon = new Image();
+        leetCodeIcon.src = "leetcode.svg";
+        leetCodeIcon.alt = "LeetCode";
+        leetCodeIcon.style.height = "30px";
+        leetCodeIcon.style.width = "30px";
+        link.appendChild(leetCodeIcon);
+        cells[2].appendChild(link);
+
+        cells[3].textContent = localStorage.getItem(`difficulty-${id}`);
+        cells[3].classList.add("difficulty-tag");
+        if (cells[3].textContent === 'Hard') cells[3].classList.add('difficulty-hard');
+        else if (cells[3].textContent === 'Medium') cells[3].classList.add('difficulty-medium');
+        else if (cells[3].textContent === 'Easy') cells[3].classList.add('difficulty-easy');
+
+        cells[4].textContent = localStorage.getItem(`companies-${id}`);
+        cells[5].textContent = localStorage.getItem(`date-${id}`);
+      }
+    }
+  });
+}
+
