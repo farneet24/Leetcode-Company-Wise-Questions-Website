@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="data-science.png" type="image/x-icon">
-    <title>Company-wise Leetcode Problems</title>
+    <title>LeetCode Questions by Company</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -17,11 +17,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
   </head>
 
   <body class="bg-gray-900 text-white">
     <div class="container mx-auto px-4 py-8">
-      <h1 class="text-4xl font-bold text-center mb-8 my-4">
+      <h1 class="text-4xl font-bold text-center mb-8 my-10">
         Company-wise Leetcode Problems
       </h1>
 
@@ -84,7 +86,7 @@
             class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
           ></i>
         </div>
-        <div class="relative" style="display: flex;">
+        <div class="relative" style="display: flex">
           <input
             type="text"
             id="id-search"
@@ -94,12 +96,31 @@
           <button
             id="search-button"
             class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            style="display: flex;"
+            style="display: flex"
           >
             <i data-feather="search" class="mr-2"></i>
             <span>Search</span>
           </button>
         </div>
+        <button
+          id="analysisBtn"
+          class="px-4 py-2 rounded-lg bg-purple-700 hover:bg-purple-600 text-white focus:outline-none focus:bg-purple-800 flex items-center space-x-2"
+        >
+          <i data-feather="bar-chart-2" class="mr-2"></i>
+          Analysis
+        </button>
+        <div class="relative">
+          <button id="dropdownButton" class="bg-pink-500 text-white px-4 py-2 rounded-lg flex items-center">
+            Add <span class="ml-2">+</span>
+          </button>
+          <div id="dropdownMenu" class="hidden absolute bg-gray-800 shadow-lg rounded-lg mt-2 w-48">
+            <ul>
+              <li class="p-3 hover:bg-gray-600 cursor-pointer" onclick="toggleNewEntryForm()">New Entry</li>
+              <li class="p-3 hover:bg-gray-600 cursor-pointer py-3" onclick="showSummary()">Summary</li>
+            </ul>
+          </div>
+        </div>
+
         <button
           id="clear-button"
           class="px-4 py-2 rounded-lg bg-red-700 hover:bg-red-600 text-white focus:outline-none focus:bg-red-800 flex items-center space-x-2"
@@ -107,6 +128,24 @@
           <i data-feather="x-circle"></i>
           <span>Clear</span>
         </button>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="options">
+          <select
+            id="timeFrame"
+            class="select-dropdown appearance-none bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:bg-gray-700 pr-8"
+          >
+            <option value="week">Last 7 Days</option>
+            <option value="month">Last 1 Month</option>
+            <option value="month-wise">Month-wise</option>
+          </select>
+        </div>
+        <canvas id="problemsSolvedPerDay"></canvas>
+        <canvas id="problemsSolvedByHour"></canvas>
       </div>
 
       <!-- Company Logo and Current Selection -->
@@ -130,8 +169,46 @@
       </div>
     </div>
 
+    <div id="newEntryForm" class="hidden mt-4 mx-auto w-full max-w-md">
+      <div class="text-white" style="font-size: 36px; text-align: center;"><span class="mx-2">New Question?</span><i class="fa-solid fa-plus"></i></div>
+      <br>
+      <br>
+      <input type="text" id="uniqueId" placeholder="Unique ID" class="border border-gray-300 text-black p-2 rounded-lg w-full mb-2">
+      <input type="text" id="problemName" placeholder="Name of the Problem" class="border border-gray-300 text-black p-2 rounded-lg w-full mb-2">
+      <input type="text" id="link" placeholder="Link" class="border border-gray-300 p-2 rounded-lg w-full text-black mb-2">      
+      <input type="text" id="companies" placeholder="Companies" class="border border-gray-300 p-2 rounded-lg w-full text-black mb-2">
+      <select id="difficulty" class="border border-gray-300 p-2 rounded-lg mb-2 text-black" onchange="checkDifficulty(this)">
+        <option value="">Difficulty</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+      <button onclick="storeData()" class="bg-green-500 text-white px-4 py-2 rounded-lg w-full">Submit</button>
+    </div>
+    
+    
+    <div class="flex justify-center items-center w-full">
+      <div id="summaryTable" class="hidden w-full max-w-4xl">
+        <table class="w-full border-collapse border border-gray-300 mx-auto">
+          <thead>
+            <tr>
+              <th class="border border-gray-300 text-center">Unique ID</th>
+              <th class="border border-gray-300 text-center">Name of the Problem</th>
+              <th class="border border-gray-300 text-center">Link</th>
+              <th class="border border-gray-300 text-center">Difficulty</th>
+              <th class="border border-gray-300 text-center">Companies</th>
+              <th class="border border-gray-300 text-center">Date</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    
+    
+
     <div>
-        <footer class="text-center py-4 text-white-400">
+      <footer class="text-center py-4 text-white-400">
         <p>
           Built <i class="fas fa-tools text-white-500"></i> by
           <a
@@ -141,13 +218,15 @@
             >Farneet Singh</a
           >
         </p>
-        <br>
-        <br>
+        <br />
+        <br />
       </footer>
     </div>
     <script src="script.js"></script>
     <script>
       feather.replace();
     </script>
+    <script src="https://kit.fontawesome.com/795c004276.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
