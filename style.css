@@ -43,8 +43,8 @@ body {
 }
 
 .difficulty-easy:hover {
-  transform: translateY(-2px);  
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .difficulty-medium {
@@ -61,10 +61,9 @@ body {
 }
 
 .difficulty-medium:hover {
-  transform: translateY(-2px);  
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .difficulty-hard {
   display: inline-block;
@@ -80,8 +79,8 @@ body {
 }
 
 .difficulty-hard:hover {
-  transform: translateY(-2px);  
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 html,
@@ -123,9 +122,8 @@ body {
   padding: 12px 15px;
 }
 
-
 .styled-table tr:nth-of-type(odd) {
-  background-color: #FFF6F6;
+  background-color: #fff6f6;
 }
 .styled-table tr:nth-of-type(even) {
   background-color: #f6f5f2;
@@ -134,7 +132,6 @@ body {
 .styled-table tr:last-of-type {
   border-bottom: 2px solid #009879;
 }
-
 
 .frequency-tag {
   display: inline-block;
@@ -146,28 +143,48 @@ body {
 
 .high-frequency {
   color: white;
-  background-color: #FF204E; 
+  background-color: #ff204e;
 }
 
 .medium-frequency {
   color: white;
 
-  background-color: #FF9300;  
+  background-color: #ff9300;
 }
 
 .low-frequency {
   color: white;
 
-  background-color: #1FAB89;  
+  background-color: #1fab89;
 }
 
 .frequency-tag:hover {
-  transform: translateY(-2px);  
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 img {
-  vertical-align: middle;  
+  vertical-align: middle;
   height: 24px;
   margin-right: 10px;
+}
+
+canvas{
+  margin: 75px 0px;
+}
+
+
+#options {
+  display: none;
+  margin-left: 90%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#problemsSolvedPerDay{
+  display: none;
+}
+
+#problemsSolvedByHour{
+  display: none;
 }
