@@ -8,6 +8,8 @@ This repository hosts the code for the Company-wise LeetCode Website, a tool tha
 - Access company-specific questions.
 - Search by LeetCode ID to discover company-specific frequency data.
 - Use checkboxes to track attempted questions without needing to log in.
+- Monitor your solving trend over time with the Analysis button, which shows metrics like the number of problems solved over the past week or month and identifies peak productivity hours.
+- Easily integrate new problems into the platform using the Add feature. Review your contributions by selecting Summary under the Add option.
 
 
 ## Access
