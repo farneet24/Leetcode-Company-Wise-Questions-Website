@@ -117,7 +117,7 @@ function displayTable(csvData, sort, difficulty) {
   // Create a new table element
   const table = document.createElement("table");
   table.classList.add("styled-table"); // Apply custom table styles
-
+  let checkboxCount = 0;  // Counter for the checkboxes
   // Iterate over each row to create table rows
   rows.forEach((row, index) => {
     const tr = document.createElement("tr");
@@ -152,6 +152,10 @@ function displayTable(csvData, sort, difficulty) {
         checkbox.checked = JSON.parse(
           localStorage.getItem(checkbox.id) || "false"
         );
+
+        if(checkbox.checked){
+          checkboxCount++;
+        }
 
         checkbox.addEventListener("change", function () {
           const dateInput = document.getElementById(`date-${cells[0]}`);
@@ -245,7 +249,7 @@ function displayTable(csvData, sort, difficulty) {
     font-size: 18px;
     text-align: center;
     color: #ffffff;
-    width: 20%;
+    width: 40%;
   }
 `;
   // Append the style tag to the head of the document
@@ -254,8 +258,7 @@ function displayTable(csvData, sort, difficulty) {
   // Create a div to display the number of questions
   const rowCountDisplay = document.createElement("div");
   rowCountDisplay.className = "row-count-display"; // Assign the class to the div
-  rowCountDisplay.textContent = `Number of Questions: ${rows.length - 1}`;
-
+  rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${rows.length - 1}`;
   // Insert the row count above the table
   tableContainer.insertBefore(rowCountDisplay, tableContainer.firstChild);
   tableContainer.appendChild(table);
@@ -596,10 +599,6 @@ function clearUIElements() {
   document.getElementById('newEntryForm').classList.add('hidden');
   document.getElementById('summaryTable').classList.add('hidden');
   document.getElementById('uniqueId').value = '';
-  document.getElementById('problemName').value = '';
-  document.getElementById('link').value = '';
-  document.getElementById('difficulty').value = '';
-  document.getElementById('companies').value = '';
 
   if (window.problemsSolvedPerDayChart) {
     window.problemsSolvedPerDayChart.destroy();
@@ -615,9 +614,7 @@ function clearUIElements() {
 }
 
 // Add the event listener to the clear button
-document
-  .getElementById("clear-button")
-  .addEventListener("click", clearUIElements);
+document.getElementById("clear-button").addEventListener("click", clearUIElements);
 
 function clearTable() {
   const tableContainer = document.getElementById("table-container");
@@ -906,8 +903,6 @@ function getOrdinalSuffix(day) {
   }
 }
 
-
-
 document.getElementById('dropdownButton').addEventListener('click', function() {
   document.getElementById('dropdownMenu').classList.toggle('hidden');
 });
@@ -916,15 +911,23 @@ function toggleNewEntryForm() {
   document.getElementById('newEntryForm').classList.toggle('hidden');
 }
 
-function storeData() {
+let selectedCompanies = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+    var multiSelectInstance = new MultiSelectTag("companies", {
+        onChange: function(values) {
+            selectedCompanies = values.map(item => item.value); // Extract the value and store in the global variable
+            console.log("Selected companies: ", selectedCompanies);
+        }
+    });
+});
+
+
+async function storeData() {
   const uniqueId = document.getElementById('uniqueId').value;
-  const problemName = document.getElementById('problemName').value;
-  const link = document.getElementById('link').value;
-  const difficulty = document.getElementById('difficulty').value;
-  const companies = document.getElementById('companies').value;
+  const companies = selectedCompanies;
   const currentDate = formatDate(new Date());
 
-  // Check if the ID is numeric and not already used
   if (!uniqueId || isNaN(uniqueId)) {
     Swal.fire({
       icon: 'error',
@@ -934,7 +937,6 @@ function storeData() {
     return;
   }
 
-  // Check if the Unique ID already exists in localStorage
   if (localStorage.getItem(`attempt-${uniqueId}`)) {
     Swal.fire({
       icon: 'error',
@@ -944,37 +946,56 @@ function storeData() {
     return;
   }
 
-  if (!problemName || !link || !companies || difficulty === "") {
+  if (companies.length === 0) {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'All fields must be filled out.'
+      text: 'Please select at least one company.'
     });
     return;
   }
 
-  localStorage.setItem(`attempt-${uniqueId}`, true);
-  localStorage.setItem(`date-${uniqueId}`, currentDate);
-  localStorage.setItem(`name-${uniqueId}`, problemName);
-  localStorage.setItem(`link-${uniqueId}`, link);
-  localStorage.setItem(`difficulty-${uniqueId}`, difficulty);
-  localStorage.setItem(`companies-${uniqueId}`, companies);
+  try {
+    const response = await fetch('problem_data.json');
+    const problems = await response.json();
+    const problem = problems[uniqueId];
 
-  // Clear input fields
-  document.getElementById('uniqueId').value = '';
-  document.getElementById('problemName').value = '';
-  document.getElementById('link').value = '';
-  document.getElementById('difficulty').value = '';
-  document.getElementById('companies').value = '';
+    if (!problem) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Not Found',
+        text: 'No problem found with the given ID.'
+      });
+      return;
+    }
 
-  // Show success modal with SweetAlert2
-  Swal.fire({
-    title: 'Success!',
-    text: 'Question submitted successfully!',
-    icon: 'success',
-    confirmButtonText: 'Cool'
-  });
+    localStorage.setItem(`attempt-${uniqueId}`, true);
+    localStorage.setItem(`date-${uniqueId}`, currentDate);
+    localStorage.setItem(`name-${uniqueId}`, problem['Problem Name']);
+    localStorage.setItem(`link-${uniqueId}`, 'https://leetcode.com/problems/' + problem['Problem Name'].replace(/\s+/g, '-').toLowerCase());
+    localStorage.setItem(`difficulty-${uniqueId}`, problem['Difficulty']);
+    localStorage.setItem(`companies-${uniqueId}`, companies.join(', '));
+
+    Swal.fire({
+      title: 'Success!',
+      text: 'Question submitted successfully!',
+      icon: 'success',
+      confirmButtonText: 'Cool'
+    });
+
+    document.getElementById('uniqueId').value = '';
+    document.getElementById('companies').selectedIndex = -1;
+
+  } catch (error) {
+    console.error('Failed to fetch problem data:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Fetch Error',
+      text: 'Failed to retrieve problem data.'
+    });
+  }
 }
+
 
 
 function showSummary() {
@@ -1027,3 +1048,21 @@ function showSummary() {
   });
 }
 
+
+document.addEventListener('keydown', function(event) {
+  // Checking for the '/' key without any modifiers
+  if (event.key === '/' && !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
+      event.preventDefault(); // Prevent any default behavior
+      document.getElementById("id-search").focus(); // Focus the search button
+  }
+
+  // Checking for 'Ctrl+M'
+  if (event.key === 'm' && event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+      event.preventDefault(); // Prevent any default behavior
+      // Adding event listener to the 'clear-button'
+      document.getElementById("clear-button").addEventListener("click", clearUIElements);
+      alert('Ctrl+M pressed: Listener added to Clear button.'); // Feedback for action taken
+  }
+
+
+});
