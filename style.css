@@ -188,3 +188,7 @@ canvas{
 #problemsSolvedByHour{
   display: none;
 }
+
+.drawer{
+  color: black;
+}
