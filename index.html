@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LeetCode Questions by Company</title>
-    <link rel="shortcut icon" href="data-science.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="data-science (1).png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -110,13 +115,29 @@
           Analysis
         </button>
         <div class="relative">
-          <button id="dropdownButton" class="bg-pink-500 text-white px-4 py-2 rounded-lg flex items-center">
+          <button
+            id="dropdownButton"
+            class="bg-pink-500 text-white px-4 py-2 rounded-lg flex items-center"
+          >
             Add <span class="ml-2">+</span>
           </button>
-          <div id="dropdownMenu" class="hidden absolute bg-gray-800 shadow-lg rounded-lg mt-2 w-48">
+          <div
+            id="dropdownMenu"
+            class="hidden absolute bg-gray-800 shadow-lg rounded-lg mt-2 w-48"
+          >
             <ul>
-              <li class="p-3 hover:bg-gray-600 cursor-pointer" onclick="toggleNewEntryForm()">New Entry</li>
-              <li class="p-3 hover:bg-gray-600 cursor-pointer py-3" onclick="showSummary()">Summary</li>
+              <li
+                class="p-3 hover:bg-gray-600 cursor-pointer"
+                onclick="toggleNewEntryForm()"
+              >
+                New Entry
+              </li>
+              <li
+                class="p-3 hover:bg-gray-600 cursor-pointer py-3"
+                onclick="showSummary()"
+              >
+                Summary
+              </li>
             </ul>
           </div>
         </div>
@@ -128,7 +149,6 @@
           <i data-feather="x-circle"></i>
           <span>Clear</span>
         </button>
-
 
         <br />
         <br />
@@ -168,32 +188,87 @@
         <!-- Table will be dynamically generated here -->
       </div>
     </div>
-
     <div id="newEntryForm" class="hidden mt-4 mx-auto w-full max-w-md">
-      <div class="text-white" style="font-size: 36px; text-align: center;"><span class="mx-2">New Question?</span><i class="fa-solid fa-plus"></i></div>
-      <br>
-      <br>
-      <input type="text" id="uniqueId" placeholder="Unique ID" class="border border-gray-300 text-black p-2 rounded-lg w-full mb-2">
-      <input type="text" id="problemName" placeholder="Name of the Problem" class="border border-gray-300 text-black p-2 rounded-lg w-full mb-2">
-      <input type="text" id="link" placeholder="Link" class="border border-gray-300 p-2 rounded-lg w-full text-black mb-2">      
-      <input type="text" id="companies" placeholder="Companies" class="border border-gray-300 p-2 rounded-lg w-full text-black mb-2">
-      <select id="difficulty" class="border border-gray-300 p-2 rounded-lg mb-2 text-black" onchange="checkDifficulty(this)">
-        <option value="">Difficulty</option>
-        <option value="Easy">Easy</option>
-        <option value="Medium">Medium</option>
-        <option value="Hard">Hard</option>
+      <div class="text-white" style="font-size: 36px; text-align: center">
+        <span class="mx-2">New Question?</span><i class="fa-solid fa-plus"></i>
+      </div>
+      <br /><br />
+      <input
+        type="text"
+        id="uniqueId"
+        placeholder="Unique ID"
+        class="border border-gray-300 text-black p-2 rounded-lg w-full mb-2"
+      />
+      <select id="companies" style="color: black">
+        <option value="Google">Google</option>
+        <option value="Microsoft">Microsoft</option>
+        <option value="Amazon">Amazon</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Apple">Apple</option>
+        <option value="Netflix">Netflix</option>
+        <option value="Adobe">Adobe</option>
+        <option value="Salesforce">Salesforce</option>
+        <option value="Oracle">Oracle</option>
+        <option value="Uber">Uber</option>
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Twitter">Twitter</option>
+        <option value="Snapchat">Snapchat</option>
+        <option value="Splinkr">Splinkr</option>
+        <option value="Atlassian">Atlassian</option>
+        <option value="eBay">eBay</option>
+        <option value="PayPal">PayPal</option>
+        <option value="Spotify">Spotify</option>
+        <option value="Airbnb">Airbnb</option>
+        <option value="Dropbox">Dropbox</option>
+        <option value="Intel">Intel</option>
+        <option value="IBM">IBM</option>
+        <option value="Tesla">Tesla</option>
+        <option value="Nvidia">Nvidia</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Qualcomm">Qualcomm</option>
+        <option value="Bloomberg">Bloomberg</option>
+        <option value="Expedia">Expedia</option>
+        <option value="Lyft">Lyft</option>
+        <option value="Yelp">Yelp</option>
+        <option value="Reddit">Reddit</option>
+        <option value="Square">Square</option>
+        <option value="Visa">Visa</option>
+        <option value="Mastercard">Mastercard</option>
+        <option value="Goldman Sachs">Goldman Sachs</option>
+        <option value="Morgan Stanley">Morgan Stanley</option>
+        <option value="Cisco">Cisco</option>
+        <option value="Citrix">Citrix</option>
+        <option value="Vmware">Vmware</option>
+        <option value="Shopify">Shopify</option>
+        <option value="Pinterest">Pinterest</option>
+        <option value="Stripe">Stripe</option>
+        <option value="Robinhood">Robinhood</option>
+        <option value="Coinbase">Coinbase</option>
+        <option value="Riot Games">Riot Games</option>
+        <option value="Epic Games">Epic Games</option>
+        <option value="Palantir">Palantir</option>
+        <option value="Nutanix">Nutanix</option>
+        <option value="Slack">Slack</option>
+        <option value="Twitch">Twitch</option>
       </select>
-      <button onclick="storeData()" class="bg-green-500 text-white px-4 py-2 rounded-lg w-full">Submit</button>
+      <br />
+      <button
+        onclick="storeData()"
+        class="bg-green-500 text-white px-4 py-2 rounded-lg w-full"
+      >
+        Submit
+      </button>
     </div>
-    
-    
+
     <div class="flex justify-center items-center w-full">
       <div id="summaryTable" class="hidden w-full max-w-4xl">
         <table class="w-full border-collapse border border-gray-300 mx-auto">
           <thead>
             <tr>
               <th class="border border-gray-300 text-center">Unique ID</th>
-              <th class="border border-gray-300 text-center">Name of the Problem</th>
+              <th class="border border-gray-300 text-center">
+                Name of the Problem
+              </th>
               <th class="border border-gray-300 text-center">Link</th>
               <th class="border border-gray-300 text-center">Difficulty</th>
               <th class="border border-gray-300 text-center">Companies</th>
@@ -204,8 +279,6 @@
         </table>
       </div>
     </div>
-    
-    
 
     <div>
       <footer class="text-center py-4 text-white-400">
@@ -226,7 +299,11 @@
     <script>
       feather.replace();
     </script>
-    <script src="https://kit.fontawesome.com/795c004276.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/795c004276.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
+
