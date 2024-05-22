@@ -1060,8 +1060,7 @@ document.addEventListener('keydown', function(event) {
   if (event.key === 'm' && event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       event.preventDefault(); // Prevent any default behavior
       // Adding event listener to the 'clear-button'
-      document.getElementById("clear-button").addEventListener("click", clearUIElements);
-      alert('Ctrl+M pressed: Listener added to Clear button.'); // Feedback for action taken
+      clearUIElements();
   }
 
 
