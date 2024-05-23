@@ -871,6 +871,9 @@ function isLastMonth(date, now) {
 
 // Updated to format date strings for ChartJS
 function parseDate(input) {
+  if(!input){
+    return new Date();
+  }
   const parts = input.match(
     /(\d+)(st|nd|rd|th)? (\w+) (\d+), (\d+):(\d+) (AM|PM)/
   );
