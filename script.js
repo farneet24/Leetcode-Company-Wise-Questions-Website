@@ -955,50 +955,25 @@ async function storeData() {
     return;
   }
 
-  try {
-    const response = await fetch('problem_data.json');
-    const problems = await response.json();
-    const problem = problems[uniqueId];
+  localStorage.setItem(`attempt-${uniqueId}`, true);
+  localStorage.setItem(`date-${uniqueId}`, currentDate);
+  localStorage.setItem(`companies-${uniqueId}`, companies.join(', '));
 
-    if (!problem) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Not Found',
-        text: 'No problem found with the given ID.'
-      });
-      return;
-    }
+  Swal.fire({
+    title: 'Success!',
+    text: 'Question submitted successfully!',
+    icon: 'success',
+    confirmButtonText: 'Cool'
+  });
 
-    localStorage.setItem(`attempt-${uniqueId}`, true);
-    localStorage.setItem(`date-${uniqueId}`, currentDate);
-    localStorage.setItem(`name-${uniqueId}`, problem['Problem Name']);
-    localStorage.setItem(`link-${uniqueId}`, 'https://leetcode.com/problems/' + problem['Problem Name'].replace(/\s+/g, '-').toLowerCase());
-    localStorage.setItem(`difficulty-${uniqueId}`, problem['Difficulty']);
-    localStorage.setItem(`companies-${uniqueId}`, companies.join(', '));
-
-    Swal.fire({
-      title: 'Success!',
-      text: 'Question submitted successfully!',
-      icon: 'success',
-      confirmButtonText: 'Cool'
-    });
-
-    document.getElementById('uniqueId').value = '';
-    document.getElementById('companies').selectedIndex = -1;
-
-  } catch (error) {
-    console.error('Failed to fetch problem data:', error);
-    Swal.fire({
-      icon: 'error',
-      title: 'Fetch Error',
-      text: 'Failed to retrieve problem data.'
-    });
-  }
+  document.getElementById('uniqueId').value = '';
+  document.getElementById('companies').selectedIndex = -1;
 }
 
 
 
-function showSummary() {
+
+async function showSummary() {
   const table = document.getElementById('summaryTable');
   table.classList.remove('hidden');
   table.classList.add('styled-table');
@@ -1009,11 +984,20 @@ function showSummary() {
     tbody.deleteRow(0);
   }
 
-  Object.keys(localStorage).forEach(key => {
-    if (key.startsWith('attempt-')) {
-      const id = key.split('-')[1];
-      const name = localStorage.getItem(`name-${id}`);
-      if (name) {  // Only add rows where 'name' exists
+  try {
+    const response = await fetch('problem_data.json');
+    const problems = await response.json();
+
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith('attempt-')) {
+        const id = key.split('-')[1];
+        const problem = problems[id];
+        if (!problem) return;
+
+        const name = problem['Problem Name'];
+        const difficulty = problem['Difficulty'];
+        const linkURL = 'https://leetcode.com/problems/' + name.replace(/\s+/g, '-').toLowerCase();
+
         const row = tbody.insertRow(-1);
         const cells = [
           row.insertCell(0), row.insertCell(1), row.insertCell(2),
@@ -1025,7 +1009,7 @@ function showSummary() {
         cells[1].textContent = name;
 
         const link = document.createElement('a');
-        link.href = localStorage.getItem(`link-${id}`);
+        link.href = linkURL;
         link.target = "_blank";
         const leetCodeIcon = new Image();
         leetCodeIcon.src = "leetcode.svg";
@@ -1035,7 +1019,7 @@ function showSummary() {
         link.appendChild(leetCodeIcon);
         cells[2].appendChild(link);
 
-        cells[3].textContent = localStorage.getItem(`difficulty-${id}`);
+        cells[3].textContent = difficulty;
         cells[3].classList.add("difficulty-tag");
         if (cells[3].textContent === 'Hard') cells[3].classList.add('difficulty-hard');
         else if (cells[3].textContent === 'Medium') cells[3].classList.add('difficulty-medium');
@@ -1044,9 +1028,17 @@ function showSummary() {
         cells[4].textContent = localStorage.getItem(`companies-${id}`);
         cells[5].textContent = localStorage.getItem(`date-${id}`);
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.error('Failed to fetch problem data:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Fetch Error',
+      text: 'Failed to retrieve problem data.'
+    });
+  }
 }
+
 
 
 document.addEventListener('keydown', function(event) {
@@ -1062,6 +1054,5 @@ document.addEventListener('keydown', function(event) {
       // Adding event listener to the 'clear-button'
       clearUIElements();
   }
-
 
 });
