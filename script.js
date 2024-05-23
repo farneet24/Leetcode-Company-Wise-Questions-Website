@@ -988,6 +988,8 @@ async function showSummary() {
     const response = await fetch('problem_data.json');
     const problems = await response.json();
 
+    let entries = [];
+
     Object.keys(localStorage).forEach(key => {
       if (key.startsWith('attempt-')) {
         const id = key.split('-')[1];
@@ -997,38 +999,50 @@ async function showSummary() {
         const name = problem['Problem Name'];
         const difficulty = problem['Difficulty'];
         const linkURL = 'https://leetcode.com/problems/' + name.replace(/\s+/g, '-').toLowerCase();
-
-        const row = tbody.insertRow(-1);
-        const cells = [
-          row.insertCell(0), row.insertCell(1), row.insertCell(2),
-          row.insertCell(3), row.insertCell(4), row.insertCell(5)
-        ];
-        cells.forEach(cell => cell.className = "border px-5 py-2 text-center");
-
-        cells[0].textContent = id;
-        cells[1].textContent = name;
-
-        const link = document.createElement('a');
-        link.href = linkURL;
-        link.target = "_blank";
-        const leetCodeIcon = new Image();
-        leetCodeIcon.src = "leetcode.svg";
-        leetCodeIcon.alt = "LeetCode";
-        leetCodeIcon.style.height = "30px";
-        leetCodeIcon.style.width = "30px";
-        link.appendChild(leetCodeIcon);
-        cells[2].appendChild(link);
-
-        cells[3].textContent = difficulty;
-        cells[3].classList.add("difficulty-tag");
-        if (cells[3].textContent === 'Hard') cells[3].classList.add('difficulty-hard');
-        else if (cells[3].textContent === 'Medium') cells[3].classList.add('difficulty-medium');
-        else if (cells[3].textContent === 'Easy') cells[3].classList.add('difficulty-easy');
-
-        cells[4].textContent = localStorage.getItem(`companies-${id}`);
-        cells[5].textContent = localStorage.getItem(`date-${id}`);
+        const companies = localStorage.getItem(`companies-${id}`);
+        const date = parseDate(localStorage.getItem(`date-${id}`));
+        console.log(date);
+        // Store entries for sorting
+        entries.push({ id, name, linkURL, difficulty, companies, date });
       }
     });
+
+    // Sort entries by date in descending order
+    entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Append rows based on sorted entries
+    entries.forEach(entry => {
+      const row = tbody.insertRow(-1);
+      const cells = [
+        row.insertCell(0), row.insertCell(1), row.insertCell(2),
+        row.insertCell(3), row.insertCell(4), row.insertCell(5)
+      ];
+      cells.forEach(cell => cell.className = "border px-5 py-2 text-center");
+
+      cells[0].textContent = entry.id;
+      cells[1].textContent = entry.name;
+
+      const link = document.createElement('a');
+      link.href = entry.linkURL;
+      link.target = "_blank";
+      const leetCodeIcon = new Image();
+      leetCodeIcon.src = "leetcode.svg";
+      leetCodeIcon.alt = "LeetCode";
+      leetCodeIcon.style.height = "30px";
+      leetCodeIcon.style.width = "30px";
+      link.appendChild(leetCodeIcon);
+      cells[2].appendChild(link);
+
+      cells[3].textContent = entry.difficulty;
+      cells[3].classList.add("difficulty-tag");
+      if (cells[3].textContent === 'Hard') cells[3].classList.add('difficulty-hard');
+      else if (cells[3].textContent === 'Medium') cells[3].classList.add('difficulty-medium');
+      else if (cells[3].textContent === 'Easy') cells[3].classList.add('difficulty-easy');
+
+      cells[4].textContent = entry.companies;
+      cells[5].textContent = formatDate(entry.date);
+    });
+
   } catch (error) {
     console.error('Failed to fetch problem data:', error);
     Swal.fire({
