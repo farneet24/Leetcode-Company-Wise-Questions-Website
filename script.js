@@ -488,6 +488,7 @@ function displaySearchResults(data, title, link) {
 
   const linkElement = document.createElement("a");
   linkElement.setAttribute("href", link);
+  linkElement.target = "_blank";
   linkElement.style.display = "inline-flex";
   linkElement.style.alignItems = "center";
   linkElement.style.textDecoration = "none";
