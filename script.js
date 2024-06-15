@@ -258,7 +258,7 @@ function displayTable(csvData, sort, difficulty) {
   // Create a div to display the number of questions
   const rowCountDisplay = document.createElement("div");
   rowCountDisplay.className = "row-count-display"; // Assign the class to the div
-  rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${rows.length - 1} or ${checkboxCount/rows.length - 1} %`;
+  rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${rows.length - 1} or ${(checkboxCount/(rows.length - 1)).toFixed(2)} %`;
   // Insert the row count above the table
   tableContainer.insertBefore(rowCountDisplay, tableContainer.firstChild);
   tableContainer.appendChild(table);
