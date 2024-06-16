@@ -1005,7 +1005,6 @@ async function showSummary() {
         const linkURL = 'https://leetcode.com/problems/' + name.replace(/\s+/g, '-').toLowerCase();
         const companies = localStorage.getItem(`companies-${id}`);
         const date = parseDate(localStorage.getItem(`date-${id}`));
-        console.log(date);
         // Store entries for sorting
         entries.push({ id, name, linkURL, difficulty, companies, date });
       }
