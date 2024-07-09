@@ -195,3 +195,39 @@ canvas{
 .drawer{
   color: black;
 }
+
+
+
+/* Media queries for responsiveness */
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .flex-wrap {
+        justify-content: space-between; /* Adjust spacing on wider screens */
+    }
+
+    .select-dropdown {
+        width: auto; /* Auto width for select boxes on wider screens */
+    }
+}
+
+@media (max-width: 767px) {
+    .flex-wrap {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+    }
+
+    .relative {
+        margin-bottom: 20px; /* Add space between stacked elements */
+    }
+
+    #dropdownMenu {
+        width: 100%; /* Make dropdown menu full width on smaller screens */
+    }
+}
+
+/* Additional responsive settings for very small screens */
+@media (max-width: 480px) {
+    .select-dropdown {
+        padding: 10px; /* Larger padding for easier interaction */
+    }
+}
+
