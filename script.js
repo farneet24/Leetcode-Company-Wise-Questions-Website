@@ -979,6 +979,7 @@ async function storeData() {
 
 async function showSummary() {
   const table = document.getElementById('summaryTable');
+  const banner = document.getElementById('questionCountBanner');
   table.classList.remove('hidden');
   table.classList.add('styled-table');
   const tbody = table.querySelector('tbody');
@@ -1013,6 +1014,15 @@ async function showSummary() {
     // Sort entries by date in descending order
     entries.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Update banner with the count of questions solved
+    banner.textContent = `Total Questions Solved: ${entries.length}`; // Update the banner with the count
+    banner.style.padding = '10px';
+    banner.style.marginBottom = '10px';
+    banner.style.backgroundColor = '#f0f0f0';
+    banner.style.textAlign = 'center';
+    banner.style.fontSize = '18px';
+    banner.style.fontWeight = 'bold';
+    
     // Append rows based on sorted entries
     entries.forEach(entry => {
       const row = tbody.insertRow(-1);
