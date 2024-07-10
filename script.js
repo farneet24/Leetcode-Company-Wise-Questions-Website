@@ -1018,7 +1018,7 @@ async function showSummary() {
     banner.textContent = `Total Questions Solved: ${entries.length}`; // Update the banner with the count
     banner.style.padding = '10px';
     banner.style.marginBottom = '10px';
-    banner.style.backgroundColor = '#f0f0f0';
+    banner.style.backgroundColor = '#4A249D';
     banner.style.textAlign = 'center';
     banner.style.fontSize = '18px';
     banner.style.fontWeight = 'bold';
