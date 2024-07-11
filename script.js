@@ -100,6 +100,7 @@ function displayTable(csvData, sort, difficulty) {
   // Extract the header row
   const header = rows.shift();
   rows.unshift(header + ",Attempted,Date Solved");
+  header += ",Attempted,Date Solved";
 
   console.log("Header", header);
   // Sort rows if sort option is provided
