@@ -96,13 +96,13 @@ function displayTable(csvData, sort, difficulty) {
 
   // Split CSV data into rows and filter out any empty rows
   let rows = csvData.split("\n").filter((row) => row.trim());
-  console.log("Rows", rows);
+  // console.log("Rows", rows);
   // Extract the header row
   const header = rows.shift();
   rows.unshift(header + ",Attempted,Date Solved");
   // header += ",Attempted,Date Solved";
 
-  console.log("Header", header);
+  // console.log("Header", header);
   // Sort rows if sort option is provided
   if (sort) {
     rows = sortRows(rows, sort, header);
