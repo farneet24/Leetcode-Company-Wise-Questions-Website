@@ -1149,41 +1149,41 @@ Problem ID,Problem Name,Acceptance Rate,Difficulty
 1148,Article Views I,75.2,Easy
 1149,Article Views II,47.0,Medium
 1150,Check If a Number Is Majority Element in a Sorted Array,58.8,Easy
-1101,The Earliest Moment When Everyone Become Friends,64.6,Medium
-1102,Path With Maximum Minimum Value,53.6,Medium
-1103,Distribute Candies to People,65.2,Easy
-1104,Path In Zigzag Labelled Binary Tree,75.3,Medium
-1105,Filling Bookcase Shelves,59.5,Medium
-1106,Parsing A Boolean Expression,59.1,Hard
-1107,New Users Daily Count,44.6,Medium
-1108,Defanging an IP Address,89.1,Easy
-1109,Corporate Flight Bookings,61.7,Medium
-1110,Delete Nodes And Return Forest,69.1,Medium
-1111,Maximum Nesting Depth of Two Valid Parentheses Strings,72.0,Medium
-1112,Highest Grade For Each Student,70.8,Medium
-1113,Reported Posts,64.9,Easy
-1114,Print in Order,69.4,Easy
-1115,Print FooBar Alternately,65.8,Medium
-1116,Print Zero Even Odd,60.9,Medium
-1117,Building H2O,56.2,Medium
-1118,Number of Days in a Month,58.2,Easy
-1119,Remove Vowels from a String,91.1,Easy
-1120,Maximum Average Subtree,66.6,Medium
-1121,Divide Array Into Increasing Sequences,61.3,Hard
-1122,Relative Sort Array,69.1,Easy
-1123,Lowest Common Ancestor of Deepest Leaves,72.3,Medium
-1124,Longest Well-Performing Interval,34.9,Medium
-1125,Smallest Sufficient Team,55.6,Hard
-1126,Active Businesses,65.6,Medium
-1127,User Purchase Platform,47.5,Hard
-1128,Number of Equivalent Domino Pairs,48.2,Easy
-1129,Shortest Path with Alternating Colors,47.1,Medium
-1130,Minimum Cost Tree From Leaf Values,67.8,Medium
-1131,Maximum of Absolute Value Expression,48.4,Medium
-1132,Reported Posts II,32.3,Medium
-1133,Largest Unique Number,69.0,Easy
-1134,Armstrong Number,77.8,Easy
-1135,Connecting Cities With Minimum Cost,62.0,Medium
+1151,Minimum Swaps to Group All 1's Together,60.2,Medium
+1152,Analyze User Website Visit Pattern,42.7,Medium
+1153,String Transforms Into Another String,35.0,Hard
+1154,Day of the Year,48.9,Easy
+1155,Number of Dice Rolls With Target Sum,61.0,Medium
+1156,Swap For Longest Repeated Character Substring,44.1,Medium
+1157,Online Majority Element In Subarray,41.8,Hard
+1158,Market Analysis I,57.1,Medium
+1159,Market Analysis II,57.1,Hard
+1160,Find Words That Can Be Formed by Characters,70.6,Easy
+1161,Maximum Level Sum of a Binary Tree,67.1,Medium
+1162,As Far from Land as Possible,51.6,Medium
+1163,Last Substring in Lexicographical Order,34.6,Hard
+1164,Product Price at a Given Date,55.8,Medium
+1165,Single-Row Keyboard,87.5,Easy
+1166,Design File System,63.1,Medium
+1167,Minimum Cost to Connect Sticks,70.1,Medium
+1168,Optimize Water Distribution in a Village,64.8,Hard
+1169,Invalid Transactions,31.1,Medium
+1170,Compare Strings by Frequency of the Smallest Character,62.3,Medium
+1171,Remove Zero Sum Consecutive Nodes from Linked List,52.8,Medium
+1172,Dinner Plate Stacks,32.7,Hard
+1173,Immediate Food Delivery I,80.9,Easy
+1174,Immediate Food Delivery II,51.5,Medium
+1175,Prime Arrangements,57.5,Easy
+1176,Diet Plan Performance,53.5,Easy
+1177,Can Make Palindrome from Substring,39.2,Medium
+1178,Number of Valid Words for Each Puzzle,46.8,Hard
+1179,Reformat Department Table,77.0,Easy
+1180,Count Substrings with Only One Distinct Letter,80.0,Easy
+1181,Before and After Puzzle,45.9,Medium
+1182,Shortest Distance to Target Color,55.4,Medium
+1183,Maximum Number of Ones,68.0,Hard
+1184,Distance Between Bus Stops,54.1,Easy
+1185,Day of the Week,57.6,Easy
 1186,Maximum Subarray Sum with One Deletion,43.8,Medium
 1187,Make Array Strictly Increasing,58.3,Hard
 1188,Design Bounded Blocking Queue,72.5,Medium
