@@ -1000,8 +1000,10 @@ async function showSummary() {
       if (key.startsWith('attempt-')) {
         const id = key.split('-')[1];
         const problem = problems[id];
-        if (!problem) return;
-
+        if (!problem){
+          console.log('This problem failed: ', id);
+          return;
+        }
         const name = problem['Problem Name'];
         const difficulty = problem['Difficulty'];
         const linkURL = 'https://leetcode.com/problems/' + name.replace(/\s+/g, '-').toLowerCase();
