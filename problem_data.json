@@ -15783,5 +15783,480 @@
         "Problem Name": "Find the Level of Tree with Minimum Sum",
         "Acceptance Rate": "86.2",
         "Difficulty": "Medium"
+    },
+    "3158": {
+        "Problem Name": "Find the XOR of Numbers Which Appear Twice",
+        "Acceptance Rate": "82.0",
+        "Difficulty": "Easy"
+    },
+    "3159": {
+        "Problem Name": "Find Occurrences of an Element in an Array",
+        "Acceptance Rate": "73.6",
+        "Difficulty": "Medium"
+    },
+    "3160": {
+        "Problem Name": "Find the Number of Distinct Colors Among the Balls",
+        "Acceptance Rate": "41.1",
+        "Difficulty": "Medium"
+    },
+    "3161": {
+        "Problem Name": "Block Placement Queries",
+        "Acceptance Rate": "13.5",
+        "Difficulty": "Hard"
+    },
+    "3162": {
+        "Problem Name": "Find the Number of Good Pairs I",
+        "Acceptance Rate": "86.7",
+        "Difficulty": "Easy"
+    },
+    "3163": {
+        "Problem Name": "String Compression III",
+        "Acceptance Rate": "55.8",
+        "Difficulty": "Medium"
+    },
+    "3164": {
+        "Problem Name": "Find the Number of Good Pairs II",
+        "Acceptance Rate": "25.6",
+        "Difficulty": "Medium"
+    },
+    "3165": {
+        "Problem Name": "Maximum Sum of Subsequence With Non-adjacent Elements",
+        "Acceptance Rate": "17.1",
+        "Difficulty": "Hard"
+    },
+    "3166": {
+        "Problem Name": "Calculate Parking Fees and Duration",
+        "Acceptance Rate": "61.3",
+        "Difficulty": "Medium"
+    },
+    "3167": {
+        "Problem Name": "Better Compression of String",
+        "Acceptance Rate": "79.2",
+        "Difficulty": "Medium"
+    },
+    "3168": {
+        "Problem Name": "Minimum Number of Chairs in a Waiting Room",
+        "Acceptance Rate": "80.3",
+        "Difficulty": "Easy"
+    },
+    "3169": {
+        "Problem Name": "Count Days Without Meetings",
+        "Acceptance Rate": "33.6",
+        "Difficulty": "Medium"
+    },
+    "3170": {
+        "Problem Name": "Lexicographically Minimum String After Removing Stars",
+        "Acceptance Rate": "35.8",
+        "Difficulty": "Medium"
+    },
+    "3171": {
+        "Problem Name": "Find Subarray With Bitwise OR Closest to K",
+        "Acceptance Rate": "31.1",
+        "Difficulty": "Hard"
+    },
+    "3172": {
+        "Problem Name": "Second Day Verification",
+        "Acceptance Rate": "73.4",
+        "Difficulty": "Easy"
+    },
+    "3173": {
+        "Problem Name": "Bitwise OR of Adjacent Elements",
+        "Acceptance Rate": "95.6",
+        "Difficulty": "Easy"
+    },
+    "3174": {
+        "Problem Name": "Clear Digits",
+        "Acceptance Rate": "72.4",
+        "Difficulty": "Easy"
+    },
+    "3175": {
+        "Problem Name": "Find The First Player to win K Games in a Row",
+        "Acceptance Rate": "39.4",
+        "Difficulty": "Medium"
+    },
+    "3176": {
+        "Problem Name": "Find the Maximum Length of a Good Subsequence I",
+        "Acceptance Rate": "30.2",
+        "Difficulty": "Medium"
+    },
+    "3177": {
+        "Problem Name": "Find the Maximum Length of a Good Subsequence II",
+        "Acceptance Rate": "23.9",
+        "Difficulty": "Hard"
+    },
+    "3178": {
+        "Problem Name": "Find the Child Who Has the Ball After K Seconds",
+        "Acceptance Rate": "61.8",
+        "Difficulty": "Easy"
+    },
+    "3179": {
+        "Problem Name": "Find the N-th Value After K Seconds",
+        "Acceptance Rate": "54.6",
+        "Difficulty": "Medium"
+    },
+    "3180": {
+        "Problem Name": "Maximum Total Reward Using Operations I",
+        "Acceptance Rate": "29.3",
+        "Difficulty": "Medium"
+    },
+    "3181": {
+        "Problem Name": "Maximum Total Reward Using Operations II",
+        "Acceptance Rate": "20.6",
+        "Difficulty": "Hard"
+    },
+    "3182": {
+        "Problem Name": "Find Top Scoring Students",
+        "Acceptance Rate": "55.9",
+        "Difficulty": "Medium"
+    },
+    "3183": {
+        "Problem Name": "The Number of Ways to Make the Sum",
+        "Acceptance Rate": "58.7",
+        "Difficulty": "Medium"
+    },
+    "3184": {
+        "Problem Name": "Count Pairs That Form a Complete Day I",
+        "Acceptance Rate": "79.2",
+        "Difficulty": "Easy"
+    },
+    "3185": {
+        "Problem Name": "Count Pairs That Form a Complete Day II",
+        "Acceptance Rate": "42.9",
+        "Difficulty": "Medium"
+    },
+    "3186": {
+        "Problem Name": "Maximum Total Damage With Spell Casting",
+        "Acceptance Rate": "26.0",
+        "Difficulty": "Medium"
+    },
+    "3187": {
+        "Problem Name": "Peaks in Array",
+        "Acceptance Rate": "26.7",
+        "Difficulty": "Hard"
+    },
+    "3188": {
+        "Problem Name": "Find Top Scoring Students II",
+        "Acceptance Rate": "49.2",
+        "Difficulty": "Hard"
+    },
+    "3189": {
+        "Problem Name": "Minimum Moves to Get a Peaceful Board",
+        "Acceptance Rate": "73.9",
+        "Difficulty": "Medium"
+    },
+    "3190": {
+        "Problem Name": "Find Minimum Operations to Make All Elements Divisible by Three",
+        "Acceptance Rate": "89.8",
+        "Difficulty": "Easy"
+    },
+    "3191": {
+        "Problem Name": "Minimum Operations to Make Binary Array Elements Equal to One I",
+        "Acceptance Rate": "70.8",
+        "Difficulty": "Medium"
+    },
+    "3192": {
+        "Problem Name": "Minimum Operations to Make Binary Array Elements Equal to One II",
+        "Acceptance Rate": "65.0",
+        "Difficulty": "Medium"
+    },
+    "3193": {
+        "Problem Name": "Count the Number of Inversions",
+        "Acceptance Rate": "33.3",
+        "Difficulty": "Hard"
+    },
+    "3194": {
+        "Problem Name": "Minimum Average of Smallest and Largest Elements",
+        "Acceptance Rate": "85.1",
+        "Difficulty": "Easy"
+    },
+    "3195": {
+        "Problem Name": "Find the Minimum Area to Cover All Ones I",
+        "Acceptance Rate": "74.0",
+        "Difficulty": "Medium"
+    },
+    "3196": {
+        "Problem Name": "Maximize Total Cost of Alternating Subarrays",
+        "Acceptance Rate": "28.3",
+        "Difficulty": "Medium"
+    },
+    "3197": {
+        "Problem Name": "Find the Minimum Area to Cover All Ones II",
+        "Acceptance Rate": "36.7",
+        "Difficulty": "Hard"
+    },
+    "3198": {
+        "Problem Name": "Find Cities in Each State",
+        "Acceptance Rate": "81.2",
+        "Difficulty": "Easy"
+    },
+    "3199": {
+        "Problem Name": "Count Triplets with Even XOR Set Bits I",
+        "Acceptance Rate": "85.0",
+        "Difficulty": "Easy"
+    },
+    "3200": {
+        "Problem Name": "Maximum Height of a Triangle",
+        "Acceptance Rate": "42.2",
+        "Difficulty": "Easy"
+    },
+    "3201": {
+        "Problem Name": "Find the Maximum Length of Valid Subsequence I",
+        "Acceptance Rate": "37.3",
+        "Difficulty": "Medium"
+    },
+    "3202": {
+        "Problem Name": "Find the Maximum Length of Valid Subsequence II",
+        "Acceptance Rate": "38.9",
+        "Difficulty": "Medium"
+    },
+    "3203": {
+        "Problem Name": "Find Minimum Diameter After Merging Two Trees",
+        "Acceptance Rate": "35.5",
+        "Difficulty": "Hard"
+    },
+    "3204": {
+        "Problem Name": "Bitwise User Permissions Analysis",
+        "Acceptance Rate": "95.0",
+        "Difficulty": "Medium"
+    },
+    "3205": {
+        "Problem Name": "Maximum Array Hopping Score I",
+        "Acceptance Rate": "80.1",
+        "Difficulty": "Medium"
+    },
+    "3206": {
+        "Problem Name": "Alternating Groups I",
+        "Acceptance Rate": "66.7",
+        "Difficulty": "Easy"
+    },
+    "3207": {
+        "Problem Name": "Maximum Points After Enemy Battles",
+        "Acceptance Rate": "31.6",
+        "Difficulty": "Medium"
+    },
+    "3208": {
+        "Problem Name": "Alternating Groups II",
+        "Acceptance Rate": "40.1",
+        "Difficulty": "Medium"
+    },
+    "3209": {
+        "Problem Name": "Number of Subarrays With AND Value of K",
+        "Acceptance Rate": "34.0",
+        "Difficulty": "Hard"
+    },
+    "3210": {
+        "Problem Name": "Find the Encrypted String",
+        "Acceptance Rate": "69.3",
+        "Difficulty": "Easy"
+    },
+    "3211": {
+        "Problem Name": "Generate Binary Strings Without Adjacent Zeros",
+        "Acceptance Rate": "86.3",
+        "Difficulty": "Medium"
+    },
+    "3212": {
+        "Problem Name": "Count Submatrices With Equal Frequency of X and Y",
+        "Acceptance Rate": "51.6",
+        "Difficulty": "Medium"
+    },
+    "3213": {
+        "Problem Name": "Construct String with Minimum Cost",
+        "Acceptance Rate": "20.5",
+        "Difficulty": "Hard"
+    },
+    "3214": {
+        "Problem Name": "Year on Year Growth Rate",
+        "Acceptance Rate": "57.6",
+        "Difficulty": "Hard"
+    },
+    "3215": {
+        "Problem Name": "Count Triplets with Even XOR Set Bits II",
+        "Acceptance Rate": "73.8",
+        "Difficulty": "Medium"
+    },
+    "3216": {
+        "Problem Name": "Lexicographically Smallest String After a Swap",
+        "Acceptance Rate": "53.3",
+        "Difficulty": "Easy"
+    },
+    "3217": {
+        "Problem Name": "Delete Nodes From Linked List Present in Array",
+        "Acceptance Rate": "61.3",
+        "Difficulty": "Medium"
+    },
+    "3218": {
+        "Problem Name": "Minimum Cost for Cutting Cake I",
+        "Acceptance Rate": "57.7",
+        "Difficulty": "Medium"
+    },
+    "3219": {
+        "Problem Name": "Minimum Cost for Cutting Cake II",
+        "Acceptance Rate": "55.9",
+        "Difficulty": "Hard"
+    },
+    "3220": {
+        "Problem Name": "Odd and Even Transactions",
+        "Acceptance Rate": "71.7",
+        "Difficulty": "Medium"
+    },
+    "3221": {
+        "Problem Name": "Maximum Array Hopping Score II",
+        "Acceptance Rate": "68.5",
+        "Difficulty": "Medium"
+    },
+    "3222": {
+        "Problem Name": "Find the Winning Player in Coin Game",
+        "Acceptance Rate": "50.7",
+        "Difficulty": "Easy"
+    },
+    "3223": {
+        "Problem Name": "Minimum Length of String After Operations",
+        "Acceptance Rate": "54.4",
+        "Difficulty": "Medium"
+    },
+    "3224": {
+        "Problem Name": "Minimum Array Changes to Make Differences Equal",
+        "Acceptance Rate": "22.5",
+        "Difficulty": "Medium"
+    },
+    "3225": {
+        "Problem Name": "Maximum Score From Grid Operations",
+        "Acceptance Rate": "25.2",
+        "Difficulty": "Hard"
+    },
+    "3226": {
+        "Problem Name": "Number of Bit Changes to Make Two Integers Equal",
+        "Acceptance Rate": "64.2",
+        "Difficulty": "Easy"
+    },
+    "3227": {
+        "Problem Name": "Vowels Game in a String",
+        "Acceptance Rate": "62.0",
+        "Difficulty": "Medium"
+    },
+    "3228": {
+        "Problem Name": "Maximum Number of Operations to Move Ones to the End",
+        "Acceptance Rate": "53.5",
+        "Difficulty": "Medium"
+    },
+    "3229": {
+        "Problem Name": "Minimum Operations to Make Array Equal to Target",
+        "Acceptance Rate": "37.4",
+        "Difficulty": "Hard"
+    },
+    "3230": {
+        "Problem Name": "Customer Purchasing Behavior Analysis",
+        "Acceptance Rate": "45.2",
+        "Difficulty": "Medium"
+    },
+    "3231": {
+        "Problem Name": "Minimum Number of Increasing Subsequence to Be Removed",
+        "Acceptance Rate": "57.4",
+        "Difficulty": "Hard"
+    },
+    "3232": {
+        "Problem Name": "Find if Digit Game Can Be Won",
+        "Acceptance Rate": "83.2",
+        "Difficulty": "Easy"
+    },
+    "3233": {
+        "Problem Name": "Find the Count of Numbers Which Are Not Special",
+        "Acceptance Rate": "26.4",
+        "Difficulty": "Medium"
+    },
+    "3234": {
+        "Problem Name": "Count the Number of Substrings With Dominant Ones",
+        "Acceptance Rate": "14.4",
+        "Difficulty": "Medium"
+    },
+    "3235": {
+        "Problem Name": "Check if the Rectangle Corner Is Reachable",
+        "Acceptance Rate": "29.5",
+        "Difficulty": "Hard"
+    },
+    "3236": {
+        "Problem Name": "CEO Subordinate Hierarchy",
+        "Acceptance Rate": "80.4",
+        "Difficulty": "Hard"
+    },
+    "3237": {
+        "Problem Name": "Alt and Tab Simulation",
+        "Acceptance Rate": "81.5",
+        "Difficulty": "Medium"
+    },
+    "3238": {
+        "Problem Name": "Find the Number of Winning Players",
+        "Acceptance Rate": "60.9",
+        "Difficulty": "Easy"
+    },
+    "3239": {
+        "Problem Name": "Minimum Number of Flips to Make Binary Grid Palindromic I",
+        "Acceptance Rate": "78.0",
+        "Difficulty": "Medium"
+    },
+    "3240": {
+        "Problem Name": "Minimum Number of Flips to Make Binary Grid Palindromic II",
+        "Acceptance Rate": "21.9",
+        "Difficulty": "Medium"
+    },
+    "3241": {
+        "Problem Name": "Time Taken to Mark All Nodes",
+        "Acceptance Rate": "20.1",
+        "Difficulty": "Hard"
+    },
+    "3242": {
+        "Problem Name": "Design Neighbor Sum Service",
+        "Acceptance Rate": "83.8",
+        "Difficulty": "Easy"
+    },
+    "3243": {
+        "Problem Name": "Shortest Distance After Road Addition Queries I",
+        "Acceptance Rate": "47.0",
+        "Difficulty": "Medium"
+    },
+    "3244": {
+        "Problem Name": "Shortest Distance After Road Addition Queries II",
+        "Acceptance Rate": "21.6",
+        "Difficulty": "Hard"
+    },
+    "3245": {
+        "Problem Name": "Alternating Groups III",
+        "Acceptance Rate": "12.2",
+        "Difficulty": "Hard"
+    },
+    "3246": {
+        "Problem Name": "Premier League Table Ranking",
+        "Acceptance Rate": "90.4",
+        "Difficulty": "Easy"
+    },
+    "3247": {
+        "Problem Name": "Number of Subsequences with Odd Sum",
+        "Acceptance Rate": "63.3",
+        "Difficulty": "Medium"
+    },
+    "3248": {
+        "Problem Name": "Snake in Matrix",
+        "Acceptance Rate": "80.1",
+        "Difficulty": "Easy"
+    },
+    "3249": {
+        "Problem Name": "Count the Number of Good Nodes",
+        "Acceptance Rate": "54.7",
+        "Difficulty": "Medium"
+    },
+    "3250": {
+        "Problem Name": "Find the Count of Monotonic Pairs I",
+        "Acceptance Rate": "41.3",
+        "Difficulty": "Hard"
+    },
+    "3251": {
+        "Problem Name": "Find the Count of Monotonic Pairs II",
+        "Acceptance Rate": "15.8",
+        "Difficulty": "Hard"
+    },
+    "3252": {
+        "Problem Name": "Premier League Table Ranking II",
+        "Acceptance Rate": "76.9",
+        "Difficulty": "Medium"
     }
 }
