@@ -3156,3 +3156,98 @@ Problem ID,Problem Name,Acceptance Rate,Difficulty
 3155,Maximum Number of Upgradable Servers,58.4,Medium
 3156,Employee Task Duration and Concurrent Tasks,77.3,Hard
 3157,Find the Level of Tree with Minimum Sum,86.2,Medium
+3158,Find the XOR of Numbers Which Appear Twice,82.0,Easy
+3159,Find Occurrences of an Element in an Array,73.6,Medium
+3160,Find the Number of Distinct Colors Among the Balls,41.1,Medium
+3161,Block Placement Queries,13.5,Hard
+3162,Find the Number of Good Pairs I,86.7,Easy
+3163,String Compression III,55.8,Medium
+3164,Find the Number of Good Pairs II,25.6,Medium
+3165,Maximum Sum of Subsequence With Non-adjacent Elements,17.1,Hard
+3166,Calculate Parking Fees and Duration,61.3,Medium
+3167,Better Compression of String,79.2,Medium
+3168,Minimum Number of Chairs in a Waiting Room,80.3,Easy
+3169,Count Days Without Meetings,33.6,Medium
+3170,Lexicographically Minimum String After Removing Stars,35.8,Medium
+3171,Find Subarray With Bitwise OR Closest to K,31.1,Hard
+3172,Second Day Verification,73.4,Easy
+3173,Bitwise OR of Adjacent Elements,95.6,Easy
+3174,Clear Digits,72.4,Easy
+3175,Find The First Player to win K Games in a Row,39.4,Medium
+3176,Find the Maximum Length of a Good Subsequence I,30.2,Medium
+3177,Find the Maximum Length of a Good Subsequence II,23.9,Hard
+3178,Find the Child Who Has the Ball After K Seconds,61.8,Easy
+3179,Find the N-th Value After K Seconds,54.6,Medium
+3180,Maximum Total Reward Using Operations I,29.3,Medium
+3181,Maximum Total Reward Using Operations II,20.6,Hard
+3182,Find Top Scoring Students,55.9,Medium
+3183,The Number of Ways to Make the Sum,58.7,Medium
+3184,Count Pairs That Form a Complete Day I,79.2,Easy
+3185,Count Pairs That Form a Complete Day II,42.9,Medium
+3186,Maximum Total Damage With Spell Casting,26.0,Medium
+3187,Peaks in Array,26.7,Hard
+3188,Find Top Scoring Students II,49.2,Hard
+3189,Minimum Moves to Get a Peaceful Board,73.9,Medium
+3190,Find Minimum Operations to Make All Elements Divisible by Three,89.8,Easy
+3191,Minimum Operations to Make Binary Array Elements Equal to One I,70.8,Medium
+3192,Minimum Operations to Make Binary Array Elements Equal to One II,65.0,Medium
+3193,Count the Number of Inversions,33.3,Hard
+3194,Minimum Average of Smallest and Largest Elements,85.1,Easy
+3195,Find the Minimum Area to Cover All Ones I,74.0,Medium
+3196,Maximize Total Cost of Alternating Subarrays,28.3,Medium
+3197,Find the Minimum Area to Cover All Ones II,36.7,Hard
+3198,Find Cities in Each State,81.2,Easy
+3199,Count Triplets with Even XOR Set Bits I,85.0,Easy
+3200,Maximum Height of a Triangle,42.2,Easy
+3201,Find the Maximum Length of Valid Subsequence I,37.3,Medium
+3202,Find the Maximum Length of Valid Subsequence II,38.9,Medium
+3203,Find Minimum Diameter After Merging Two Trees,35.5,Hard
+3204,Bitwise User Permissions Analysis,95.0,Medium
+3205,Maximum Array Hopping Score I,80.1,Medium
+3206,Alternating Groups I,66.7,Easy
+3207,Maximum Points After Enemy Battles,31.6,Medium
+3208,Alternating Groups II,40.1,Medium
+3209,Number of Subarrays With AND Value of K,34.0,Hard
+3210,Find the Encrypted String,69.3,Easy
+3211,Generate Binary Strings Without Adjacent Zeros,86.3,Medium
+3212,Count Submatrices With Equal Frequency of X and Y,51.6,Medium
+3213,Construct String with Minimum Cost,20.5,Hard
+3214,Year on Year Growth Rate,57.6,Hard
+3215,Count Triplets with Even XOR Set Bits II,73.8,Medium
+3216,Lexicographically Smallest String After a Swap,53.3,Easy
+3217,Delete Nodes From Linked List Present in Array,61.3,Medium
+3218,Minimum Cost for Cutting Cake I,57.7,Medium
+3219,Minimum Cost for Cutting Cake II,55.9,Hard
+3220,Odd and Even Transactions,71.7,Medium
+3221,Maximum Array Hopping Score II,68.5,Medium
+3222,Find the Winning Player in Coin Game,50.7,Easy
+3223,Minimum Length of String After Operations,54.4,Medium
+3224,Minimum Array Changes to Make Differences Equal,22.5,Medium
+3225,Maximum Score From Grid Operations,25.2,Hard
+3226,Number of Bit Changes to Make Two Integers Equal,64.2,Easy
+3227,Vowels Game in a String,62.0,Medium
+3228,Maximum Number of Operations to Move Ones to the End,53.5,Medium
+3229,Minimum Operations to Make Array Equal to Target,37.4,Hard
+3230,Customer Purchasing Behavior Analysis,45.2,Medium
+3231,Minimum Number of Increasing Subsequence to Be Removed,57.4,Hard
+3232,Find if Digit Game Can Be Won,83.2,Easy
+3233,Find the Count of Numbers Which Are Not Special,26.4,Medium
+3234,Count the Number of Substrings With Dominant Ones,14.4,Medium
+3235,Check if the Rectangle Corner Is Reachable,29.5,Hard
+3236,CEO Subordinate Hierarchy,80.4,Hard
+3237,Alt and Tab Simulation,81.5,Medium
+3238,Find the Number of Winning Players,60.9,Easy
+3239,Minimum Number of Flips to Make Binary Grid Palindromic I,78.0,Medium
+3240,Minimum Number of Flips to Make Binary Grid Palindromic II,21.9,Medium
+3241,Time Taken to Mark All Nodes,20.1,Hard
+3242,Design Neighbor Sum Service,83.8,Easy
+3243,Shortest Distance After Road Addition Queries I,47.0,Medium
+3244,Shortest Distance After Road Addition Queries II,21.6,Hard
+3245,Alternating Groups III,12.2,Hard
+3246,Premier League Table Ranking,90.4,Easy
+3247,Number of Subsequences with Odd Sum,63.3,Medium
+3248,Snake in Matrix,80.1,Easy
+3249,Count the Number of Good Nodes,54.7,Medium
+3250,Find the Count of Monotonic Pairs I,41.3,Hard
+3251,Find the Count of Monotonic Pairs II,15.8,Hard
+3252,Premier League Table Ranking II,76.9,Medium
