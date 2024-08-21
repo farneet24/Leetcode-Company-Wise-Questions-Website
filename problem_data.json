@@ -16258,5 +16258,55 @@
         "Problem Name": "Premier League Table Ranking II",
         "Acceptance Rate": "76.9",
         "Difficulty": "Medium"
+    },
+    "3253": {
+        "Problem Name": "Construct String with Minimum Cost (Easy)",
+        "Acceptance Rate": "52.6",
+        "Difficulty": "Medium"
+    },
+    "3254": {
+        "Problem Name": "Find the Power of K-Size Subarrays I",
+        "Acceptance Rate": "53.2",
+        "Difficulty": "Medium"
+    },
+    "3255": {
+        "Problem Name": "Find the Power of K-Size Subarrays II",
+        "Acceptance Rate": "25.0",
+        "Difficulty": "Medium"
+    },
+    "3256": {
+        "Problem Name": "Maximum Value Sum by Placing Three Rooks I",
+        "Acceptance Rate": "12.7",
+        "Difficulty": "Hard"
+    },
+    "3257": {
+        "Problem Name": "Maximum Value Sum by Placing Three Rooks II",
+        "Acceptance Rate": "25.4",
+        "Difficulty": "Hard"
+    },
+    "3258": {
+        "Problem Name": "Count Substrings That Satisfy K-Constraint I",
+        "Acceptance Rate": "79.2",
+        "Difficulty": "Easy"
+    },
+    "3259": {
+        "Problem Name": "Maximum Energy Boost From Two Drinks",
+        "Acceptance Rate": "48.2",
+        "Difficulty": "Medium"
+    },
+    "3260": {
+        "Problem Name": "Find the Largest Palindrome Divisible by K",
+        "Acceptance Rate": "11.9",
+        "Difficulty": "Hard"
+    },
+    "3261": {
+        "Problem Name": "Count Substrings That Satisfy K-Constraint II",
+        "Acceptance Rate": "16.5",
+        "Difficulty": "Hard"
+    },
+    "3262": {
+        "Problem Name": "Find Overlapping Shifts",
+        "Acceptance Rate": "83.6",
+        "Difficulty": "Medium"
     }
 }
