@@ -1056,6 +1056,7 @@ async function showSummary() {
       else if (cells[3].textContent === 'Easy') cells[3].classList.add('difficulty-easy');
 
       cells[4].textContent = entry.companies;
+      console.log(entry.date);
       cells[5].textContent = formatDate(entry.date);
     });
 
