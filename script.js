@@ -1096,7 +1096,7 @@ async function showSummary() {
           difficultyTag.classList.add("difficulty-hard");
         }
       
-      difficultyTag.textContent = entry.difficulty;
+      difficultyTag.textContent = diff;
       cells[3].appendChild(difficultyTag);
 
       cells[4].textContent = entry.companies;
