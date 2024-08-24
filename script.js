@@ -977,6 +977,41 @@ async function storeData() {
 
 
 
+function formatDateWithEmoji(date) {
+  const nth = (d) => {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  const getTimeEmoji = (hour) => {
+    if (hour >= 5 && hour < 12) return "🌅"; // Morning
+    if (hour >= 12 && hour < 18) return "☀️"; // Afternoon
+    if (hour >= 18 && hour < 22) return "🌆"; // Evening
+    return "🌙"; // Night
+  };
+
+  let day = date.getDate();
+  let month = date.toLocaleString("default", { month: "long" });
+  let year = date.getFullYear();
+  let hour = date.getHours();
+  let minute = date.getMinutes().toString().padStart(2, "0");
+  let ampm = hour >= 12 ? "PM" : "AM";
+  let emoji = getTimeEmoji(hour);
+  
+  hour = hour % 12 || 12; // Convert to 12 hour format
+
+  return `${emoji} ${day}${nth(day)} ${month} ${year}, ${hour}:${minute} ${ampm}`;
+}
+
 
 async function showSummary() {
   const table = document.getElementById('summaryTable');
@@ -1056,8 +1091,7 @@ async function showSummary() {
       else if (cells[3].textContent === 'Easy') cells[3].classList.add('difficulty-easy');
 
       cells[4].textContent = entry.companies;
-      console.log(entry.date);
-      cells[5].textContent = formatDate(entry.date);
+      cells[5].textContent = formatDateWithEmoji(entry.date);
     });
 
   } catch (error) {
