@@ -1084,11 +1084,20 @@ async function showSummary() {
       link.appendChild(leetCodeIcon);
       cells[2].appendChild(link);
 
-      cells[3].textContent = entry.difficulty;
-      cells[3].classList.add("difficulty-tag");
-      if (cells[3].textContent === 'Hard') cells[3].classList.add('difficulty-hard');
-      else if (cells[3].textContent === 'Medium') cells[3].classList.add('difficulty-medium');
-      else if (cells[3].textContent === 'Easy') cells[3].classList.add('difficulty-easy');
+      const difficultyTag = document.createElement("span");
+      difficultyTag.classList.add("difficulty-tag");
+      let diff = entry.difficulty;
+
+      if (diff === "Easy") {
+          difficultyTag.classList.add("difficulty-easy");
+        } else if (diff === "Medium") {
+          difficultyTag.classList.add("difficulty-medium");
+        } else if (diff === "Hard") {
+          difficultyTag.classList.add("difficulty-hard");
+        }
+      
+      difficultyTag.textContent = entry.difficulty;
+      cells[3].appendChild(difficultyTag);
 
       cells[4].textContent = entry.companies;
       cells[5].textContent = formatDateWithEmoji(entry.date);
