@@ -16308,5 +16308,30 @@
         "Problem Name": "Find Overlapping Shifts",
         "Acceptance Rate": "83.6",
         "Difficulty": "Medium"
+    },
+    "3263": {
+        "Problem Name": "Convert Doubly Linked List to Array I",
+        "Acceptance Rate": "97.4",
+        "Difficulty": "Easy"
+    },
+    "3264": {
+        "Problem Name": "Final Array State After K Multiplication Operations I",
+        "Acceptance Rate": "80.4",
+        "Difficulty": "Easy"
+    },
+    "3265": {
+        "Problem Name": "Count Almost Equal Pairs I",
+        "Acceptance Rate": "32.4",
+        "Difficulty": "Medium"
+    },
+    "3266": {
+        "Problem Name": "Final Array State After K Multiplication Operations II",
+        "Acceptance Rate": "5.7",
+        "Difficulty": "Hard"
+    },
+    "3267": {
+        "Problem Name": "Count Almost Equal Pairs II",
+        "Acceptance Rate": "13.4",
+        "Difficulty": "Hard"
     }
 }
