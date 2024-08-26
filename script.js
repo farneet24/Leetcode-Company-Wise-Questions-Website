@@ -440,9 +440,9 @@ function searchByID(id) {
                       const problem = data[id];
           
                       if (problem) {
-                          // Constructing the problem name slug for URL
+                          // Constructing the problem name slug for the URL
                           const problemNameSlug = problem['Problem Name'].toLowerCase().replace(/ /g, '-');
-                          const problemLink = `https://leetcode.com/problems/{problemNameSlug}/description/`;
+                          const problemLink = `https://leetcode.com/problems/${problemNameSlug}/description/`;
           
                           // Displaying the search result
                           displaySearchResults({}, problem['Problem Name'], problemLink);
@@ -538,7 +538,6 @@ function displaySearchResults(data, title, link) {
   titleLinkContainer.appendChild(linkElement);
   tableContainer.appendChild(titleLinkContainer);
 
-  console.log(Object.keys(data).length, data);
   
   if (Object.keys(data).length === 0) {
     const noDataMsg = document.createElement("p");
