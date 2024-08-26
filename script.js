@@ -515,6 +515,8 @@ function displaySearchResults(data, title, link) {
   titleLinkContainer.appendChild(linkElement);
   tableContainer.appendChild(titleLinkContainer);
 
+  console.log(Object.keys(data).length);
+  
   if (Object.keys(data).length === 0) {
     const noDataMsg = document.createElement("p");
     noDataMsg.textContent = "The question was not asked in any company.";
