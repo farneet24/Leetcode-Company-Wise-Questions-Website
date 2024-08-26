@@ -432,29 +432,7 @@ function searchByID(id) {
                 }
                 displaySearchResults(tableData, foundTitle, foundLink);
               }
-              else{
-                  fetch("problem_data.json")
-                  .then(response => response.json()) // Parsing the JSON file
-                  .then(data => {
-                      // Accessing the data using the provided problem ID
-                      const problem = data[id];
-          
-                      if (problem) {
-                          // Constructing the problem name slug for the URL
-                          const problemNameSlug = problem['Problem Name'].toLowerCase().replace(/ /g, '-');
-                          const problemLink = `https://leetcode.com/problems/${problemNameSlug}/description/`;
-          
-                          // Displaying the search result
-                          displaySearchResults({}, problem['Problem Name'], problemLink);
-                      } else {
-                          console.log('Problem ID not found in the data.');
-                      }
-                  })
-                  .catch(error => console.error('Failed to fetch problem data:', error));
-                
-              }
             })
-            .catch((error) => console.error("Failed to load data:", error));
         });
       });
     })
