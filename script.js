@@ -437,7 +437,7 @@ function searchByID(id) {
                   .then(response => response.json()) // Parsing the JSON file
                   .then(data => {
                       // Accessing the data using the provided problem ID
-                      const problem = data[problemId];
+                      const problem = data[id];
           
                       if (problem) {
                           // Constructing the problem name slug for URL
