@@ -118,7 +118,7 @@ function displayTable(csvData, sort, difficulty) {
   // Create a new table element
   const table = document.createElement("table");
   table.classList.add("styled-table"); // Apply custom table styles
-  let checkboxCount = 0;  // Counter for the checkboxes
+  let checkboxCount = 0; // Counter for the checkboxes
   // Iterate over each row to create table rows
   rows.forEach((row, index) => {
     const tr = document.createElement("tr");
@@ -154,7 +154,7 @@ function displayTable(csvData, sort, difficulty) {
           localStorage.getItem(checkbox.id) || "false"
         );
 
-        if(checkbox.checked){
+        if (checkbox.checked) {
           checkboxCount++;
         }
 
@@ -259,7 +259,9 @@ function displayTable(csvData, sort, difficulty) {
   // Create a div to display the number of questions
   const rowCountDisplay = document.createElement("div");
   rowCountDisplay.className = "row-count-display"; // Assign the class to the div
-  rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${rows.length - 1} or ${((checkboxCount/(rows.length - 1))*100).toFixed(2)} %`;
+  rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${
+    rows.length - 1
+  } or ${((checkboxCount / (rows.length - 1)) * 100).toFixed(2)} %`;
   // Insert the row count above the table
   tableContainer.insertBefore(rowCountDisplay, tableContainer.firstChild);
   tableContainer.appendChild(table);
@@ -383,12 +385,12 @@ function searchByID(id) {
       const tableData = {};
       let foundTitle = "";
       let foundLink = "";
-      Object.entries(data).forEach(([company, durations]) => {
-        let hasID = false;
-        const frequencyMap = {}; // Map to store total frequency for each duration
-        durations.forEach((duration) => {
+      let idFound = false;
+
+      const promises = Object.entries(data).flatMap(([company, durations]) => {
+        return durations.map((duration) => {
           const csvFile = `data/LeetCode-Questions-CompanyWise/${company}_${duration}.csv`;
-          fetch(csvFile)
+          return fetch(csvFile)
             .then((response) => response.text())
             .then((csvText) => {
               const rows = csvText.split("\n").filter((row) => row.trim());
@@ -403,38 +405,58 @@ function searchByID(id) {
               const frequencyIndex = header.findIndex(
                 (col) => col.trim() === "Frequency"
               );
+
               rows.forEach((row) => {
                 const cells = row.split(",");
                 if (cells[idIndex].trim() === id) {
-                  hasID = true;
+                  idFound = true;
                   foundTitle = cells[titleIndex].trim();
                   foundLink = cells[linkIndex].trim();
                   const frequency = parseFloat(cells[frequencyIndex].trim());
-                  frequencyMap[duration] = frequencyMap[duration]
-                    ? frequencyMap[duration] + frequency
-                    : frequency;
+
+                  if (!tableData[company]) {
+                    tableData[company] = {};
+                  }
+                  tableData[company][duration] =
+                    (tableData[company][duration] || 0) + frequency;
                 }
               });
-              
-              if (hasID) {
-                const totalFrequency = Object.values(frequencyMap).reduce(
-                  (acc, val) => acc + val,
-                  0
-                );
-
-                if (totalFrequency > 0) {
-                  tableData[company] = tableData[company] || {};
-                  Object.entries(frequencyMap).forEach(
-                    ([duration, frequency]) => {
-                      tableData[company][duration] = frequency.toFixed(2);
-                    }
-                  );
-                }
-                displaySearchResults(tableData, foundTitle, foundLink);
-              }
-            })
+            });
         });
       });
+
+      Promise.all(promises)
+        .then(() => {
+          if (idFound) {
+            Object.keys(tableData).forEach((company) => {
+              Object.keys(tableData[company]).forEach((duration) => {
+                tableData[company][duration] =
+                  tableData[company][duration].toFixed(2);
+              });
+            });
+            displaySearchResults(tableData, foundTitle, foundLink);
+          } else {
+            return fetch("problem_data.json");
+          }
+        })
+        .then((response) => {
+          if (response) return response.json();
+        })
+        .then((problemData) => {
+          if (problemData) {
+            const problem = problemData[id];
+            if (problem) {
+              const problemNameSlug = problem["Problem Name"]
+                .toLowerCase()
+                .replace(/ /g, "-");
+              const problemLink = `https://leetcode.com/problems/${problemNameSlug}/description/`;
+              displaySearchResults({}, problem["Problem Name"], problemLink);
+            } else {
+              console.log("Problem ID not found in the data.");
+            }
+          }
+        })
+        .catch((error) => console.error("Error in search process:", error));
     })
     .catch((error) => console.error("Error loading company data:", error));
 }
@@ -467,23 +489,31 @@ function displaySearchResults(data, title, link) {
     "mr-2"
   ); // Tailwind CSS for style
 
-  const checkboxId = document.getElementById("id-search").value; // Ensure this element exists and has a value
+  const checkboxId = parseInt(document.getElementById("id-search").value); // Ensure this element exists and has a value
 
-  function getLocalStorageItem(key, checkboxId, defaultValue = "false") {
-    return JSON.parse(
-      localStorage.getItem(`${key}-${checkboxId}`) || defaultValue
-    );
+  function getLocalStorageItem(key, checkboxId, defaultValue = false) {
+    
+        let checkAttempted = localStorage.getItem(`${key}-${checkboxId}`);
+        return JSON.parse(checkAttempted || defaultValue);
+
   }
-
-  titleCheckbox.checked =
-    getLocalStorageItem("attempt", checkboxId) ||
-    getLocalStorageItem("date", checkboxId);
+  
+  titleCheckbox.checked = getLocalStorageItem("attempt", checkboxId) 
 
   // Event listener to update local storage or handle changes
   titleCheckbox.addEventListener("change", function () {
-    localStorage.setItem(`attempt-${checkboxId}`, this.checked);
-    const currentDate = formatDate(new Date());
-    localStorage.setItem(`date-${checkboxId}`, currentDate);
+
+    if(this.checked){
+      localStorage.setItem(`attempt-${checkboxId}`, this.checked);
+      const currentDate = formatDate(new Date());
+      localStorage.setItem(`date-${checkboxId}`, currentDate);
+    }
+    else{
+      localStorage.removeItem(`attempt-${checkboxId}`); // Remove 'attempt' item
+      localStorage.removeItem(`date-${checkboxId}`); // Remove 'date' item
+      localStorage.removeItem(`companies-${checkboxId}`); // Remove 'companies' item
+    }
+
   });
 
   // Append the checkbox to the container
@@ -516,7 +546,6 @@ function displaySearchResults(data, title, link) {
   titleLinkContainer.appendChild(linkElement);
   tableContainer.appendChild(titleLinkContainer);
 
-  
   if (Object.keys(data).length === 0) {
     const noDataMsg = document.createElement("p");
     noDataMsg.textContent = "The question was not asked in any company.";
@@ -600,9 +629,9 @@ function clearUIElements() {
   document.getElementById("id-search").value = "";
   document.getElementById("options").style.display = "none"; // Show the dropdown
 
-  document.getElementById('newEntryForm').classList.add('hidden');
-  document.getElementById('summaryTable').classList.add('hidden');
-  document.getElementById('uniqueId').value = '';
+  document.getElementById("newEntryForm").classList.add("hidden");
+  document.getElementById("summaryTable").classList.add("hidden");
+  document.getElementById("uniqueId").value = "";
 
   if (window.problemsSolvedPerDayChart) {
     window.problemsSolvedPerDayChart.destroy();
@@ -618,7 +647,9 @@ function clearUIElements() {
 }
 
 // Add the event listener to the clear button
-document.getElementById("clear-button").addEventListener("click", clearUIElements);
+document
+  .getElementById("clear-button")
+  .addEventListener("click", clearUIElements);
 
 function clearTable() {
   const tableContainer = document.getElementById("table-container");
@@ -773,8 +804,8 @@ function updateCharts() {
       },
       plugins: {
         legend: {
-          position: 'top',  // Positions the legend at the top
-          align: 'end',     // Aligns the legend to the right
+          position: "top", // Positions the legend at the top
+          align: "end", // Aligns the legend to the right
           labels: {
             color: "rgb(255, 253, 208)", // Cream color for legend labels
           },
@@ -841,8 +872,8 @@ function updateCharts() {
       },
       plugins: {
         legend: {
-          position: 'top',  // Positions the legend at the top
-          align: 'end',     // Aligns the legend to the right
+          position: "top", // Positions the legend at the top
+          align: "end", // Aligns the legend to the right
           labels: {
             color: "rgb(255, 253, 208)", // Cream color for legend labels
           },
@@ -875,7 +906,7 @@ function isLastMonth(date, now) {
 
 // Updated to format date strings for ChartJS
 function parseDate(input) {
-  if(!input){
+  if (!input) {
     return new Date();
   }
   const parts = input.match(
@@ -910,74 +941,73 @@ function getOrdinalSuffix(day) {
   }
 }
 
-document.getElementById('dropdownButton').addEventListener('click', function() {
-  document.getElementById('dropdownMenu').classList.toggle('hidden');
-});
+document
+  .getElementById("dropdownButton")
+  .addEventListener("click", function () {
+    document.getElementById("dropdownMenu").classList.toggle("hidden");
+  });
 
 function toggleNewEntryForm() {
-  document.getElementById('newEntryForm').classList.toggle('hidden');
+  document.getElementById("newEntryForm").classList.toggle("hidden");
 }
 
 let selectedCompanies = [];
 
-document.addEventListener('DOMContentLoaded', function() {
-    var multiSelectInstance = new MultiSelectTag("companies", {
-        onChange: function(values) {
-            selectedCompanies = values.map(item => item.value); // Extract the value and store in the global variable
-            console.log("Selected companies: ", selectedCompanies);
-        }
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  var multiSelectInstance = new MultiSelectTag("companies", {
+    onChange: function (values) {
+      selectedCompanies = values.map((item) => item.value); // Extract the value and store in the global variable
+      console.log("Selected companies: ", selectedCompanies);
+    },
+  });
 });
 
-
 async function storeData() {
-  const uniqueId = document.getElementById('uniqueId').value;
+  const uniqueId = document.getElementById("uniqueId").value;
   const companies = selectedCompanies;
   const currentDate = formatDate(new Date());
 
   if (!uniqueId || isNaN(uniqueId)) {
     Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Please enter a numeric Unique ID.'
+      icon: "error",
+      title: "Oops...",
+      text: "Please enter a numeric Unique ID.",
     });
     return;
   }
 
   if (localStorage.getItem(`attempt-${uniqueId}`)) {
     Swal.fire({
-      icon: 'error',
-      title: 'Duplicate Entry',
-      text: 'This Unique ID already exists. Please use a different ID.'
+      icon: "error",
+      title: "Duplicate Entry",
+      text: "This Unique ID already exists. Please use a different ID.",
     });
     return;
   }
 
   if (companies.length === 0) {
     Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Please select at least one company.'
+      icon: "error",
+      title: "Oops...",
+      text: "Please select at least one company.",
     });
     return;
   }
 
   localStorage.setItem(`attempt-${uniqueId}`, true);
   localStorage.setItem(`date-${uniqueId}`, currentDate);
-  localStorage.setItem(`companies-${uniqueId}`, companies.join(', '));
+  localStorage.setItem(`companies-${uniqueId}`, companies.join(", "));
 
   Swal.fire({
-    title: 'Success!',
-    text: 'Question submitted successfully!',
-    icon: 'success',
-    confirmButtonText: 'Cool'
+    title: "Success!",
+    text: "Question submitted successfully!",
+    icon: "success",
+    confirmButtonText: "Cool",
   });
 
-  document.getElementById('uniqueId').value = '';
-  document.getElementById('companies').selectedIndex = -1;
+  document.getElementById("uniqueId").value = "";
+  document.getElementById("companies").selectedIndex = -1;
 }
-
-
 
 function formatDateWithEmoji(date) {
   const nth = (d) => {
@@ -1008,19 +1038,20 @@ function formatDateWithEmoji(date) {
   let minute = date.getMinutes().toString().padStart(2, "0");
   let ampm = hour >= 12 ? "PM" : "AM";
   let emoji = getTimeEmoji(hour);
-  
+
   hour = hour % 12 || 12; // Convert to 12 hour format
 
-  return `${emoji} ${day}${nth(day)} ${month} ${year}, ${hour}:${minute} ${ampm}`;
+  return `${emoji} ${day}${nth(
+    day
+  )} ${month} ${year}, ${hour}:${minute} ${ampm}`;
 }
 
-
 async function showSummary() {
-  const table = document.getElementById('summaryTable');
-  const banner = document.getElementById('questionCountBanner');
-  table.classList.remove('hidden');
-  table.classList.add('styled-table');
-  const tbody = table.querySelector('tbody');
+  const table = document.getElementById("summaryTable");
+  const banner = document.getElementById("questionCountBanner");
+  table.classList.remove("hidden");
+  table.classList.add("styled-table");
+  const tbody = table.querySelector("tbody");
 
   // Clear previous rows
   while (tbody.rows.length > 0) {
@@ -1028,22 +1059,24 @@ async function showSummary() {
   }
 
   try {
-    const response = await fetch('problem_data.json');
+    const response = await fetch("problem_data.json");
     const problems = await response.json();
 
     let entries = [];
 
-    Object.keys(localStorage).forEach(key => {
-      if (key.startsWith('attempt-')) {
-        const id = key.split('-')[1];
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith("attempt-")) {
+        const id = key.split("-")[1];
         const problem = problems[id];
-        if (!problem){
-          console.log('This problem failed: ', id);
+        if (!problem) {
+          console.log("This problem failed: ", id);
           return;
         }
-        const name = problem['Problem Name'];
-        const difficulty = problem['Difficulty'];
-        const linkURL = 'https://leetcode.com/problems/' + name.replace(/\s+/g, '-').toLowerCase();
+        const name = problem["Problem Name"];
+        const difficulty = problem["Difficulty"];
+        const linkURL =
+          "https://leetcode.com/problems/" +
+          name.replace(/\s+/g, "-").toLowerCase();
         const companies = localStorage.getItem(`companies-${id}`);
         const date = parseDate(localStorage.getItem(`date-${id}`));
         // Store entries for sorting
@@ -1056,26 +1089,32 @@ async function showSummary() {
 
     // Update banner with the count of questions solved
     banner.textContent = `Total Questions Solved: ${entries.length}`; // Update the banner with the count
-    banner.style.padding = '10px';
-    banner.style.marginBottom = '10px';
-    banner.style.backgroundColor = '#4A249D';
-    banner.style.textAlign = 'center';
-    banner.style.fontSize = '18px';
-    banner.style.fontWeight = 'bold';
-    
+    banner.style.padding = "10px";
+    banner.style.marginBottom = "10px";
+    banner.style.backgroundColor = "#4A249D";
+    banner.style.textAlign = "center";
+    banner.style.fontSize = "18px";
+    banner.style.fontWeight = "bold";
+
     // Append rows based on sorted entries
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       const row = tbody.insertRow(-1);
       const cells = [
-        row.insertCell(0), row.insertCell(1), row.insertCell(2),
-        row.insertCell(3), row.insertCell(4), row.insertCell(5)
+        row.insertCell(0),
+        row.insertCell(1),
+        row.insertCell(2),
+        row.insertCell(3),
+        row.insertCell(4),
+        row.insertCell(5),
       ];
-      cells.forEach(cell => cell.className = "border px-5 py-2 text-center");
+      cells.forEach(
+        (cell) => (cell.className = "border px-5 py-2 text-center")
+      );
 
       cells[0].textContent = entry.id;
       cells[1].textContent = entry.name;
 
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = entry.linkURL;
       link.target = "_blank";
       const leetCodeIcon = new Image();
@@ -1091,44 +1130,52 @@ async function showSummary() {
       let diff = entry.difficulty;
 
       if (diff === "Easy") {
-          difficultyTag.classList.add("difficulty-easy");
-        } else if (diff === "Medium") {
-          difficultyTag.classList.add("difficulty-medium");
-        } else if (diff === "Hard") {
-          difficultyTag.classList.add("difficulty-hard");
-        }
-      
+        difficultyTag.classList.add("difficulty-easy");
+      } else if (diff === "Medium") {
+        difficultyTag.classList.add("difficulty-medium");
+      } else if (diff === "Hard") {
+        difficultyTag.classList.add("difficulty-hard");
+      }
+
       difficultyTag.textContent = diff;
       cells[3].appendChild(difficultyTag);
 
       cells[4].textContent = entry.companies;
       cells[5].textContent = formatDateWithEmoji(entry.date);
     });
-
   } catch (error) {
-    console.error('Failed to fetch problem data:', error);
+    console.error("Failed to fetch problem data:", error);
     Swal.fire({
-      icon: 'error',
-      title: 'Fetch Error',
-      text: 'Failed to retrieve problem data.'
+      icon: "error",
+      title: "Fetch Error",
+      text: "Failed to retrieve problem data.",
     });
   }
 }
 
-
-
-document.addEventListener('keydown', function(event) {
+document.addEventListener("keydown", function (event) {
   // Checking for the '/' key without any modifiers
-  if (event.key === '/' && !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
-      event.preventDefault(); // Prevent any default behavior
-      document.getElementById("id-search").focus(); // Focus the search button
+  if (
+    event.key === "/" &&
+    !event.shiftKey &&
+    !event.ctrlKey &&
+    !event.altKey &&
+    !event.metaKey
+  ) {
+    event.preventDefault(); // Prevent any default behavior
+    document.getElementById("id-search").focus(); // Focus the search button
   }
 
   // Checking for 'Ctrl+M'
-  if (event.key === 'm' && event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
-      event.preventDefault(); // Prevent any default behavior
-      // Adding event listener to the 'clear-button'
-      clearUIElements();
+  if (
+    event.key === "m" &&
+    event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey &&
+    !event.metaKey
+  ) {
+    event.preventDefault(); // Prevent any default behavior
+    // Adding event listener to the 'clear-button'
+    clearUIElements();
   }
-
 });
