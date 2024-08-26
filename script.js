@@ -515,7 +515,7 @@ function displaySearchResults(data, title, link) {
   titleLinkContainer.appendChild(linkElement);
   tableContainer.appendChild(titleLinkContainer);
 
-  console.log(Object.keys(data).length);
+  console.log(Object.keys(data).length, data);
   
   if (Object.keys(data).length === 0) {
     const noDataMsg = document.createElement("p");
