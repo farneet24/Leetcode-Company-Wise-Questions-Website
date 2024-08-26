@@ -415,8 +415,7 @@ function searchByID(id) {
                     : frequency;
                 }
               });
-              console.log(id);
-              console.log(hasId ? "Question Found" : "Question Not found");
+              
               if (hasID) {
                 const totalFrequency = Object.values(frequencyMap).reduce(
                   (acc, val) => acc + val,
@@ -432,6 +431,9 @@ function searchByID(id) {
                   );
                 }
                 displaySearchResults(tableData, foundTitle, foundLink);
+              }
+              else{
+                displaySearchResults({}, foundTitle, foundLink);
               }
             })
             .catch((error) => console.error("Failed to load data:", error));
