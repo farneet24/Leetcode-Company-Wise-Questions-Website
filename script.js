@@ -420,6 +420,8 @@ function searchByID(id) {
                   (acc, val) => acc + val,
                   0
                 );
+
+                console.log(id, totalFrequency);
                 if (totalFrequency > 0) {
                   tableData[company] = tableData[company] || {};
                   Object.entries(frequencyMap).forEach(
