@@ -1,6 +1,6 @@
 # Company-wise LeetCode Website
 
-This repository hosts the code for the Company-wise LeetCode Website, a tool that provides access to interview questions from over 100 companies sorted by frequency and difficulty. The website categorizes questions based on their timeline (last 6 months, 1 year, or 2 years) and is based on data provided in the repo: [LeetCode Questions Company Wise](https://github.com/krishnadey30/LeetCode-Questions-CompanyWise.git).
+This repository hosts the code for the Company-wise LeetCode Website, a tool that provides access to LeetCode interview questions from over 100 companies sorted by frequency and difficulty. The website categorizes questions based on their timeline (last 6 months, 1 year, or 2 years) and is based on data provided in the repo: [LeetCode Questions Company Wise](https://github.com/krishnadey30/LeetCode-Questions-CompanyWise.git).
 
 ## Features
 - Filter questions by difficulty.
