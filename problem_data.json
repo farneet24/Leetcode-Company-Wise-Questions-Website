@@ -16333,5 +16333,55 @@
         "Problem Name": "Count Almost Equal Pairs II",
         "Acceptance Rate": "13.4",
         "Difficulty": "Hard"
+    },
+    "3268": {
+        "Problem Name": "Find Overlapping Shifts II",
+        "Acceptance Rate": "83.3",
+        "Difficulty": "Hard"
+    },
+    "3269": {
+        "Problem Name": "Constructing Two Increasing Arrays",
+        "Acceptance Rate": "64.6",
+        "Difficulty": "Hard"
+    },
+    "3270": {
+        "Problem Name": "Find the Key of the Numbers",
+        "Acceptance Rate": "75.6",
+        "Difficulty": "Easy"
+    },
+    "3271": {
+        "Problem Name": "Hash Divided String",
+        "Acceptance Rate": "83.3",
+        "Difficulty": "Medium"
+    },
+    "3272": {
+        "Problem Name": "Find the Count of Good Integers",
+        "Acceptance Rate": "19.9",
+        "Difficulty": "Hard"
+    },
+    "3273": {
+        "Problem Name": "Minimum Amount of Damage Dealt to Bob",
+        "Acceptance Rate": "31.9",
+        "Difficulty": "Hard"
+    },
+    "3274": {
+        "Problem Name": "Check if Two Chessboard Squares Have the Same Color",
+        "Acceptance Rate": "68.8",
+        "Difficulty": "Easy"
+    },
+    "3275": {
+        "Problem Name": "K-th Nearest Obstacle Queries",
+        "Acceptance Rate": "44.4",
+        "Difficulty": "Medium"
+    },
+    "3276": {
+        "Problem Name": "Select Cells in Grid With Maximum Score",
+        "Acceptance Rate": "4.1",
+        "Difficulty": "Hard"
+    },
+    "3277": {
+        "Problem Name": "Maximum XOR Score Subarray Queries",
+        "Acceptance Rate": "14.8",
+        "Difficulty": "Hard"
     }
 }
