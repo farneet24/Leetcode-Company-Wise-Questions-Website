@@ -500,8 +500,6 @@ function displaySearchResults(data, title, link) {
   
   titleCheckbox.checked = getLocalStorageItem("attempt", checkboxId) 
 
-  console.log("The attempt type is: ", typeof(getLocalStorageItem("attempt", checkboxId)));
-
   // Event listener to update local storage or handle changes
   titleCheckbox.addEventListener("change", function () {
 
@@ -968,8 +966,6 @@ async function storeData() {
   const uniqueId = document.getElementById("uniqueId").value;
   const companies = selectedCompanies;
   const currentDate = formatDate(new Date());
-
-  console.log("The date type is: ", typeof(currentDate));
 
   if (!uniqueId || isNaN(uniqueId)) {
     Swal.fire({
