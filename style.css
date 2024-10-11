@@ -231,3 +231,17 @@ canvas{
     }
 }
 
+@media (max-width: 792px) {
+    #analysisBtn{
+        padding: auto;
+        margin: 10px 0px;
+    }
+}
+
+@media (max-width: 1050px){
+    @media (min-width: 768px) {
+      #company-select, #duration-select, #sort-select{
+        margin-bottom: 20px;
+      }
+    }
+}
