@@ -203,7 +203,7 @@ function displayTable(csvData, sort, difficulty) {
         leetCodeIcon.src = "leetcode.svg";
         leetCodeIcon.alt = "LeetCode";
         leetCodeIcon.style.alignItems = "center";
-        leetCodeIcon.style.height = "30px";
+        leetCodeIcon.style.height = "47px";
         leetCodeIcon.style.width = "30px";
         link.appendChild(leetCodeIcon);
         cellElement.appendChild(link);
@@ -1049,6 +1049,10 @@ function formatDateWithEmoji(date) {
 async function showSummary() {
   const table = document.getElementById("summaryTable");
   const banner = document.getElementById("questionCountBanner");
+  const heading = document.getElementById("summaryHeading");
+  heading.classList.remove = "hidden";
+  heading.style.display = "block";
+
   table.classList.remove("hidden");
   table.classList.add("styled-table");
   const tbody = table.querySelector("tbody");
@@ -1114,13 +1118,17 @@ async function showSummary() {
       cells[0].textContent = entry.id;
       cells[1].textContent = entry.name;
 
+      cells[2].style.display = "flex";
+      cells[2].style.justifyContent = "center";
+      cells[2].style.alignItems = "center";
+
       const link = document.createElement("a");
       link.href = entry.linkURL;
       link.target = "_blank";
       const leetCodeIcon = new Image();
       leetCodeIcon.src = "leetcode.svg";
       leetCodeIcon.alt = "LeetCode";
-      leetCodeIcon.style.height = "30px";
+      leetCodeIcon.style.height = "47px";
       leetCodeIcon.style.width = "30px";
       link.appendChild(leetCodeIcon);
       cells[2].appendChild(link);

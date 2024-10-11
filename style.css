@@ -245,3 +245,33 @@ canvas{
       }
     }
 }
+
+@media (max-width: 792px){
+    .row-count-display{
+      font-size: 0.9rem;
+      width: 100%;
+    }
+}
+
+@media (min-width: 792px){
+  @media (max-width: 1400px){
+    .row-count-display{
+      width: 65%;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+#summaryHeading{
+  margin-bottom: 50px;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+}
+
+
+@media (max-width: 792px){
+  .frequency-tag{
+    margin: 2px;
+  }
+}
