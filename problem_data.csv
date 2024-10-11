@@ -48,7 +48,7 @@ Problem ID,Problem Name,Acceptance Rate,Difficulty
 47,Permutations II,59.3,Medium
 48,Rotate Image,74.5,Medium
 49,Group Anagrams,68.6,Medium
-50,Pow(x, n),34.9,Medium
+50,Pow(x;n),34.9,Medium
 51,N-Queens,68.4,Hard
 52,N-Queens II,74.0,Hard
 53,Maximum Subarray,50.8,Medium
