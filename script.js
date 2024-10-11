@@ -236,27 +236,6 @@ function displayTable(csvData, sort, difficulty) {
   });
 
   // Create a div to display the number of questions
-  // Create a style element
-  const style = document.createElement("style");
-  // Add style rules to the style element
-  style.textContent = `
-  .row-count-display {
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #025464;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    text-align: center;
-    color: #ffffff;
-    width: 40%;
-  }
-`;
-  // Append the style tag to the head of the document
-  document.head.appendChild(style);
-
-  // Create a div to display the number of questions
   const rowCountDisplay = document.createElement("div");
   rowCountDisplay.className = "row-count-display"; // Assign the class to the div
   rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${

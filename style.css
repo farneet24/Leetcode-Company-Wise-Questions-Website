@@ -246,6 +246,20 @@ canvas{
     }
 }
 
+
+.row-count-display {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #025464;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  color: #ffffff;
+  width: 40%;
+}
+
 @media (max-width: 792px){
     .row-count-display{
       font-size: 0.9rem;
@@ -261,6 +275,8 @@ canvas{
     }
   }
 }
+
+
 
 #summaryHeading{
   margin-bottom: 50px;
