@@ -753,7 +753,7 @@ function updateCharts() {
           },
           title: {
             display: true,
-            text: "Date",
+            text: selectedTimeFrame === "month-wise" ? "Month" : "Date",
             color: "rgb(255, 253, 208)",
             font: {
               size: 16, // Increased font size for Y-axis title
@@ -808,8 +808,9 @@ function updateCharts() {
         {
           label: "Problems Solved",
           data: timeData,
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132)",
+          borderColor: "rgb(21, 179, 146)",
+          borderWidth: 3,
+          backgroundColor: "rgba(21, 179, 146, 0.4)",
         },
       ],
     },
