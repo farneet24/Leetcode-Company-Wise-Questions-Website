@@ -1246,3 +1246,10 @@ document.getElementById("close-btn").addEventListener("click", () => {
   const feedbackBox = document.getElementById("feedback-box");
   feedbackBox.style.display = "none"; // Hide the feedback box
 });
+
+// JavaScript to clear form after submission
+document.getElementById("feedback-box").addEventListener("submit", (e) => {
+  e.preventDefault(); // Prevent form's default submission
+  e.target.submit();  // Submit the form data to Formspree
+  e.target.reset();   // Reset the form fields after submission
+});
