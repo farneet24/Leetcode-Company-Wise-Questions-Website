@@ -351,8 +351,6 @@ canvas{
   }
 }
 
-
-
 #summaryHeading{
   margin-bottom: 50px;
   font-size: 3rem;
@@ -364,5 +362,11 @@ canvas{
 @media (max-width: 792px){
   .frequency-tag{
     margin: 2px;
+  }
+}
+
+@media (max-width: 792px){
+  #feedback-box{
+    margin: 0% 5%;
   }
 }

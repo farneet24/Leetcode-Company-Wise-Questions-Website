@@ -1208,3 +1208,41 @@ document.addEventListener("keydown", function (event) {
     clearUIElements();
   }
 });
+
+
+// JavaScript to handle star rating interactivity
+document.addEventListener("DOMContentLoaded", () => {
+  const stars = document.querySelectorAll(".star");
+  let selectedRating = -1; // Store the selected rating index
+
+  stars.forEach((star, index) => {
+    // Click event to select and color the stars up to the clicked one
+    star.addEventListener("click", () => {
+      selectedRating = index; // Update the selected rating index
+      stars.forEach((s, i) => {
+        s.style.color = i <= selectedRating ? "#ffc107" : "#cccccc";
+      });
+    });
+
+    // Hover event to temporarily color stars up to the hovered one
+    star.addEventListener("mouseover", () => {
+      stars.forEach((s, i) => {
+        s.style.color = i <= index ? "#ffc107" : "#cccccc";
+      });
+    });
+
+    // Mouseout event to reset stars based on the selected rating
+    star.addEventListener("mouseout", () => {
+      stars.forEach((s, i) => {
+        s.style.color = i <= selectedRating ? "#ffc107" : "#cccccc";
+      });
+    });
+  });
+});
+
+
+// JavaScript to close the feedback box temporarily
+document.getElementById("close-btn").addEventListener("click", () => {
+  const feedbackBox = document.getElementById("feedback-box");
+  feedbackBox.style.display = "none"; // Hide the feedback box
+});
