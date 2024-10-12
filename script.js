@@ -239,20 +239,23 @@ function displayTable(csvData, sort, difficulty) {
   const rowCountDisplay = document.createElement("div");
   rowCountDisplay.className = "row-count-display"; // Assign the class to the div
 
- // Create a container for the image and text
+  // Create a container for the image and text
   const contentContainer = document.createElement("div");
   contentContainer.className = "content-container"; // New container for flex alignment
 
   // Create the image element
   const img = document.createElement("img");
-  img.src = "https://cdn-icons-png.freepik.com/256/15441/15441427.png?semt=ais_hybrid";
+  img.src =
+    "https://cdn-icons-png.freepik.com/256/15441/15441427.png?semt=ais_hybrid";
   img.alt = "Statistics Icon";
   img.className = "row-count-icon"; // Assign a class for separate CSS styling
 
   // Create the text content
   const textContent = document.createElement("div");
   textContent.className = "progress-text";
-  textContent.textContent = `Progress: ${checkboxCount} out of ${rows.length - 1} answered (${((checkboxCount / (rows.length - 1)) * 100).toFixed(2)}%)`;
+  textContent.textContent = `Progress: ${checkboxCount} out of ${
+    rows.length - 1
+  } answered (${((checkboxCount / (rows.length - 1)) * 100).toFixed(2)}%)`;
 
   // Append the image and text to the content container
   contentContainer.appendChild(img);
@@ -262,7 +265,9 @@ function displayTable(csvData, sort, difficulty) {
   const tooltipText = document.createElement("span");
   tooltipText.className = "tooltip-text";
   let questionRemaining = rows.length - 1 - checkboxCount;
-  tooltipText.textContent = `${questionRemaining} ${questionRemaining == 1 ? "question" : "questions"} remaining`;
+  tooltipText.textContent = `${questionRemaining} ${
+    questionRemaining == 1 ? "question" : "questions"
+  } remaining`;
 
   // Create the progress bar container
   const progressBarContainer = document.createElement("div");
@@ -512,28 +517,23 @@ function displaySearchResults(data, title, link) {
   const checkboxId = parseInt(document.getElementById("id-search").value); // Ensure this element exists and has a value
 
   function getLocalStorageItem(key, checkboxId, defaultValue = false) {
-    
-        let checkAttempted = localStorage.getItem(`${key}-${checkboxId}`);
-        return JSON.parse(checkAttempted || defaultValue);
-
+    let checkAttempted = localStorage.getItem(`${key}-${checkboxId}`);
+    return JSON.parse(checkAttempted || defaultValue);
   }
-  
-  titleCheckbox.checked = getLocalStorageItem("attempt", checkboxId) 
+
+  titleCheckbox.checked = getLocalStorageItem("attempt", checkboxId);
 
   // Event listener to update local storage or handle changes
   titleCheckbox.addEventListener("change", function () {
-
-    if(this.checked){
+    if (this.checked) {
       localStorage.setItem(`attempt-${checkboxId}`, this.checked);
       const currentDate = formatDate(new Date());
       localStorage.setItem(`date-${checkboxId}`, currentDate);
-    }
-    else{
+    } else {
       localStorage.removeItem(`attempt-${checkboxId}`); // Remove 'attempt' item
       localStorage.removeItem(`date-${checkboxId}`); // Remove 'date' item
       localStorage.removeItem(`companies-${checkboxId}`); // Remove 'companies' item
     }
-
   });
 
   // Append the checkbox to the container
