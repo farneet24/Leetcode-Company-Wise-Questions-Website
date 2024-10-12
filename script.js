@@ -99,7 +99,7 @@ function displayTable(csvData, sort, difficulty) {
   // console.log("Rows", rows);
   // Extract the header row
   const header = rows.shift();
-  rows.unshift(header + ",Attempted,Date Solved");
+  rows.unshift(header + ",Attempted?,Date Solved");
   // header += ",Attempted,Date Solved";
 
   // console.log("Header", header);
@@ -140,7 +140,7 @@ function displayTable(csvData, sort, difficulty) {
 
       if (index === 0 && cellIndex === cells.length - 2) {
         // Set text for 'Attempted' header
-        cellElement.textContent = "Attempted";
+        cellElement.textContent = "Attempted?";
       } else if (index === 0 && cellIndex === cells.length - 1) {
         // Set text for 'Attempted' header
         cellElement.textContent = "Date Solved";
@@ -238,9 +238,50 @@ function displayTable(csvData, sort, difficulty) {
   // Create a div to display the number of questions
   const rowCountDisplay = document.createElement("div");
   rowCountDisplay.className = "row-count-display"; // Assign the class to the div
-  rowCountDisplay.textContent = `📊 Ratio of Answered to Total Questions: ${checkboxCount} / ${
-    rows.length - 1
-  } or ${((checkboxCount / (rows.length - 1)) * 100).toFixed(2)} %`;
+
+ // Create a container for the image and text
+  const contentContainer = document.createElement("div");
+  contentContainer.className = "content-container"; // New container for flex alignment
+
+  // Create the image element
+  const img = document.createElement("img");
+  img.src = "https://cdn-icons-png.freepik.com/256/15441/15441427.png?semt=ais_hybrid";
+  img.alt = "Statistics Icon";
+  img.className = "row-count-icon"; // Assign a class for separate CSS styling
+
+  // Create the text content
+  const textContent = document.createElement("div");
+  textContent.className = "progress-text";
+  textContent.textContent = `Progress: ${checkboxCount} out of ${rows.length - 1} answered (${((checkboxCount / (rows.length - 1)) * 100).toFixed(2)}%)`;
+
+  // Append the image and text to the content container
+  contentContainer.appendChild(img);
+  contentContainer.appendChild(textContent);
+
+  // Create the text content (as tooltip text)
+  const tooltipText = document.createElement("span");
+  tooltipText.className = "tooltip-text";
+  let questionRemaining = rows.length - 1 - checkboxCount;
+  tooltipText.textContent = `${questionRemaining} ${questionRemaining == 1 ? "question" : "questions"} remaining`;
+
+  // Create the progress bar container
+  const progressBarContainer = document.createElement("div");
+  progressBarContainer.className = "progress-bar-container";
+
+  // Create the progress bar
+  const progressBar = document.createElement("div");
+  progressBar.className = "progress-bar";
+
+  // Set the progress bar width based on the percentage
+  const progressPercentage = (checkboxCount / (rows.length - 1)) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+
+  // Append elements to the display container
+  progressBarContainer.appendChild(progressBar);
+  rowCountDisplay.appendChild(contentContainer);
+  rowCountDisplay.appendChild(progressBarContainer);
+  rowCountDisplay.appendChild(tooltipText);
+
   // Insert the row count above the table
   tableContainer.insertBefore(rowCountDisplay, tableContainer.firstChild);
   tableContainer.appendChild(table);
