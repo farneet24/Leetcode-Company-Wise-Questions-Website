@@ -538,6 +538,12 @@ function formatDateWithEmoji(date) {
 
 
 
+
+
+
+
+
+
 // <----------------- Search Functionality ----------------->
 // Handling the search functionality
 document.getElementById("search-button").addEventListener("click", () => {
@@ -806,6 +812,7 @@ function displaySearchResults(data, title, link) {
 
 
 
+
 // <----------------- Clear Functionality ----------------->
 function clearUIElements() {
   // Clear the table
@@ -841,6 +848,11 @@ function clearTable() {
   const tableContainer = document.getElementById("table-container");
   tableContainer.innerHTML = "";
 }
+
+
+
+
+
 
 
 
@@ -1088,6 +1100,21 @@ function updateCharts() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // <----------------- New Entry Functionality ----------------->
 document
   .getElementById("dropdownButton")
@@ -1109,6 +1136,15 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1168,6 +1204,17 @@ async function storeData() {
   document.getElementById("uniqueId").value = "";
   document.getElementById("companies").selectedIndex = -1;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1301,6 +1348,14 @@ async function showSummary() {
 
 
 
+
+
+
+
+
+
+
+
 // <----------------- Star Rating and Feedback Box ----------------->
 // To handle star rating interactivity
 document.addEventListener("DOMContentLoaded", () => {
@@ -1344,6 +1399,18 @@ document.getElementById("feedback-box").addEventListener("submit", (e) => {
   e.target.submit();  // Submit the form data to Formspree
   e.target.reset();   // Reset the form fields after submission
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
