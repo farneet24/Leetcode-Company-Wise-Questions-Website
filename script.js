@@ -173,7 +173,7 @@ function displayTable(csvData, sort, difficulty) {
         );
 
         if (checkbox.checked) {
-          checkboxCount++;
+          checkboxCount++; // count the already checked boxes
         }
 
         checkbox.addEventListener("change", function () {
@@ -182,11 +182,15 @@ function displayTable(csvData, sort, difficulty) {
             const currentDate = formatDate(new Date());
             dateInput.value = currentDate;
             localStorage.setItem(`date-${cells[0]}`, currentDate);
+            localStorage.setItem(`attempt-${cells[0]}`, this.checked);
+            checkboxCount++; // if checked, increment the counter
           } else {
             dateInput.value = "";
             localStorage.removeItem(`date-${cells[0]}`);
+            localStorage.removeItem(`attempt-${cells[0]}`);
+            checkboxCount--; // if unchecked, decrement the counter
           }
-          localStorage.setItem(this.id, this.checked);
+          updateProgress(); // Update the progress bar
         });
 
         const label = document.createElement("label");
@@ -200,9 +204,7 @@ function displayTable(csvData, sort, difficulty) {
         dateInput.id = `date-${cells[0]}`;
         dateInput.classList.add("form-input", "text-center");
         dateInput.value = localStorage.getItem(`date-${cells[0]}`) || "";
-        dateInput.disabled = !JSON.parse(
-          localStorage.getItem(`attempt-${cells[0]}`) || "false"
-        );
+        dateInput.disabled = true; // Disable the input field, can't change the date now
 
         dateInput.addEventListener("change", function () {
           localStorage.setItem(this.id, this.value);
@@ -305,6 +307,15 @@ function displayTable(csvData, sort, difficulty) {
   rowCountDisplay.appendChild(progressBarContainer);
   rowCountDisplay.appendChild(tooltipText);
 
+  // Update the progress bar when the checkboxes are changed
+  function updateProgress() {
+    const totalQuestions = rows.length - 1;
+    const progressPercentage = (checkboxCount / totalQuestions) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+    textContent.textContent = `Progress: ${checkboxCount} out of ${totalQuestions} answered (${progressPercentage.toFixed(2)}%)`;
+    tooltipText.textContent = `${totalQuestions - checkboxCount} ${totalQuestions - checkboxCount === 1 ? "question" : "questions"} remaining`;
+  }
+
   // Insert the row count above the table
   tableContainer.insertBefore(rowCountDisplay, tableContainer.firstChild);
   tableContainer.appendChild(table);
@@ -364,13 +375,21 @@ function sortRows(rows, sort, header) {
   return rows;
 }
 
-// Need to fix this function to handle the difficulty filter
+// Define the filterRows function
 function filterRows(rows, difficulty, header) {
-  const headerParts = header.split(",");
-  const columnIndex = headerParts.indexOf("Difficulty");
-  return rows.filter(
-    (row) => row.split(",")[columnIndex].trim() === difficulty
-  );
+  // Find the index of the "Difficulty" column from the header
+  const headers = header.split(",");
+  const difficultyIndex = headers.indexOf("Difficulty");
+
+  // Return the header and rows where the difficulty matches
+  return rows.filter((row, index) => {
+    // Include the header row by default
+    if (index === 0) return true;
+
+    const cells = row.split(",");
+    // Compare the cell value with the desired difficulty
+    return cells[difficultyIndex] === difficulty;
+  });
 }
 
 
