@@ -1450,3 +1450,8 @@ document.addEventListener("keydown", function (event) {
     clearUIElements();
   }
 });
+
+// To close the shortcut box
+document.getElementById("close-shortcut-btn").addEventListener("click", function () {
+  document.getElementById("shortcut-box").style.display = "none";
+});

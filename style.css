@@ -366,7 +366,40 @@ canvas{
 }
 
 @media (max-width: 792px){
-  #feedback-box{
+  #feedback-box, #shortcut-box{
     margin: 0% 5%;
+    margin-bottom: 20px;
   }
+
+}
+
+
+#shortcut-box {
+  max-width: 500px;
+}
+
+#shortcut-box .flex.items-center {
+  padding-left: 20px; /* Adjust padding as needed for alignment */
+}
+
+#shortcut-box .space-y-4 > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+#shortcut-box .space-y-4 > div span:first-child {
+  flex-shrink: 0;
+}
+
+#shortcut-box .text-gray-300 {
+  margin-left: 10px;
+  text-align: left;
+  flex: 1; /* Ensures the description aligns consistently */
+}
+
+#shortcut-box .bg-gray-700 {
+  min-width: 70px; /* Ensures a uniform width for key labels */
+  text-align: center;
 }
