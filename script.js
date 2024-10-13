@@ -1,9 +1,12 @@
+// <----------------- Dropdown Functionality ----------------->
+// Accessing the dropdown elements
 const companySelect = document.getElementById("company-select");
 const durationSelect = document.getElementById("duration-select");
 const sortSelect = document.getElementById("sort-select");
 const difficultyFilter = document.getElementById("difficulty-filter");
 const currentSelection = document.getElementById("current-selection");
 
+// Event listener to handle the dropdown selection
 document.addEventListener("DOMContentLoaded", function () {
   fetch("company_data.json")
     .then((response) => response.json())
@@ -11,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Error loading company data:", error));
 });
 
+// Function to initialize the dropdowns
 function initializeDropdowns(companyData) {
   Object.keys(companyData).forEach((company) => {
     const option = document.createElement("option");
@@ -62,12 +66,20 @@ function initializeDropdowns(companyData) {
   difficultyFilter.addEventListener("change", updateDisplay);
 }
 
+
+
+
+
+
+// <----------------- Company Logo Functionality ----------------->
+// Function to update the company logo
 function updateCompanyLogo(companyName) {
   const logoImg = document.getElementById("company-logo");
   logoImg.src = `https://logo.clearbit.com/${companyName}.com`;
   logoImg.style.display = "block";
 }
 
+// Function to load the company questions
 function loadCompanyQuestions(company, duration, sort, difficulty) {
   const csvFile = `data/LeetCode-Questions-CompanyWise/${company}_${duration}.csv`;
   fetch(csvFile)
@@ -78,9 +90,15 @@ function loadCompanyQuestions(company, duration, sort, difficulty) {
     .catch((error) => console.error("Failed to load data:", error));
 }
 
-function displayTable(csvData, sort, difficulty) {
-  // Get the container for the table
 
+
+
+
+// <----------------- Table Display and Manipulation Functionality ----------------->
+// Function to display the table when company and time are selected
+function displayTable(csvData, sort, difficulty) {
+  
+  // Get the container for the table
   const tableContainer = document.getElementById("table-container");
 
   if (tableContainer.innerHTML == "") {
@@ -292,31 +310,7 @@ function displayTable(csvData, sort, difficulty) {
   tableContainer.appendChild(table);
 }
 
-function formatDate(date) {
-  const nth = (d) => {
-    if (d > 3 && d < 21) return "th";
-    switch (d % 10) {
-      case 1:
-        return "st";
-      case 2:
-        return "nd";
-      case 3:
-        return "rd";
-      default:
-        return "th";
-    }
-  };
-
-  let day = date.getDate();
-  let month = date.toLocaleString("default", { month: "long" });
-  let year = date.getFullYear();
-  let hour = date.getHours() % 12 || 12; // Convert to 12 hour format
-  let minute = date.getMinutes().toString().padStart(2, "0");
-  let ampm = date.getHours() >= 12 ? "PM" : "AM";
-
-  return `${day}${nth(day)} ${month} ${year}, ${hour}:${minute} ${ampm}`;
-}
-
+// Function to sort the rows based on the selected column
 function sortRows(rows, sort, header) {
   const headerParts = header.split(",");
   const sortKey = sort.split("-")[0].trim();
@@ -370,12 +364,45 @@ function sortRows(rows, sort, header) {
   return rows;
 }
 
+// Need to fix this function to handle the difficulty filter
 function filterRows(rows, difficulty, header) {
   const headerParts = header.split(",");
   const columnIndex = headerParts.indexOf("Difficulty");
   return rows.filter(
     (row) => row.split(",")[columnIndex].trim() === difficulty
   );
+}
+
+
+
+
+
+
+
+// <----------------- Time Functionalities ----------------->
+function formatDate(date) {
+  const nth = (d) => {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  let day = date.getDate();
+  let month = date.toLocaleString("default", { month: "long" });
+  let year = date.getFullYear();
+  let hour = date.getHours() % 12 || 12; // Convert to 12 hour format
+  let minute = date.getMinutes().toString().padStart(2, "0");
+  let ampm = date.getHours() >= 12 ? "PM" : "AM";
+
+  return `${day}${nth(day)} ${month} ${year}, ${hour}:${minute} ${ampm}`;
 }
 
 function formatDuration(duration) {
@@ -385,6 +412,110 @@ function formatDuration(duration) {
     .replace("alltime", "All Time");
 }
 
+function isToday(date) {
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+}
+
+function isLast7Days(date, now) {
+  const oneWeekAgo = new Date(now);
+  oneWeekAgo.setDate(now.getDate() - 7);
+  return date >= oneWeekAgo && date <= now;
+}
+
+function isLastMonth(date, now) {
+  const oneMonthAgo = new Date(now);
+  oneMonthAgo.setMonth(now.getMonth() - 1);
+  return date >= oneMonthAgo && date <= now;
+}
+
+// Updated to format date strings for ChartJS
+function parseDate(input) {
+  if (!input) {
+    return new Date();
+  }
+  const parts = input.match(
+    /(\d+)(st|nd|rd|th)? (\w+) (\d+), (\d+):(\d+) (AM|PM)/
+  );
+  if (!parts) return new Date(input); // Fallback to default parser if regex fails
+
+  const num = parseInt(parts[1], 10);
+  const month = parts[3];
+  const year = parseInt(parts[4], 10);
+  let hour = parseInt(parts[5], 10);
+  const minute = parseInt(parts[6], 10);
+  const ampm = parts[7];
+
+  if (ampm === "PM" && hour < 12) hour += 12;
+  if (ampm === "AM" && hour === 12) hour = 0;
+
+  return new Date(`${month} ${num}, ${year} ${hour}:${minute}:00`);
+}
+
+function getOrdinalSuffix(day) {
+  if (day > 3 && day < 21) return "th";
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+
+function formatDateWithEmoji(date) {
+  const nth = (d) => {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  const getTimeEmoji = (hour) => {
+    if (hour >= 5 && hour < 12) return "🌅"; // Morning
+    if (hour >= 12 && hour < 18) return "☀️"; // Afternoon
+    if (hour >= 18 && hour < 22) return "🌆"; // Evening
+    return "🌙"; // Night
+  };
+
+  let day = date.getDate();
+  let month = date.toLocaleString("default", { month: "long" });
+  let year = date.getFullYear();
+  let hour = date.getHours();
+  let minute = date.getMinutes().toString().padStart(2, "0");
+  let ampm = hour >= 12 ? "PM" : "AM";
+  let emoji = getTimeEmoji(hour);
+
+  hour = hour % 12 || 12; // Convert to 12 hour format
+
+  return `${emoji} ${day}${nth(
+    day
+  )} ${month} ${year}, ${hour}:${minute} ${ampm}`;
+}
+
+
+
+
+
+
+
+
+// <----------------- Search Functionality ----------------->
+// Handling the search functionality
 document.getElementById("search-button").addEventListener("click", () => {
   const id = document.getElementById("id-search").value.trim();
   if (id) {
@@ -641,6 +772,17 @@ function displaySearchResults(data, title, link) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+// <----------------- Clear Functionality ----------------->
 function clearUIElements() {
   // Clear the table
   document.getElementById("table-container").innerHTML = "";
@@ -676,6 +818,18 @@ function clearTable() {
   tableContainer.innerHTML = "";
 }
 
+
+
+
+
+
+
+
+
+
+
+
+// <----------------- Analysis and Chart Functionality ----------------->
 document.getElementById("analysisBtn").addEventListener("click", function () {
   document.getElementById("options").style.display = "block";
   updateCharts();
@@ -904,64 +1058,13 @@ function updateCharts() {
   });
 }
 
-function isToday(date) {
-  const today = new Date();
-  return (
-    date.getDate() === today.getDate() &&
-    date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear()
-  );
-}
 
-function isLast7Days(date, now) {
-  const oneWeekAgo = new Date(now);
-  oneWeekAgo.setDate(now.getDate() - 7);
-  return date >= oneWeekAgo && date <= now;
-}
 
-function isLastMonth(date, now) {
-  const oneMonthAgo = new Date(now);
-  oneMonthAgo.setMonth(now.getMonth() - 1);
-  return date >= oneMonthAgo && date <= now;
-}
 
-// Updated to format date strings for ChartJS
-function parseDate(input) {
-  if (!input) {
-    return new Date();
-  }
-  const parts = input.match(
-    /(\d+)(st|nd|rd|th)? (\w+) (\d+), (\d+):(\d+) (AM|PM)/
-  );
-  if (!parts) return new Date(input); // Fallback to default parser if regex fails
 
-  const num = parseInt(parts[1], 10);
-  const month = parts[3];
-  const year = parseInt(parts[4], 10);
-  let hour = parseInt(parts[5], 10);
-  const minute = parseInt(parts[6], 10);
-  const ampm = parts[7];
 
-  if (ampm === "PM" && hour < 12) hour += 12;
-  if (ampm === "AM" && hour === 12) hour = 0;
 
-  return new Date(`${month} ${num}, ${year} ${hour}:${minute}:00`);
-}
-
-function getOrdinalSuffix(day) {
-  if (day > 3 && day < 21) return "th";
-  switch (day % 10) {
-    case 1:
-      return "st";
-    case 2:
-      return "nd";
-    case 3:
-      return "rd";
-    default:
-      return "th";
-  }
-}
-
+// <----------------- New Entry Functionality ----------------->
 document
   .getElementById("dropdownButton")
   .addEventListener("click", function () {
@@ -983,6 +1086,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+
+
+
+
+
+
+
+
+
+// <----------------- Data Storage and Retrieval ----------------->
+// Function to store the data in local storage
 async function storeData() {
   const uniqueId = document.getElementById("uniqueId").value;
   const companies = selectedCompanies;
@@ -1030,43 +1145,16 @@ async function storeData() {
   document.getElementById("companies").selectedIndex = -1;
 }
 
-function formatDateWithEmoji(date) {
-  const nth = (d) => {
-    if (d > 3 && d < 21) return "th";
-    switch (d % 10) {
-      case 1:
-        return "st";
-      case 2:
-        return "nd";
-      case 3:
-        return "rd";
-      default:
-        return "th";
-    }
-  };
 
-  const getTimeEmoji = (hour) => {
-    if (hour >= 5 && hour < 12) return "🌅"; // Morning
-    if (hour >= 12 && hour < 18) return "☀️"; // Afternoon
-    if (hour >= 18 && hour < 22) return "🌆"; // Evening
-    return "🌙"; // Night
-  };
 
-  let day = date.getDate();
-  let month = date.toLocaleString("default", { month: "long" });
-  let year = date.getFullYear();
-  let hour = date.getHours();
-  let minute = date.getMinutes().toString().padStart(2, "0");
-  let ampm = hour >= 12 ? "PM" : "AM";
-  let emoji = getTimeEmoji(hour);
 
-  hour = hour % 12 || 12; // Convert to 12 hour format
 
-  return `${emoji} ${day}${nth(
-    day
-  )} ${month} ${year}, ${hour}:${minute} ${ampm}`;
-}
 
+
+
+
+// <----------------- Summary Display ----------------->
+// Function to display the summary of questions solved
 async function showSummary() {
   const table = document.getElementById("summaryTable");
   const banner = document.getElementById("questionCountBanner");
@@ -1182,35 +1270,15 @@ async function showSummary() {
   }
 }
 
-document.addEventListener("keydown", function (event) {
-  // Checking for the '/' key without any modifiers
-  if (
-    event.key === "/" &&
-    !event.shiftKey &&
-    !event.ctrlKey &&
-    !event.altKey &&
-    !event.metaKey
-  ) {
-    event.preventDefault(); // Prevent any default behavior
-    document.getElementById("id-search").focus(); // Focus the search button
-  }
-
-  // Checking for 'Ctrl+M'
-  if (
-    event.key === "m" &&
-    event.ctrlKey &&
-    !event.shiftKey &&
-    !event.altKey &&
-    !event.metaKey
-  ) {
-    event.preventDefault(); // Prevent any default behavior
-    // Adding event listener to the 'clear-button'
-    clearUIElements();
-  }
-});
 
 
-// JavaScript to handle star rating interactivity
+
+
+
+
+
+// <----------------- Star Rating and Feedback Box ----------------->
+// To handle star rating interactivity
 document.addEventListener("DOMContentLoaded", () => {
   const stars = document.querySelectorAll(".star");
   let selectedRating = -1; // Store the selected rating index
@@ -1240,16 +1308,54 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-// JavaScript to close the feedback box temporarily
+// To close the feedback box temporarily
 document.getElementById("close-btn").addEventListener("click", () => {
   const feedbackBox = document.getElementById("feedback-box");
   feedbackBox.style.display = "none"; // Hide the feedback box
 });
 
-// JavaScript to clear form after submission
+// To clear form after submission
 document.getElementById("feedback-box").addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent form's default submission
   e.target.submit();  // Submit the form data to Formspree
   e.target.reset();   // Reset the form fields after submission
+});
+
+
+
+
+
+
+
+
+
+
+// <----------------- Shortcut Keys ----------------->
+
+// Shortcut keys for search and clear functionalities
+document.addEventListener("keydown", function (event) {
+  // Checking for the '/' key without any modifiers
+  if (
+    event.key === "/" &&
+    !event.shiftKey &&
+    !event.ctrlKey &&
+    !event.altKey &&
+    !event.metaKey
+  ) {
+    event.preventDefault(); // Prevent any default behavior
+    document.getElementById("id-search").focus(); // Focus the search button
+  }
+
+  // Checking for 'Ctrl+M'
+  if (
+    event.key === "m" &&
+    event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey &&
+    !event.metaKey
+  ) {
+    event.preventDefault(); // Prevent any default behavior
+    // Adding event listener to the 'clear-button'
+    clearUIElements();
+  }
 });
