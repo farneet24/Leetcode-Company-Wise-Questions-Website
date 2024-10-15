@@ -9,7 +9,7 @@ import os
 import csv
 import json
 
-PATH = 'C:\\Users\\Farneet\\Downloads\\chromedriver-win64\\chromedriver.exe'
+PATH = 'C:\\Users\\Farneet\\Downloads\\chromedriver.exe'
 
 options = Options()
 options.add_experimental_option('detach', True)
