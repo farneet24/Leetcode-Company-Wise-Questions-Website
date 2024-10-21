@@ -640,7 +640,7 @@ function initializeSearchRecommendations() {
   // Create recommendation item
   function createRecommendationItem(problem) {
     const item = document.createElement('div');
-    item.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between';
+    item.className = 'px-4 py-2 hover:bg-gray-300 cursor-pointer flex items-center justify-between';
     
     const leftContent = document.createElement('div');
     leftContent.className = 'flex-1 text-black';
@@ -735,22 +735,22 @@ function initializeSearchRecommendations() {
     if (!recommendationsContainer || recommendationsContainer.style.display === 'none') return;
 
     const items = recommendationsContainer.children;
-    const currentIndex = Array.from(items).findIndex(item => item.classList.contains('bg-gray-100'));
+    const currentIndex = Array.from(items).findIndex(item => item.classList.contains('bg-gray-300'));
 
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
         if (currentIndex < items.length - 1) {
-          items[currentIndex]?.classList.remove('bg-gray-100');
-          items[currentIndex + 1].classList.add('bg-gray-100');
+          items[currentIndex]?.classList.remove('bg-gray-300');
+          items[currentIndex + 1].classList.add('bg-gray-300');
           items[currentIndex + 1].scrollIntoView({ block: 'nearest' });
         }
         break;
       case 'ArrowUp':
         e.preventDefault();
         if (currentIndex > 0) {
-          items[currentIndex]?.classList.remove('bg-gray-100');
-          items[currentIndex - 1].classList.add('bg-gray-100');
+          items[currentIndex]?.classList.remove('bg-gray-300');
+          items[currentIndex - 1].classList.add('bg-gray-300');
           items[currentIndex - 1].scrollIntoView({ block: 'nearest' });
         }
         break;
