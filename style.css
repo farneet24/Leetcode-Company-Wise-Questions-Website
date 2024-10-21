@@ -403,3 +403,28 @@ canvas{
   min-width: 70px; /* Ensures a uniform width for key labels */
   text-align: center;
 }
+
+
+
+/* Recommendation Container below the search bar */
+.recommendations-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.recommendations-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recommendations-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.recommendations-container::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.recommendation-item:last-child {
+  border-bottom: none;
+}

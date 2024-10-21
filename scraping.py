@@ -82,9 +82,11 @@ with open(csv_file_path, 'r', newline='', encoding='utf-8') as csv_file:
     for row in csv_reader:
         problem_id = row['Problem ID']
         problem_data = {
-            'Problem Name': row['Problem Name'],
-            'Acceptance Rate': row['Acceptance Rate'],
-            'Difficulty': row['Difficulty']
+            "id": row['Problem ID'],
+            "name": row['Problem Name'],
+            "acceptance": row['Acceptance Rate'],
+            "difficulty": row['Difficulty'],
+            "displayText": f'{row["Problem ID"]}. {row["Problem Name"]}'
         }
         data_dict[problem_id] = problem_data
 

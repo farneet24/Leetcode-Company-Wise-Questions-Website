@@ -546,6 +546,15 @@ function formatDateWithEmoji(date) {
 
 // <----------------- Search Functionality ----------------->
 // Handling the search functionality
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await loadAndSetIndex();
+    initializeSearchRecommendations();
+  } catch (error) {
+    console.error("Failed to initialize search:", error);
+  }
+});
+
 document.getElementById("search-button").addEventListener("click", () => {
   const id = document.getElementById("id-search").value.trim();
   if (id) {
@@ -565,93 +574,203 @@ document.getElementById("id-search").addEventListener("keypress", (event) => {
 });
 
 function searchByID(id) {
-  fetch("company_data.json")
+  fetch("preprocessed_companies.json")
     .then((response) => response.json())
     .then((data) => {
-      const tableData = {};
-      let foundTitle = "";
-      let foundLink = "";
-      let idFound = false;
+      // If the question was asked in any company, then print the companies using the table
+      if (data[id]) {
+        const problem = data[id];
+        const title = problem.title;
+        const problemNameSlug = title.toLowerCase().replace(/ /g, "-");
+        const link = `https://leetcode.com/problems/${problemNameSlug}/description/`;
+        displaySearchResults(problem.companies, title, link);
+      } else {
+        // If the question was not asked in any company, then search in the problem data
+        return fetch("problem_data.json");
+      }
+    }).then((response) => {
+      if (response) return response.json();
+    }).then((problemData) => {
+      // The problem title is extracted from the problems dataset and then it is printed without companies.
+      if (problemData) {
+        const problem = problemData[id];
+        console.log(problem);
+        if (problem) {
+          const problemNameSlug = problem["name"].toLowerCase().replace(/ /g, "-");
+          const problemLink = `https://leetcode.com/problems/${problemNameSlug}/description/`;
+          displaySearchResults({}, problem["name"], problemLink);
+        }
+      }
+    }).catch((error) => console.error("Error loading data:", error));
+}
 
-      const promises = Object.entries(data).flatMap(([company, durations]) => {
-        return durations.map((duration) => {
-          const csvFile = `data/LeetCode-Questions-CompanyWise/${company}_${duration}.csv`;
-          return fetch(csvFile)
-            .then((response) => response.text())
-            .then((csvText) => {
-              const rows = csvText.split("\n").filter((row) => row.trim());
-              const header = rows.shift().split(",");
-              const idIndex = header.findIndex((col) => col.trim() === "ID");
-              const titleIndex = header.findIndex(
-                (col) => col.trim() === "Title"
-              );
-              const linkIndex = header.findIndex(
-                (col) => col.trim() === "Leetcode Question Link"
-              );
-              const frequencyIndex = header.findIndex(
-                (col) => col.trim() === "Frequency"
-              );
+// Preparing the data for the Search functionality
+let searchIndex;
+let searchArray = [];
 
-              rows.forEach((row) => {
-                const cells = row.split(",");
-                if (cells[idIndex].trim() === id) {
-                  idFound = true;
-                  foundTitle = cells[titleIndex].trim();
-                  foundLink = cells[linkIndex].trim();
-                  const frequency = parseFloat(cells[frequencyIndex].trim());
+async function loadAndSetIndex() {
+  try {
+    const response = await fetch("problem_data.json");
+    const data = await response.json();
+    searchIndex = data;
+    searchArray = Object.values(searchIndex);
+    return searchIndex;
+  } catch (error) {
+    console.error("Error loading search index:", error);
+    throw error;
+  }
+}
 
-                  if (!tableData[company]) {
-                    tableData[company] = {};
-                  }
-                  tableData[company][duration] =
-                    (tableData[company][duration] || 0) + frequency;
-                }
-              });
-            });
-        });
+// Add the recommendation UI and functionality
+function initializeSearchRecommendations() {
+  const searchInput = document.getElementById('id-search');
+  const searchButton = document.getElementById('search-button');
+  let recommendationsContainer = null;
+
+  // Create recommendations container
+  function createRecommendationsContainer() {
+    const container = document.createElement('div');
+    container.className = 'absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg mt-1 max-h-60 overflow-y-auto';
+    container.style.top = '100%';
+    container.style.display = 'none';
+    searchInput.parentElement.appendChild(container);
+    return container;
+  }
+
+  // Create recommendation item
+  function createRecommendationItem(problem) {
+    const item = document.createElement('div');
+    item.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between';
+    
+    const leftContent = document.createElement('div');
+    leftContent.className = 'flex-1 text-black';
+    leftContent.textContent = problem.displayText;
+
+    const rightContent = document.createElement('div');
+    rightContent.className = `text-sm ${getDifficultyColor(problem.difficulty)}`;
+    rightContent.textContent = problem.difficulty;
+
+    item.appendChild(leftContent);
+    item.appendChild(rightContent);
+
+    item.addEventListener('click', () => {
+      searchInput.value = problem.id;
+      hideRecommendations();
+      searchButton.click();
+    });
+
+    return item;
+  }
+
+  // Get color class based on difficulty
+  function getDifficultyColor(difficulty) {
+    switch (difficulty.toLowerCase()) {
+      case 'easy': return 'text-green-600';
+      case 'medium': return 'text-yellow-600';
+      case 'hard': return 'text-red-600';
+      default: return 'text-gray-600';
+    }
+  }
+
+  // Show recommendations
+  function showRecommendations(recommendations) {
+    if (!recommendationsContainer) {
+      recommendationsContainer = createRecommendationsContainer();
+    }
+
+    recommendationsContainer.innerHTML = '';
+    
+    if (recommendations.length === 0) {
+      const noResults = document.createElement('div');
+      noResults.className = 'px-4 py-2 text-gray-500';
+      noResults.textContent = 'No matching problems found';
+      recommendationsContainer.appendChild(noResults);
+    } else {
+      // Show all recommendations instead of limiting to 5
+      recommendations.forEach(problem => {
+        recommendationsContainer.appendChild(createRecommendationItem(problem));
       });
+    }
 
-      Promise.all(promises)
-        .then(() => {
-          if (idFound) {
-            Object.keys(tableData).forEach((company) => {
-              Object.keys(tableData[company]).forEach((duration) => {
-                tableData[company][duration] =
-                  tableData[company][duration].toFixed(2);
-              });
-            });
-            displaySearchResults(tableData, foundTitle, foundLink);
-          } else {
-            return fetch("problem_data.json");
-          }
-        })
-        .then((response) => {
-          if (response) return response.json();
-        })
-        .then((problemData) => {
-          if (problemData) {
-            const problem = problemData[id];
-            if (problem) {
-              const problemNameSlug = problem["Problem Name"]
-                .toLowerCase()
-                .replace(/ /g, "-");
-              const problemLink = `https://leetcode.com/problems/${problemNameSlug}/description/`;
-              displaySearchResults({}, problem["Problem Name"], problemLink);
-            } else {
-              console.log("Problem ID not found in the data.");
-            }
-          }
-        })
-        .catch((error) => console.error("Error in search process:", error));
-    })
-    .catch((error) => console.error("Error loading company data:", error));
+    recommendationsContainer.style.display = 'block';
+  }
+
+  // Hide recommendations
+  function hideRecommendations() {
+    if (recommendationsContainer) {
+      recommendationsContainer.style.display = 'none';
+    }
+  }
+
+  // Filter problems based on input
+  function filterProblems(query) {
+    query = query.toLowerCase();
+    return searchArray.filter(problem => {
+      return problem.id.includes(query) || 
+             problem.name.toLowerCase().includes(query) ||
+             problem.displayText.toLowerCase().includes(query);
+    });
+  }
+
+  // Add event listeners
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    if (query) {
+      const recommendations = filterProblems(query);
+      showRecommendations(recommendations);
+    } else {
+      hideRecommendations();
+    }
+  });
+
+  // Close recommendations when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !recommendationsContainer?.contains(e.target)) {
+      hideRecommendations();
+    }
+  });
+
+  // Handle keyboard navigation
+  searchInput.addEventListener('keydown', (e) => {
+    if (!recommendationsContainer || recommendationsContainer.style.display === 'none') return;
+
+    const items = recommendationsContainer.children;
+    const currentIndex = Array.from(items).findIndex(item => item.classList.contains('bg-gray-100'));
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        if (currentIndex < items.length - 1) {
+          items[currentIndex]?.classList.remove('bg-gray-100');
+          items[currentIndex + 1].classList.add('bg-gray-100');
+          items[currentIndex + 1].scrollIntoView({ block: 'nearest' });
+        }
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        if (currentIndex > 0) {
+          items[currentIndex]?.classList.remove('bg-gray-100');
+          items[currentIndex - 1].classList.add('bg-gray-100');
+          items[currentIndex - 1].scrollIntoView({ block: 'nearest' });
+        }
+        break;
+      case 'Enter':
+        if (currentIndex !== -1) {
+          e.preventDefault();
+          items[currentIndex].click();
+        }
+        break;
+      case 'Escape':
+        hideRecommendations();
+        break;
+    }
+  });
 }
 
 function displaySearchResults(data, title, link) {
   const tableContainer = document.getElementById("table-container");
   tableContainer.innerHTML = "";
 
-  // Create a container for title and link to display them inline
   const titleLinkContainer = document.createElement("div");
   titleLinkContainer.style.display = "flex";
   titleLinkContainer.style.alignItems = "center";
@@ -663,19 +782,18 @@ function displaySearchResults(data, title, link) {
   titleElement.style.fontSize = "30px";
   titleElement.style.marginRight = "10px";
 
-  // Create checkbox beside the title
   const titleCheckbox = document.createElement("input");
   titleCheckbox.type = "checkbox";
-  titleCheckbox.id = "title-checkbox"; // Specific ID for the checkbox
+  titleCheckbox.id = "title-checkbox";
   titleCheckbox.classList.add(
     "form-checkbox",
     "h-5",
     "w-5",
     "text-blue-600",
     "mr-2"
-  ); // Tailwind CSS for style
+  );
 
-  const checkboxId = parseInt(document.getElementById("id-search").value); // Ensure this element exists and has a value
+  const checkboxId = parseInt(document.getElementById("id-search").value);
 
   function getLocalStorageItem(key, checkboxId, defaultValue = false) {
     let checkAttempted = localStorage.getItem(`${key}-${checkboxId}`);
@@ -684,122 +802,137 @@ function displaySearchResults(data, title, link) {
 
   titleCheckbox.checked = getLocalStorageItem("attempt", checkboxId);
 
-  // Event listener to update local storage or handle changes
   titleCheckbox.addEventListener("change", function () {
     if (this.checked) {
       localStorage.setItem(`attempt-${checkboxId}`, this.checked);
       const currentDate = formatDate(new Date());
       localStorage.setItem(`date-${checkboxId}`, currentDate);
     } else {
-      localStorage.removeItem(`attempt-${checkboxId}`); // Remove 'attempt' item
-      localStorage.removeItem(`date-${checkboxId}`); // Remove 'date' item
-      localStorage.removeItem(`companies-${checkboxId}`); // Remove 'companies' item
+      localStorage.removeItem(`attempt-${checkboxId}`);
+      localStorage.removeItem(`date-${checkboxId}`);
+      localStorage.removeItem(`companies-${checkboxId}`);
     }
   });
 
-  // Append the checkbox to the container
-
   const linkElement = document.createElement("a");
-  linkElement.setAttribute("href", link);
-  linkElement.target = "_blank";
-  linkElement.style.display = "inline-flex";
-  linkElement.style.alignItems = "center";
-  linkElement.style.textDecoration = "none";
+  if (link) {
+    linkElement.href = link;
+    linkElement.target = "_blank";
+    linkElement.style.display = "inline-flex";
+    linkElement.style.alignItems = "center";
+    linkElement.style.textDecoration = "none";
 
-  const leetCodeIcon = new Image();
-  leetCodeIcon.src = "leetcode.svg"; // Ensure this path correctly points to the LeetCode logo
-  leetCodeIcon.alt = "LeetCode";
-  leetCodeIcon.style.height = "34px"; // Icon height
-  leetCodeIcon.style.width = "34px"; // Icon width
-  leetCodeIcon.style.marginRight = "5px"; // Space between the icon and the text
-  leetCodeIcon.style.backgroundColor = "white"; // Set the background color to white
-  leetCodeIcon.style.borderRadius = "50%"; // Make the background circular
-  leetCodeIcon.style.padding = "5px"; // Add padding to expand the background area
-  leetCodeIcon.style.display = "flex"; // Ensures the icon centers correctly in its expanded background
-  leetCodeIcon.style.justifyContent = "center"; // Center the icon horizontally within its padding
-  leetCodeIcon.style.alignItems = "center"; // Center the icon vertically within its padding
-  leetCodeIcon.style.boxSizing = "border-box"; // Includes padding in the width and height measurements
+    const leetCodeIcon = new Image();
+    leetCodeIcon.src = "leetcode.svg";
+    leetCodeIcon.alt = "LeetCode";
+    leetCodeIcon.style.height = "34px";
+    leetCodeIcon.style.width = "34px";
+    leetCodeIcon.style.marginRight = "5px";
+    leetCodeIcon.style.backgroundColor = "white";
+    leetCodeIcon.style.borderRadius = "50%";
+    leetCodeIcon.style.padding = "5px";
+    leetCodeIcon.style.display = "flex";
+    leetCodeIcon.style.justifyContent = "center";
+    leetCodeIcon.style.alignItems = "center";
+    leetCodeIcon.style.boxSizing = "border-box";
 
-  linkElement.insertBefore(leetCodeIcon, linkElement.firstChild);
+    linkElement.insertBefore(leetCodeIcon, linkElement.firstChild);
+  }
 
   titleLinkContainer.appendChild(titleCheckbox);
   titleLinkContainer.appendChild(titleElement);
   titleLinkContainer.appendChild(linkElement);
   tableContainer.appendChild(titleLinkContainer);
 
+  // If no company asked that questions, simply print the title and link
   if (Object.keys(data).length === 0) {
     const noDataMsg = document.createElement("p");
     noDataMsg.textContent = "The question was not asked in any company.";
     noDataMsg.style.textAlign = "center";
     noDataMsg.style.fontSize = "20px";
     tableContainer.appendChild(noDataMsg);
-  } else {
-    const companyCount = document.createElement("p");
-    companyCount.textContent = `Number of companies: ${
-      Object.keys(data).length
-    }`;
-    companyCount.style.textAlign = "center";
-    companyCount.style.fontSize = "20px";
-    tableContainer.appendChild(companyCount);
-
-    const table = document.createElement("table");
-    table.classList.add("styled-table");
-
-    const thead = document.createElement("thead");
-    const headerRow = document.createElement("tr");
-    const companyNameHeader = document.createElement("th");
-    companyNameHeader.style.backgroundColor = "#556FB5";
-    companyNameHeader.style.color = "white";
-    companyNameHeader.textContent = "Company";
-    const frequencyHeader = document.createElement("th");
-    frequencyHeader.textContent = "Frequency";
-    frequencyHeader.style.backgroundColor = "#556FB5";
-    frequencyHeader.style.color = "white";
-    headerRow.appendChild(companyNameHeader);
-    headerRow.appendChild(frequencyHeader);
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-    Object.entries(data).forEach(([company, durations]) => {
-      const row = document.createElement("tr");
-
-      const companyNameCell = document.createElement("td");
-      companyNameCell.style.display = "flex";
-      companyNameCell.style.alignItems = "center";
-      const companyLogo = document.createElement("img");
-      companyLogo.src = `https://logo.clearbit.com/${company}.com`;
-      companyLogo.style.height = "24px";
-      companyNameCell.appendChild(companyLogo);
-      companyNameCell.appendChild(
-        document.createTextNode(
-          company[0].toUpperCase() + company.slice(1).toLowerCase()
-        )
-      );
-      row.appendChild(companyNameCell);
-
-      const frequencyCell = document.createElement("td");
-      Object.entries(durations).forEach(([duration, frequency]) => {
-        const tag = document.createElement("span");
-        tag.textContent = `${Math.ceil(frequency * 100)}% (${duration})`;
-        tag.classList.add("frequency-tag");
-        tag.style.marginRight = "10px";
-        if (parseFloat(frequency) >= 0.7) {
-          tag.classList.add("high-frequency");
-        } else if (parseFloat(frequency) >= 0.4) {
-          tag.classList.add("medium-frequency");
-        } else {
-          tag.classList.add("low-frequency");
-        }
-        frequencyCell.appendChild(tag);
-      });
-      row.appendChild(frequencyCell);
-
-      tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-    tableContainer.appendChild(table);
+    return;
   }
+
+  const companyCount = document.createElement("p");
+  companyCount.textContent = `Number of companies: ${Object.keys(data).length}`;
+  companyCount.style.textAlign = "center";
+  companyCount.style.fontSize = "20px";
+  tableContainer.appendChild(companyCount);
+
+  const table = document.createElement("table");
+  table.classList.add("styled-table");
+
+  const thead = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+
+  // Create the header cells
+  ["Company", "Frequency"].forEach(headerText => {
+    const header = document.createElement("th");
+    header.style.backgroundColor = "#556FB5";
+    header.style.color = "white";
+    header.textContent = headerText;
+    headerRow.appendChild(header);
+  });
+
+
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Making the body of the table where each company is shown
+  const tbody = document.createElement("tbody");
+  Object.entries(data).forEach(([company, frequencies]) => {
+    const row = document.createElement("tr"); // Create a new row
+
+    // Create the company cell
+    const companyNameCell = document.createElement("td");
+    companyNameCell.style.display = "flex";
+    companyNameCell.style.alignItems = "center";
+    
+    const companyLogo = document.createElement("img");
+    companyLogo.src = `https://logo.clearbit.com/${company}.com`;
+    companyLogo.style.height = "24px";
+    companyNameCell.appendChild(companyLogo);
+    companyNameCell.appendChild(
+      document.createTextNode(
+        company.charAt(0).toUpperCase() + company.slice(1).toLowerCase()
+      )
+    );
+    row.appendChild(companyNameCell);
+
+    // Create the frequency cell
+    const frequencyCell = document.createElement("td");
+    const periods = {
+      "6months": "6 months",
+      "1year": "1 year",
+      "2year": "2 years",
+      "alltime": "all time"
+    };
+
+    Object.entries(frequencies).forEach(([period, frequency]) => {
+      const tag = document.createElement("span");
+      const percentageValue = Math.ceil(parseFloat(frequency) * 100);
+      tag.textContent = `${percentageValue}% (${periods[period]})`;
+      tag.classList.add("frequency-tag");
+      tag.style.marginRight = "10px";
+
+      if (percentageValue >= 70) {
+        tag.classList.add("high-frequency");
+      } else if (percentageValue >= 40) {
+        tag.classList.add("medium-frequency");
+      } else {
+        tag.classList.add("low-frequency");
+      }
+      frequencyCell.appendChild(tag);
+    });
+    row.appendChild(frequencyCell);
+
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  tableContainer.appendChild(table);
 }
 
 
@@ -1256,8 +1389,8 @@ async function showSummary() {
           console.log("This problem failed: ", id);
           return;
         }
-        const name = problem["Problem Name"];
-        const difficulty = problem["Difficulty"];
+        const name = problem["name"];
+        const difficulty = problem["difficulty"];
         const linkURL =
           "https://leetcode.com/problems/" +
           name.replace(/\s+/g, "-").toLowerCase();
