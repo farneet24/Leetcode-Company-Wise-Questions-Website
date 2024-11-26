@@ -3,17 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Prepare for software engineering interviews with our extensive collection of LeetCode questions categorized by company. Access coding challenges and solutions tailored for interviews at top tech companies like Google, Amazon, Facebook, Apple, Netflix, and more." />
-    <meta name="keywords" content="LeetCode, LeetCode questions by company, coding interview prep, software engineering interview, FAANG interview questions, top tech companies interview prep, Google interview questions, Amazon interview questions, Facebook interview questions, Apple interview questions, Netflix interview questions, Microsoft interview questions, algorithm problems, data structure questions, coding practice, interview guide, technical interviews, problem-solving, software developer interview prep, SDE interviews, tech job preparation, coding challenge solutions, computer science interviews, tech hiring" />
+    <meta
+      name="description"
+      content="Prepare for software engineering interviews with our extensive collection of LeetCode questions categorized by company. Access coding challenges and solutions tailored for interviews at top tech companies like Google, Amazon, Facebook, Apple, Netflix, and more."
+    />
+    <meta
+      name="keywords"
+      content="LeetCode, LeetCode questions by company, coding interview prep, software engineering interview, FAANG interview questions, top tech companies interview prep, Google interview questions, Amazon interview questions, Facebook interview questions, Apple interview questions, Netflix interview questions, Microsoft interview questions, algorithm problems, data structure questions, coding practice, interview guide, technical interviews, problem-solving, software developer interview prep, SDE interviews, tech job preparation, coding challenge solutions, computer science interviews, tech hiring"
+    />
     <meta name="author" content="Farneet Singh" />
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="LeetCode Company-Wise Interview Questions and Solutions" />
-    <meta property="og:description" content= "Access categorized LeetCode interview questions for top tech companies. Optimize your preparation for software engineering roles at Google, Amazon, Facebook, Apple, and more." />
+    <meta
+      property="og:title"
+      content="LeetCode Company-Wise Interview Questions and Solutions"
+    />
+    <meta
+      property="og:description"
+      content="Access categorized LeetCode interview questions for top tech companies. Optimize your preparation for software engineering roles at Google, Amazon, Facebook, Apple, and more."
+    />
     <meta property="og:image" content="data-science.png" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://company-wise-leetcode-farneet.netlify.app/" />
+    <meta
+      property="og:url"
+      content="https://company-wise-leetcode-farneet.netlify.app/"
+    />
     <title>LeetCode Company Questions</title>
-    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=19293&format=png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=19293&format=png"
+      type="image/x-icon"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"
@@ -33,18 +52,22 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-</head>
-
+  </head>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RFX0N9X8Y1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-RFX0N9X8Y1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-  gtag('config', 'G-RFX0N9X8Y1');
-</script>
+    gtag("config", "G-RFX0N9X8Y1");
+  </script>
 
   <body class="bg-gray-900 text-white">
     <div class="container mx-auto px-4">
@@ -278,8 +301,12 @@
         <option value="Capital One">Capital One</option>
         <option value="J.P. Morgan">J.P. Morgan</option>
         <option value="BlackRock">BlackRock</option>
-        <option value="The Bank of New York Mellon">The Bank of New York Mellon</option>
-        <option value="State Street Corporation">State Street Corporation</option>
+        <option value="The Bank of New York Mellon">
+          The Bank of New York Mellon
+        </option>
+        <option value="State Street Corporation">
+          State Street Corporation
+        </option>
         <option value="PNC Financial Services">PNC Financial Services</option>
         <option value="TD Bank">TD Bank</option>
         <option value="HSBC">HSBC</option>
@@ -325,7 +352,13 @@
         <div id="questionCountBanner" class="question-count-banner"></div>
         <table class="w-full border-collapse border border-gray-300 mx-auto">
           <thead>
-            <tr style="background-color: #0F67B1; color: white; border-bottom: 0px;">
+            <tr
+              style="
+                background-color: #0f67b1;
+                color: white;
+                border-bottom: 0px;
+              "
+            >
               <th class="border border-gray-300 text-center">Unique ID</th>
               <th class="border border-gray-300 text-center">
                 Name of the Problem
@@ -341,52 +374,84 @@
       </div>
     </div>
 
-    <div id="shortcut-box" class="bg-gray-800 text-white py-8 px-6 md:px-12 lg:px-16 rounded-xl shadow-2xl max-w-xl mx-auto mt-10 relative">
-      <button id="close-shortcut-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-xl font-bold">
+    <div
+      id="shortcut-box"
+      class="bg-gray-800 text-white py-8 px-6 md:px-12 lg:px-16 rounded-xl shadow-2xl max-w-xl mx-auto mt-10 relative"
+    >
+      <button
+        id="close-shortcut-btn"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-xl font-bold"
+      >
         &times;
       </button>
-    
-      <h2 class="text-2xl font-semibold text-center mb-4">Keyboard Shortcuts</h2>
-      <p class="text-center text-gray-400 mb-6">Quickly navigate and use features with these shortcuts:</p>
-    
+
+      <h2 class="text-2xl font-semibold text-center mb-4">
+        Keyboard Shortcuts
+      </h2>
+      <p class="text-center text-gray-400 mb-6">
+        Quickly navigate and use features with these shortcuts:
+      </p>
+
       <div class="space-y-4">
         <!-- Shortcut 1 -->
-        <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+        <div
+          class="flex items-center justify-between border-b border-gray-700 pb-2"
+        >
           <div class="flex items-center space-x-3">
-            <span class="bg-gray-700 py-1 px-3 rounded-md font-mono text-sm">Ctrl + M</span>
+            <span class="bg-gray-700 py-1 px-3 rounded-md font-mono text-sm"
+              >Ctrl + M</span
+            >
           </div>
           <span class="text-gray-300">Clear everything</span>
         </div>
-    
+
         <!-- Shortcut 2 -->
-        <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+        <div
+          class="flex items-center justify-between border-b border-gray-700 pb-2"
+        >
           <div class="flex items-center space-x-3">
-            <span class="bg-gray-700 py-1 px-3 rounded-md font-mono text-sm">/</span>
+            <span class="bg-gray-700 py-1 px-3 rounded-md font-mono text-sm"
+              >/</span
+            >
           </div>
           <span class="text-gray-300">Focus on search bar</span>
         </div>
-    
+
         <!-- Shortcut 3 -->
-        <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+        <div
+          class="flex items-center justify-between border-b border-gray-700 pb-2"
+        >
           <div class="flex items-center space-x-3">
-            <span class="bg-gray-700 py-1 px-3 rounded-md font-mono text-sm">Enter</span>
+            <span class="bg-gray-700 py-1 px-3 rounded-md font-mono text-sm"
+              >Enter</span
+            >
           </div>
-          <span class="text-gray-300">Search by LeetCode question ID or name to find which companies have asked it</span>
+          <span class="text-gray-300"
+            >Search by LeetCode question ID or name to find which companies have
+            asked it</span
+          >
         </div>
       </div>
     </div>
-    
-    
-    
-    
 
-    <!-- <div id="feedback-box" class="bg-gray-800 text-white py-12 px-8 md:px-16 lg:px-20 rounded-xl shadow-2xl max-w-2xl mx-auto mt-10 relative">
+    <div
+      id="feedback-box"
+      class="bg-gray-800 text-white py-12 px-8 md:px-16 lg:px-20 rounded-xl shadow-2xl max-w-2xl mx-auto mt-10 relative"
+    >
+      <button
+        id="close-btn"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-xl font-bold"
+      >
+        &times;
+      </button>
 
-      <button id="close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-xl font-bold">&times;</button>
-    
-      <h2 class="text-3xl font-semibold text-center mb-6">Let me know what you think!</h2>
-      <p class="text-center text-gray-400 mb-8">Help me improve by sharing your thoughts and rating your experience.</p>
-    
+      <h2 class="text-3xl font-semibold text-center mb-6">
+        Let me know what you think!
+      </h2>
+      <p class="text-center text-gray-400 mb-8">
+        Help me improve by sharing your thoughts and rating your experience.
+      </p>
+
       <form action="https://formspree.io/f/xdovznoy" method="POST">
         <textarea
           id="suggestion"
@@ -396,27 +461,82 @@
           placeholder="Write your experience or suggestion here..."
           required
         ></textarea>
-    
-        <label for="rating" class="block text-lg font-medium mt-6 mb-3">Rate your experience:</label>
+
+        <label for="rating" class="block text-lg font-medium mt-6 mb-3"
+          >Rate your experience:</label
+        >
         <div class="flex justify-center space-x-3 mb-6" id="star-rating">
+          <input
+            type="radio"
+            id="star1"
+            name="rating"
+            value="1"
+            class="hidden"
+          />
+          <label
+            for="star1"
+            title="Worst"
+            class="star text-4xl cursor-pointer hover:text-yellow-500"
+            >&#9733;</label
+          >
 
-          <input type="radio" id="star1" name="rating" value="1" class="hidden" />
-          <label for="star1" title="Worst" class="star text-4xl cursor-pointer hover:text-yellow-500">&#9733;</label>
-    
-          <input type="radio" id="star2" name="rating" value="2" class="hidden" />
-          <label for="star2" title="Bad" class="star text-4xl cursor-pointer hover:text-yellow-500">&#9733;</label>
-    
-          <input type="radio" id="star3" name="rating" value="3" class="hidden" />
-          <label for="star3" title="Neutral" class="star text-4xl cursor-pointer hover:text-yellow-500">&#9733;</label>
-    
-          <input type="radio" id="star4" name="rating" value="4" class="hidden" />
-          <label for="star4" title="Good" class="star text-4xl cursor-pointer hover:text-yellow-500">&#9733;</label>
-    
-          <input type="radio" id="star5" name="rating" value="5" class="hidden" />
-          <label for="star5" title="Awesome" class="star text-4xl cursor-pointer hover:text-yellow-500">&#9733;</label>
+          <input
+            type="radio"
+            id="star2"
+            name="rating"
+            value="2"
+            class="hidden"
+          />
+          <label
+            for="star2"
+            title="Bad"
+            class="star text-4xl cursor-pointer hover:text-yellow-500"
+            >&#9733;</label
+          >
 
+          <input
+            type="radio"
+            id="star3"
+            name="rating"
+            value="3"
+            class="hidden"
+          />
+          <label
+            for="star3"
+            title="Neutral"
+            class="star text-4xl cursor-pointer hover:text-yellow-500"
+            >&#9733;</label
+          >
+
+          <input
+            type="radio"
+            id="star4"
+            name="rating"
+            value="4"
+            class="hidden"
+          />
+          <label
+            for="star4"
+            title="Good"
+            class="star text-4xl cursor-pointer hover:text-yellow-500"
+            >&#9733;</label
+          >
+
+          <input
+            type="radio"
+            id="star5"
+            name="rating"
+            value="5"
+            class="hidden"
+          />
+          <label
+            for="star5"
+            title="Awesome"
+            class="star text-4xl cursor-pointer hover:text-yellow-500"
+            >&#9733;</label
+          >
         </div>
-    
+
         <button
           type="submit"
           class="w-full bg-yellow-500 text-gray-900 font-semibold py-3 rounded-lg hover:bg-yellow-600 transition duration-300 ease-in-out shadow-md"
@@ -425,9 +545,8 @@
         </button>
       </form>
     </div>
-     -->
-    
-    <br>
+
+    <br />
     <div>
       <footer class="text-center py-4 text-white-400">
         <p>
@@ -445,7 +564,7 @@
         <br />
       </footer>
     </div>
-    
+
     <script src="script.js"></script>
     <script>
       feather.replace();
@@ -457,5 +576,3 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
-
-
