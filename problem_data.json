@@ -23574,5 +23574,159 @@
         "acceptance": "91.7",
         "difficulty": "Hard",
         "displayText": "3368. First Letter Capitalization"
+    },
+    "3369": {
+        "id": "3369",
+        "name": "Design an Array Statistics Tracker",
+        "acceptance": "30.7",
+        "difficulty": "Hard",
+        "displayText": "3369. Design an Array Statistics Tracker"
+    },
+    "3370": {
+        "id": "3370",
+        "name": "Smallest Number With All Set Bits",
+        "acceptance": "76.3",
+        "difficulty": "Easy",
+        "displayText": "3370. Smallest Number With All Set Bits"
+    },
+    "3371": {
+        "id": "3371",
+        "name": "Identify the Largest Outlier in an Array",
+        "acceptance": "27.7",
+        "difficulty": "Medium",
+        "displayText": "3371. Identify the Largest Outlier in an Array"
+    },
+    "3372": {
+        "id": "3372",
+        "name": "Maximize the Number of Target Nodes After Connecting Trees I",
+        "acceptance": "50.2",
+        "difficulty": "Medium",
+        "displayText": "3372. Maximize the Number of Target Nodes After Connecting Trees I"
+    },
+    "3373": {
+        "id": "3373",
+        "name": "Maximize the Number of Target Nodes After Connecting Trees II",
+        "acceptance": "57.0",
+        "difficulty": "Hard",
+        "displayText": "3373. Maximize the Number of Target Nodes After Connecting Trees II"
+    },
+    "3374": {
+        "id": "3374",
+        "name": "First Letter Capitalization II",
+        "acceptance": "81.7",
+        "difficulty": "Hard",
+        "displayText": "3374. First Letter Capitalization II"
+    },
+    "3375": {
+        "id": "3375",
+        "name": "Minimum Operations to Make Array Values Equal to K",
+        "acceptance": "50.8",
+        "difficulty": "Easy",
+        "displayText": "3375. Minimum Operations to Make Array Values Equal to K"
+    },
+    "3376": {
+        "id": "3376",
+        "name": "Minimum Time to Break Locks I",
+        "acceptance": "28.2",
+        "difficulty": "Medium",
+        "displayText": "3376. Minimum Time to Break Locks I"
+    },
+    "3377": {
+        "id": "3377",
+        "name": "Digit Operations to Make Two Integers Equal",
+        "acceptance": "30.7",
+        "difficulty": "Medium",
+        "displayText": "3377. Digit Operations to Make Two Integers Equal"
+    },
+    "3378": {
+        "id": "3378",
+        "name": "Count Connected Components in LCM Graph",
+        "acceptance": "26.6",
+        "difficulty": "Hard",
+        "displayText": "3378. Count Connected Components in LCM Graph"
+    },
+    "3379": {
+        "id": "3379",
+        "name": "Transformed Array",
+        "acceptance": "55.8",
+        "difficulty": "Easy",
+        "displayText": "3379. Transformed Array"
+    },
+    "3380": {
+        "id": "3380",
+        "name": "Maximum Area Rectangle With Point Constraints I",
+        "acceptance": "48.9",
+        "difficulty": "Medium",
+        "displayText": "3380. Maximum Area Rectangle With Point Constraints I"
+    },
+    "3381": {
+        "id": "3381",
+        "name": "Maximum Subarray Sum With Length Divisible by K",
+        "acceptance": "25.7",
+        "difficulty": "Medium",
+        "displayText": "3381. Maximum Subarray Sum With Length Divisible by K"
+    },
+    "3382": {
+        "id": "3382",
+        "name": "Maximum Area Rectangle With Point Constraints II",
+        "acceptance": "18.8",
+        "difficulty": "Hard",
+        "displayText": "3382. Maximum Area Rectangle With Point Constraints II"
+    },
+    "3383": {
+        "id": "3383",
+        "name": "Minimum Runes to Add to Cast Spell",
+        "acceptance": "55.9",
+        "difficulty": "Hard",
+        "displayText": "3383. Minimum Runes to Add to Cast Spell"
+    },
+    "3384": {
+        "id": "3384",
+        "name": "Team Dominance by Pass Success",
+        "acceptance": "87.6",
+        "difficulty": "Hard",
+        "displayText": "3384. Team Dominance by Pass Success"
+    },
+    "3385": {
+        "id": "3385",
+        "name": "Minimum Time to Break Locks II",
+        "acceptance": "66.3",
+        "difficulty": "Hard",
+        "displayText": "3385. Minimum Time to Break Locks II"
+    },
+    "3386": {
+        "id": "3386",
+        "name": "Button with Longest Push Time",
+        "acceptance": "40.9",
+        "difficulty": "Easy",
+        "displayText": "3386. Button with Longest Push Time"
+    },
+    "3387": {
+        "id": "3387",
+        "name": "Maximize Amount After Two Days of Conversions",
+        "acceptance": "55.2",
+        "difficulty": "Medium",
+        "displayText": "3387. Maximize Amount After Two Days of Conversions"
+    },
+    "3388": {
+        "id": "3388",
+        "name": "Count Beautiful Splits in an Array",
+        "acceptance": "12.1",
+        "difficulty": "Medium",
+        "displayText": "3388. Count Beautiful Splits in an Array"
+    },
+    "3389": {
+        "id": "3389",
+        "name": "Minimum Operations to Make Character Frequencies Equal",
+        "acceptance": "15.6",
+        "difficulty": "Hard",
+        "displayText": "3389. Minimum Operations to Make Character Frequencies Equal"
+    },
+    "3390": {
+        "id": "3390",
+        "name": "Longest Team Pass Streak",
+        "acceptance": "64.5",
+        "difficulty": "Hard",
+        "displayText": "3390. Longest Team Pass Streak"
     }
 }
