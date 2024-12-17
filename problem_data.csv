@@ -3367,3 +3367,25 @@ Problem ID,Problem Name,Acceptance Rate,Difficulty
 3366,Minimum Array Sum,24.9,Medium
 3367,Maximize Sum of Weights after Edge Removals,24.0,Hard
 3368,First Letter Capitalization,91.7,Hard
+3369,Design an Array Statistics Tracker,30.7,Hard
+3370,Smallest Number With All Set Bits,76.3,Easy
+3371,Identify the Largest Outlier in an Array,27.7,Medium
+3372,Maximize the Number of Target Nodes After Connecting Trees I,50.2,Medium
+3373,Maximize the Number of Target Nodes After Connecting Trees II,57.0,Hard
+3374,First Letter Capitalization II,81.7,Hard
+3375,Minimum Operations to Make Array Values Equal to K,50.8,Easy
+3376,Minimum Time to Break Locks I,28.2,Medium
+3377,Digit Operations to Make Two Integers Equal,30.7,Medium
+3378,Count Connected Components in LCM Graph,26.6,Hard
+3379,Transformed Array,55.8,Easy
+3380,Maximum Area Rectangle With Point Constraints I,48.9,Medium
+3381,Maximum Subarray Sum With Length Divisible by K,25.7,Medium
+3382,Maximum Area Rectangle With Point Constraints II,18.8,Hard
+3383,Minimum Runes to Add to Cast Spell,55.9,Hard
+3384,Team Dominance by Pass Success,87.6,Hard
+3385,Minimum Time to Break Locks II,66.3,Hard
+3386,Button with Longest Push Time,40.9,Easy
+3387,Maximize Amount After Two Days of Conversions,55.2,Medium
+3388,Count Beautiful Splits in an Array,12.1,Medium
+3389,Minimum Operations to Make Character Frequencies Equal,15.6,Hard
+3390,Longest Team Pass Streak,64.5,Hard
